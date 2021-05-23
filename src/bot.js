@@ -10,7 +10,7 @@ const webhookClient = new WebhookClient(
 	process.env.WEBHOOK_TOKEN,
 );
 
-const PREFIX = '--';
+const PREFIX = process.env.PREFIX;
 
 client.on('ready', () => {
 	console.log(`${client.user.tag} has logged in`);
@@ -18,7 +18,7 @@ client.on('ready', () => {
 
 //message event listener - when anyone types a message/certain command in the text chat
 client.on('message', (message) => {
-	console.log(`${message.author.tag}: ${message.content}`);
+	// console.log(`${message.author.tag}: ${message.content}`);
 
 	//if the message author is not the bot itself and if the message starts with the prefix
 	if (!message.author.bot && message.content.startsWith(PREFIX)) {
