@@ -14,9 +14,17 @@ const clearMessages = (message) => {
 			// });
 			if (message.member.hasPermission('MANAGE_MESSAGES')) {
 				if (args.length === 0) {
-					message.channel.bulkDelete(parseInt(2));
+					message.channel
+						.bulkDelete(parseInt(2))
+						.catch((e) =>
+							message.channel.send(`Welp, I do not have the permission`),
+						);
 				} else {
-					message.channel.bulkDelete(parseInt(args[0]) + 1);
+					message.channel
+						.bulkDelete(parseInt(args[0]) + 1)
+						.catch((e) =>
+							message.channel.send(`Welp, I do not have the permission`),
+						);
 				}
 			} else {
 				message.reply(
