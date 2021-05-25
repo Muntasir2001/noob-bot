@@ -12,7 +12,7 @@ const clearMessages = (message) => {
 			// message.channel.messages.fetch().then((results) => {
 
 			// });
-			if (message.author.hasPermission('MANAGE_MESSAGES')) {
+			if (message.member.hasPermission('MANAGE_MESSAGES')) {
 				if (args.length === 0) {
 					message.channel.bulkDelete(parseInt(2));
 				} else {
