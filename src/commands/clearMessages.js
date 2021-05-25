@@ -12,10 +12,16 @@ const clearMessages = (message) => {
 			// message.channel.messages.fetch().then((results) => {
 
 			// });
-			if (args.length === 0) {
-				message.channel.bulkDelete(parseInt(2));
+			if (message.author.hasPermission('MANAGE_MESSAGES')) {
+				if (args.length === 0) {
+					message.channel.bulkDelete(parseInt(2));
+				} else {
+					message.channel.bulkDelete(parseInt(args[0]) + 1);
+				}
 			} else {
-				message.channel.bulkDelete(parseInt(args[0]) + 1);
+				message.reply(
+					'HEY HEY HEY there, I see what you trynna do there :eyes:',
+				);
 			}
 		}
 	}
