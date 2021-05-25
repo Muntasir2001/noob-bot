@@ -51,12 +51,12 @@ const serverInfo = (message) => {
 			.split(/\s+/); //this is a regular expression which eliminates multiple whitespaces in the command
 
 		if (CMD_NAME === 'serverinfo') {
-			console.log(client.guilds);
-
 			client.guilds.cache.forEach((guild) => {
-				message.channel.send(
-					`${guild.name} has a total of ${guild.memberCount} members`,
-				);
+				if (message.guild.id === guild.id) {
+					message.channel.send(
+						`${guild.name} has a total of ${guild.memberCount} members`,
+					);
+				}
 			});
 		}
 	}
@@ -66,7 +66,7 @@ const serverInfo = (message) => {
 client.on('message', ban);
 client.on('message', kick);
 client.on('message', basicCommands);
-// client.on('message', serverInfo);
+client.on('message', serverInfo);
 client.on('message', clearMessages);
 client.on('message', setStatus);
 
