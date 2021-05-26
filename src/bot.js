@@ -9,6 +9,9 @@ const basicCommands = require('./commands/basicCommands');
 const ban = require('./commands/ban');
 const kick = require('./commands/kick');
 const clearMessages = require('./commands/clearMessages');
+const help = require('./commands/help');
+const setStatus = require('./commands/setStatus');
+const serverInfo = require('./commands/serverInfo');
 
 const PREFIX = process.env.PREFIX;
 
@@ -17,58 +20,14 @@ client.on('ready', () => {
 	console.log(`${client.user.tag} has logged in BEEP BEEP 🤖`);
 });
 
-//for setting status of the bot
-const setStatus = (message) => {
-	if (!message.author.bot && message.content.startsWith(PREFIX)) {
-		const [CMD_NAME, ...args] = message.content
-			.trim()
-			.substring(PREFIX.length)
-			.split(/\s+/); //this is a regular expression which eliminates multiple whitespaces in the command
-
-		if (CMD_NAME === 'setstatus') {
-			if (message.author.id === '374230181889572876') {
-				client.user.setPresence({
-					activity: {
-						name: args[0],
-						type: 0,
-					},
-				});
-			} else {
-				message.channel.send(
-					'you do not have the permission to run this command!',
-				);
-			}
-		}
-	}
-};
-
-//for printing out serverinfo
-const serverInfo = (message) => {
-	if (!message.author.bot && message.content.startsWith(PREFIX)) {
-		const [CMD_NAME, ...args] = message.content
-			.trim()
-			.substring(PREFIX.length)
-			.split(/\s+/); //this is a regular expression which eliminates multiple whitespaces in the command
-
-		if (CMD_NAME === 'serverinfo') {
-			client.guilds.cache.forEach((guild) => {
-				if (message.guild.id === guild.id) {
-					message.channel.send(
-						`${guild.name} has a total of ${guild.memberCount} members`,
-					);
-				}
-			});
-		}
-	}
-};
-
 //message event listener - when anyone types a message/certain command in the text chat
 client.on('message', ban);
 client.on('message', kick);
 client.on('message', basicCommands);
-client.on('message', serverInfo);
+client.on('message', (message) => serverInfo(message, client));
 client.on('message', clearMessages);
-client.on('message', setStatus);
+client.on('message', (message) => setStatus(message, client));
+client.on('message', (message) => help(message, client));
 
 //add reaction roles
 client.on('messageReactionAdd', (reaction, user) => {
@@ -105,3 +64,5 @@ client.on('messageReactionRemove', (reaction, user) => {
 });
 
 client.login(process.env.DISCORDJS_BOT_TOKEN);
+
+module.exports = { client };
