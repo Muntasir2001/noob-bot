@@ -1,6 +1,6 @@
 const PREFIX = process.env.PREFIX;
 
-const kick = (message) => {
+const kick = async (message) => {
 	if (!message.author.bot && message.content.startsWith(PREFIX)) {
 		const [CMD_NAME, ...args] = message.content
 			.trim()
@@ -16,7 +16,8 @@ const kick = (message) => {
 			}
 			if (args.length === 0) return message.reply('please provide an ID');
 
-			const member = message.guild.members.cache.get(args[0]);
+			// const member = message.guild.members.cache.get(args[0]);
+			const member = await message.guild.members.fetch(args[0]);
 
 			if (member) {
 				member

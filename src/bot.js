@@ -22,7 +22,7 @@ client.on('ready', () => {
 
 //message event listener - when anyone types a message/certain command in the text chat
 client.on('message', ban);
-client.on('message', kick);
+client.on('message', (message) => kick(message, client));
 client.on('message', basicCommands);
 client.on('message', (message) => serverInfo(message, client));
 client.on('message', clearMessages);

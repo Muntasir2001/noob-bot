@@ -48,13 +48,11 @@ const serverInfo = (message, client) => {
 			.setFooter('Requested by: ');
 
 		if (CMD_NAME === 'serverinfo') {
-			// client.guilds.cache.forEach((guild) => {
-			// 	if (message.guild.id === guild.id) {
-			// 		message.channel.send(
-			// 			`${guild.name} has a total of ${guild.memberCount} members`,
-			// 		);
-			// 	}
-			// });
+			client.guilds.cache.forEach((guild) => {
+				if (message.guild.id === guild.id) {
+					message.channel.send(`${guild.name} owner: ${guild.owner}`);
+				}
+			});
 
 			// roles.cache.forEach((value, key) => {
 			// 	message.channel.send(`<@&${key}>`);
