@@ -25,8 +25,6 @@ const kick = async (message) => {
 						message.channel.send(`${args[0]} is an unknown user`),
 					));
 
-			console.log(member);
-
 			if (member) {
 				member
 					.kick()
