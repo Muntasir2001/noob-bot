@@ -17,7 +17,15 @@ const kick = async (message) => {
 			if (args.length === 0) return message.reply('please provide an ID');
 
 			// const member = message.guild.members.cache.get(args[0]);
-			const member = await message.guild.members.fetch(args[0]);
+			const member =
+				message.mentions.members.first() ||
+				(await message.guild.members
+					.fetch(args[0])
+					.catch((err) =>
+						message.channel.send(`${args[0]} is an unknown user`),
+					));
+
+			console.log(member);
 
 			if (member) {
 				member
