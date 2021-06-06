@@ -13,6 +13,8 @@ const help = require('./commands/help');
 const setStatus = require('./commands/setStatus');
 const serverInfo = require('./commands/serverInfo');
 const welcome = require('./commands/welcome');
+const goodMorning = require('./commands/goodMorning');
+const goodNight = require('./commands/goodNight');
 
 const PREFIX = process.env.PREFIX;
 
@@ -29,6 +31,9 @@ client.on('message', (message) => serverInfo(message, client));
 client.on('message', clearMessages);
 client.on('message', (message) => setStatus(message, client));
 client.on('message', (message) => help(message, client));
+client.on('message', goodMorning);
+client.on('message', goodNight);
+
 client.on('guildMemberAdd', welcome);
 
 //add reaction roles
