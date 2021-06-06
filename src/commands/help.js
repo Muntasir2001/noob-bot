@@ -11,11 +11,11 @@ const helpEmbed = new Discord.MessageEmbed()
 		{ name: '\u200B', value: '\u200B' },
 		{
 			name: 'Kick',
-			value: `${PREFIX}kick <uid> to kick the user out from the server`,
+			value: `${PREFIX}kick <uid> or @mention to kick the user out from the server`,
 		},
 		{
 			name: 'Ban',
-			value: `${PREFIX}ban <uid> to ban the user from the server`,
+			value: `${PREFIX}ban <uid> or @mention to ban the user from the server`,
 		},
 		{
 			name: 'serverinfo',
