@@ -30,6 +30,14 @@ const helpEmbed = new Discord.MessageEmbed()
 			value: `${PREFIX}bye to say bye`,
 		},
 		{
+			name: 'gm',
+			value: `${PREFIX}gm to say good morning`,
+		},
+		{
+			name: 'gn',
+			value: `${PREFIX}gn to say good night`,
+		},
+		{
 			name: 'clear',
 			value: `${PREFIX}clear <no of messages to clear> to delete the messages above. ${PREFIX}clear will just delete one message`,
 		},
