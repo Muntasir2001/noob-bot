@@ -22,6 +22,10 @@ const helpEmbed = new Discord.MessageEmbed()
 			value: `${PREFIX}serverinfo to see info about the server (under development)`,
 		},
 		{
+			name: 'botinfo',
+			value: `${PREFIX}botinfo to see info about the bot (under development)`,
+		},
+		{
 			name: 'hello',
 			value: `${PREFIX}hello to say hello`,
 		},
