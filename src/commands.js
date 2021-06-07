@@ -1,4 +1,5 @@
 const PREFIX = process.env.PREFIX;
+
 const hello = require('./commands/hello');
 const bye = require('./commands/bye');
 const ban = require('./commands/ban');
@@ -9,6 +10,7 @@ const setStatus = require('./commands/setStatus');
 const serverInfo = require('./commands/serverInfo');
 const goodMorning = require('./commands/goodMorning');
 const goodNight = require('./commands/goodNight');
+const botInfo = require('./commands/botInfo');
 
 const cmds = {
 	hello,
@@ -21,6 +23,7 @@ const cmds = {
 	setstatus: setStatus,
 	gm: goodMorning,
 	gn: goodNight,
+	botinfo: botInfo,
 };
 
 const commands = (message, client) => {
@@ -30,7 +33,11 @@ const commands = (message, client) => {
 			.substring(PREFIX.length)
 			.split(/\s+/); //this is a regular expression which eliminates multiple whitespaces in the command
 
-		cmds[CMD_NAME](message, CMD_NAME, args, client);
+		if (CMD_NAME in cmds) {
+			cmds[CMD_NAME](message, CMD_NAME, args, client);
+		} else {
+			message.channel.send(':x: Wrong Command :x:');
+		}
 	}
 };
 

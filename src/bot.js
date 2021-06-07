@@ -7,17 +7,7 @@ const client = new Client({
 
 const basicCommands = require('./commands/basicCommands');
 const commandHandler = require('./commands');
-const ban = require('./commands/ban');
-const kick = require('./commands/kick');
-const clearMessages = require('./commands/clearMessages');
-const help = require('./commands/help');
-const setStatus = require('./commands/setStatus');
-const serverInfo = require('./commands/serverInfo');
 const welcome = require('./commands/welcome');
-const goodMorning = require('./commands/goodMorning');
-const goodNight = require('./commands/goodNight');
-
-const PREFIX = process.env.PREFIX;
 
 //status of the bot
 client.on('ready', () => {
@@ -26,15 +16,6 @@ client.on('ready', () => {
 
 //message event listener - when anyone types a message/certain command in the text chat
 client.on('message', (message) => commandHandler(message, client));
-client.on('message', (message) => ban(message, client));
-client.on('message', (message) => kick(message, client));
-// client.on('message', basicCommands);
-client.on('message', (message) => serverInfo(message, client));
-client.on('message', clearMessages);
-client.on('message', (message) => setStatus(message, client));
-client.on('message', (message) => help(message, client));
-client.on('message', goodMorning);
-client.on('message', goodNight);
 
 client.on('guildMemberAdd', welcome);
 
