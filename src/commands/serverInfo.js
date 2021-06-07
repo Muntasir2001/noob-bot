@@ -1,7 +1,5 @@
 const Discord = require('discord.js');
 
-const PREFIX = process.env.PREFIX;
-
 const serverInfo = (message, CMD_NAME, args, client) => {
 	const { guild } = message;
 	const { name, region, memberCount, roles, owner } = guild;
