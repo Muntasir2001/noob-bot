@@ -6,6 +6,7 @@ const client = new Client({
 });
 
 const basicCommands = require('./commands/basicCommands');
+const commandHandler = require('./commands');
 const ban = require('./commands/ban');
 const kick = require('./commands/kick');
 const clearMessages = require('./commands/clearMessages');
@@ -24,9 +25,10 @@ client.on('ready', () => {
 });
 
 //message event listener - when anyone types a message/certain command in the text chat
+client.on('message', (message) => commandHandler(message, client));
 client.on('message', (message) => ban(message, client));
 client.on('message', (message) => kick(message, client));
-client.on('message', basicCommands);
+// client.on('message', basicCommands);
 client.on('message', (message) => serverInfo(message, client));
 client.on('message', clearMessages);
 client.on('message', (message) => setStatus(message, client));

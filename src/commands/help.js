@@ -45,16 +45,9 @@ const helpEmbed = new Discord.MessageEmbed()
 	)
 	.setTimestamp();
 
-const help = (message, client) => {
-	if (!message.author.bot && message.content.startsWith(PREFIX)) {
-		const [CMD_NAME, ...args] = message.content
-			.trim()
-			.substring(PREFIX.length)
-			.split(/\s+/); //this is a regular expression which eliminates multiple whitespaces in the command
-
-		if (CMD_NAME === 'help') {
-			message.channel.send(helpEmbed);
-		}
+const help = (message, CMD_NAME) => {
+	if (CMD_NAME === 'help') {
+		message.channel.send(helpEmbed);
 	}
 };
 
