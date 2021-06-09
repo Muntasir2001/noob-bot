@@ -6,9 +6,14 @@ const webhookClient = new WebhookClient(
 	process.env.WEBHOOK_TOKEN,
 );
 
-const generalMssg = (message, CMD_NAME) => {
+const generalMssg = (message, CMD_NAME, args) => {
 	if (CMD_NAME === 'nou') {
-		message.reply('no u');
+		if (args.length !== 0) {
+			const member = message.mentions.members.first();
+			message.channel.send(`no u ${member}`);
+		} else {
+			message.channel.send(`no u`);
+		}
 	}
 
 	if (CMD_NAME === 'announce') {
