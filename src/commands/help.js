@@ -23,7 +23,7 @@ const helpEmbed = new Discord.MessageEmbed()
 		},
 		{
 			name: 'botinfo',
-			value: `${PREFIX}botinfo to see info about the bot (under development)`,
+			value: `${PREFIX}botinfo to see info about the bote (under development)`,
 		},
 		{
 			name: 'hello',

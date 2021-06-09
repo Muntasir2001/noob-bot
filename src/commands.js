@@ -11,6 +11,7 @@ const serverInfo = require('./commands/serverInfo');
 const goodMorning = require('./commands/goodMorning');
 const goodNight = require('./commands/goodNight');
 const botInfo = require('./commands/botInfo');
+const basicCommands = require('./commands/basicCommands');
 
 const cmds = {
 	hello,
@@ -24,6 +25,7 @@ const cmds = {
 	gm: goodMorning,
 	gn: goodNight,
 	botinfo: botInfo,
+	nou: basicCommands,
 };
 
 const commands = (message, client) => {
