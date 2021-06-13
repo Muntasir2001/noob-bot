@@ -1,4 +1,5 @@
 const PREFIX = process.env.PREFIX;
+const Discord = require('discord.js');
 
 const hello = require('./commands/hello');
 const bye = require('./commands/bye');
@@ -12,6 +13,7 @@ const goodMorning = require('./commands/goodMorning');
 const goodNight = require('./commands/goodNight');
 const botInfo = require('./commands/botInfo');
 const basicCommands = require('./commands/basicCommands');
+const userInfo = require('./commands/userInfo');
 
 const cmds = {
 	hello,
@@ -26,6 +28,7 @@ const cmds = {
 	gn: goodNight,
 	botinfo: botInfo,
 	nou: basicCommands,
+	userinfo: userInfo,
 };
 
 const commands = (message, client) => {

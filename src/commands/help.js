@@ -8,7 +8,6 @@ const helpEmbed = new Discord.MessageEmbed()
 	.setDescription('Here is the list of commands you can use')
 	.setThumbnail('https://i.ibb.co/0YQ68pT/noobot.png')
 	.addFields(
-		{ name: '\u200B', value: '\u200B' },
 		{
 			name: 'Kick',
 			value: `${PREFIX}kick <uid> or @mention to kick the user out from the server`,
@@ -23,7 +22,11 @@ const helpEmbed = new Discord.MessageEmbed()
 		},
 		{
 			name: 'botinfo',
-			value: `${PREFIX}botinfo to see info about the bote (under development)`,
+			value: `${PREFIX}botinfo to see info about the bot (under development)`,
+		},
+		{
+			name: 'userinfo',
+			value: `${PREFIX}userinfo <uid> or @user to see info about the user. Just putting ${PREFIX} will show info about you (under development)`,
 		},
 		{
 			name: 'hello',
@@ -47,9 +50,9 @@ const helpEmbed = new Discord.MessageEmbed()
 		},
 		{
 			name: 'clear',
-			value: `${PREFIX}clear <no of messages to clear> to delete the messages above. ${PREFIX}clear will just delete one message`,
+			value: `${PREFIX}clear <no of messages to clear> to delete the messages above. Just putting ${PREFIX}clear will delete one message`,
 		},
-		{ name: '\u200B', value: '\u200B' },
+		// { name: '\u200B', value: '\u200B' },
 	)
 	.setTimestamp();
 
