@@ -12,8 +12,11 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
+		"cors": "^2.8.5",
 		"discord.js": "^12.5.3",
-		"dotenv": "^9.0.2"
+		"dotenv": "^9.0.2",
+		"express": "^4.17.1",
+		"mongoose": "^5.12.14"
 	},
 	"_moduleAliases": {
 		"@root": "."
