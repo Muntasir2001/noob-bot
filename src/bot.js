@@ -7,6 +7,7 @@ const client = new Client({
 });
 
 // const basicCommands = require('./commands/basicCommands');
+const registerCommands = require('./slash-commands/registerCommands');
 const commandHandler = require('./commands');
 const welcome = require('./commands/welcome');
 
@@ -24,29 +25,33 @@ client.on('ready', () => {
 		commands = client.application.commands;
 	}
 
-	commands.create({
-		name: 'ping',
-		description: 'replies with pong',
-	});
+	const commandsObject = [
+		{
+			name: 'ping',
+			description: 'Replies with pong',
+			options: [],
+		},
+		{
+			name: 'add',
+			description: 'Add two numbers',
+			options: [
+				{
+					name: 'num1',
+					description: 'The first number',
+					required: true,
+					type: Constants.ApplicationCommandOptionTypes.NUMBER,
+				},
+				{
+					name: 'num2',
+					description: 'The second number',
+					required: true,
+					type: Constants.ApplicationCommandOptionTypes.NUMBER,
+				},
+			],
+		},
+	];
 
-	commands.create({
-		name: 'add',
-		description: 'Add two numbers',
-		options: [
-			{
-				name: 'num1',
-				description: 'The first number',
-				required: true,
-				type: Constants.ApplicationCommandOptionTypes.NUMBER,
-			},
-			{
-				name: 'num2',
-				description: 'The second number',
-				required: true,
-				type: Constants.ApplicationCommandOptionTypes.NUMBER,
-			},
-		],
-	});
+	registerCommands(commands, guild, commandsObject);
 });
 
 client.on('interactionCreate', async (interaction) => {
@@ -74,7 +79,7 @@ client.on('interactionCreate', async (interaction) => {
 });
 
 //message event listener - when anyone types a message/certain command in the text chat (v12)
-// client.on('message', (message) => commandHandler(message, client));
+// client.on('messageCreate', (message) => commandHandler(message, client));
 
 /* when some joins the server */
 /* STILL INCOMPLETE */
