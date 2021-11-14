@@ -1,6 +1,6 @@
 require('dotenv').config();
-
 const { Client, Intents, Constants } = require('discord.js');
+
 const client = new Client({
 	partials: ['MESSAGE', 'REACTION'],
 	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
@@ -9,6 +9,7 @@ const client = new Client({
 // const basicCommands = require('./commands/basicCommands');
 const registerCommands = require('./slash-commands/registerCommands');
 const commandHandler = require('./commands');
+const slashCommandHandler = require('./slash-commands/slashCommandHandler');
 const welcome = require('./commands/welcome');
 
 //status of the bot
@@ -62,20 +63,21 @@ client.on('interactionCreate', async (interaction) => {
 	}
 	const { commandName, options } = interaction;
 
-	if (commandName === 'ping') {
-		interaction.reply({
-			content: 'pong',
-			ephemeral: false,
-		});
-	} else if (commandName === 'add') {
-		const num1 = options.getNumber('num1');
-		const num2 = options.getNumber('num2');
+	// if (commandName === 'ping') {
+	// 	interaction.reply({
+	// 		content: 'pong',
+	// 		ephemeral: false,
+	// 	});
+	// } else if (commandName === 'add') {
+	// 	const num1 = options.getNumber('num1');
+	// 	const num2 = options.getNumber('num2');
 
-		interaction.reply({
-			content: `The sum is ${num1 + num2}`,
-			ephemeral: false,
-		});
-	}
+	// 	interaction.reply({
+	// 		content: `The sum is ${num1 + num2}`,
+	// 		ephemeral: false,
+	// 	});
+	// }
+	slashCommandHandler(interaction, client);
 });
 
 //message event listener - when anyone types a message/certain command in the text chat (v12)
