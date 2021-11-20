@@ -26,6 +26,24 @@ const commandsList = [
 			},
 		],
 	},
+	{
+		name: 'kick',
+		description: 'kick member from the server',
+		options: [
+			{
+				name: 'userid',
+				description: 'userID of the user',
+				required: true,
+				type: Constants.ApplicationCommandOptionTypes.USER,
+			},
+			{
+				name: 'reason',
+				description: 'reason for kick',
+				required: true,
+				type: Constants.ApplicationCommandOptionTypes.STRING,
+			},
+		],
+	},
 ];
 
 module.exports = commandsList;

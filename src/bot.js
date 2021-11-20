@@ -3,7 +3,13 @@ const { Client, Intents, Constants } = require('discord.js');
 
 const client = new Client({
 	partials: ['MESSAGE', 'REACTION'],
-	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+	intents: [
+		Intents.FLAGS.GUILDS,
+		Intents.FLAGS.GUILD_MESSAGES,
+		Intents.FLAGS.DIRECT_MESSAGES,
+		Intents.FLAGS.GUILD_BANS,
+		Intents.FLAGS.GUILD_MESSAGE_TYPING,
+	],
 });
 
 // const basicCommands = require('./commands/basicCommands');
