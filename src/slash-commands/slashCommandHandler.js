@@ -4,12 +4,12 @@ const slashCommandHandler = async (interaction, client) => {
 	const { commandName, options } = interaction;
 
 	console.log(commandName);
-	console.log(slashCommands());
+	// console.log(slashCommands());
 
 	if (commandName in slashCommands) {
-		console.log('command name in object', slashCommands[commandName]);
+		// console.log('command name in object', slashCommands[commandName]);
 
-		slashCommands()[commandName](interaction, commandName, options);
+		slashCommands[commandName](interaction, commandName, options);
 	}
 };
 

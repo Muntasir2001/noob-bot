@@ -61,7 +61,7 @@ client.on('interactionCreate', async (interaction) => {
 
 		return 'Unknown command';
 	}
-	const { commandName, options } = interaction;
+	// const { commandName, options } = interaction;
 
 	// if (commandName === 'ping') {
 	// 	interaction.reply({
