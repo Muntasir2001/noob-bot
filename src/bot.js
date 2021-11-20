@@ -10,6 +10,7 @@ const client = new Client({
 const registerCommands = require('./slash-commands/registerCommands');
 const commandHandler = require('./commands');
 const slashCommandHandler = require('./slash-commands/slashCommandHandler');
+const commandsList = require('./slash-commands/registerCommandsList');
 const welcome = require('./commands/welcome');
 
 //status of the bot
@@ -26,33 +27,7 @@ client.on('ready', () => {
 		commands = client.application.commands;
 	}
 
-	const commandsObject = [
-		{
-			name: 'ping',
-			description: 'Replies with pong',
-			options: [],
-		},
-		{
-			name: 'add',
-			description: 'Add two numbers',
-			options: [
-				{
-					name: 'num1',
-					description: 'The first number',
-					required: true,
-					type: Constants.ApplicationCommandOptionTypes.NUMBER,
-				},
-				{
-					name: 'num2',
-					description: 'The second number',
-					required: true,
-					type: Constants.ApplicationCommandOptionTypes.NUMBER,
-				},
-			],
-		},
-	];
-
-	registerCommands(commands, guild, commandsObject);
+	registerCommands(commands, guild, commandsList);
 });
 
 client.on('interactionCreate', async (interaction) => {
