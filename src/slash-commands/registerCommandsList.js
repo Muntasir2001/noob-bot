@@ -1,3 +1,5 @@
+/* this is slashCommandsList and its for registerCommands to use and register them */
+
 const { Constants } = require('discord.js');
 
 const commandsList = [
