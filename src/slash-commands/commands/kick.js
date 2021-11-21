@@ -1,8 +1,4 @@
-const { GuildMember } = require('discord.js');
-
 const kick = (interaction, CMD_NAME, options) => {
-	// if (CMD_NAME === 'ping') {
-	// const userID = options.getMentionable('userid', true);
 	const userID = options.getUser('userid', true);
 	const reason = options.getString('reason');
 
@@ -13,27 +9,40 @@ const kick = (interaction, CMD_NAME, options) => {
 		});
 	}
 
-	const target = interaction.options.getMember(userID);
+	const target = interaction.options.getMember('userid');
+
+	/* if user not found */
+	if (!target) {
+		console.log('Please tag an user to kick');
+
+		return interaction.reply({
+			content: `Please tag an user to kick`,
+			ephemeral: false,
+		});
+	}
+
+	/* if user kickable */
+	if (!target.kickable) {
+		return interaction.reply({
+			content: `Cannot kick that user :(`,
+			ephemeral: false,
+		});
+	}
 
 	// get user id (if using mentionable)
 	// console.log(userID.user.id);
 	console.log(target);
 	console.log(userID);
 
-	// interaction.member.kick(reason);
-	// .then((member) => {
-	// 	interaction.reply({
-	// 		content: `${member} has been kicked. **Reason**: ${reason}`,
-	// 		ephemeral: false,
-	// 	});
-	// })
-	// .catch((err) => console.log(err));
-	// target.kick(reason);
-
-	interaction.reply({
-		content: `User ${userID} has been kicked. **Reason**: ${reason}`,
-		ephemeral: false,
-	});
+	target
+		.kick(reason)
+		.then(() => {
+			interaction.reply({
+				content: `User ${userID} has been kicked. **Reason**: ${reason}`,
+				ephemeral: false,
+			});
+		})
+		.catch((err) => console.log(err));
 };
 
 module.exports = kick;
