@@ -7,6 +7,7 @@ const userInfo = require('./commands/userInfo');
 const serverInfo = require('./commands/serverInfo');
 const goodMorning = require('./commands/goodMorning');
 const goodNight = require('./commands/goodNight');
+const hello = require('./commands/hello');
 
 const slashCommands = {
 	ping,
@@ -17,6 +18,7 @@ const slashCommands = {
 	serverinfo: serverInfo,
 	goodmorning: goodMorning,
 	goodnight: goodNight,
+	hello,
 };
 
 module.exports = slashCommands;

@@ -95,6 +95,11 @@ const commandsList = [
 		description: 'Replies with goodnight',
 		options: [],
 	},
+	{
+		name: 'hello',
+		description: 'Replies with hello',
+		options: [],
+	},
 ];
 
 module.exports = commandsList;
