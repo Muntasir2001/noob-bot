@@ -85,6 +85,16 @@ const commandsList = [
 		description: 'Get serverinfo',
 		options: [],
 	},
+	{
+		name: 'goodmorning',
+		description: 'Replies with goodmorning',
+		options: [],
+	},
+	{
+		name: 'goodnight',
+		description: 'Replies with goodnight',
+		options: [],
+	},
 ];
 
 module.exports = commandsList;

@@ -5,6 +5,8 @@ const kick = require('./commands/kick');
 const ban = require('./commands/ban');
 const userInfo = require('./commands/userInfo');
 const serverInfo = require('./commands/serverInfo');
+const goodMorning = require('./commands/goodMorning');
+const goodNight = require('./commands/goodNight');
 
 const slashCommands = {
 	ping,
@@ -13,6 +15,8 @@ const slashCommands = {
 	ban,
 	userinfo: userInfo,
 	serverinfo: serverInfo,
+	goodmorning: goodMorning,
+	goodnight: goodNight,
 };
 
 module.exports = slashCommands;
