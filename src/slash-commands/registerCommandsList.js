@@ -117,6 +117,11 @@ const commandsList = [
 		description: 'Get botinfo',
 		options: [],
 	},
+	{
+		name: 'help',
+		description: 'Get list of all the commands',
+		options: [],
+	},
 ];
 
 module.exports = commandsList;

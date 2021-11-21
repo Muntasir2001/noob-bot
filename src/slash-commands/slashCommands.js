@@ -10,6 +10,7 @@ const goodNight = require('./commands/goodNight');
 const hello = require('./commands/hello');
 const noYou = require('./commands/noYou');
 const botInfo = require('./commands/botInfo');
+const help = require('./commands/help');
 
 const slashCommands = {
 	ping,
@@ -23,6 +24,7 @@ const slashCommands = {
 	hello,
 	nou: noYou,
 	botinfo: botInfo,
+	help,
 };
 
 module.exports = slashCommands;
