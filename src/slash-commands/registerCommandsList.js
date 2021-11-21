@@ -86,12 +86,12 @@ const commandsList = [
 		options: [],
 	},
 	{
-		name: 'goodmorning',
+		name: 'gm',
 		description: 'Replies with goodmorning',
 		options: [],
 	},
 	{
-		name: 'goodnight',
+		name: 'gn',
 		description: 'Replies with goodnight',
 		options: [],
 	},
@@ -99,6 +99,18 @@ const commandsList = [
 		name: 'hello',
 		description: 'Replies with hello',
 		options: [],
+	},
+	{
+		name: 'nou',
+		description: 'Say no you to an user or in general',
+		options: [
+			{
+				name: 'user',
+				description: 'tag the user',
+				// required: false,
+				type: Constants.ApplicationCommandOptionTypes.USER,
+			},
+		],
 	},
 ];
 
