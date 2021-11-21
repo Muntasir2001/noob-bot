@@ -31,14 +31,38 @@ const commandsList = [
 		description: 'kick member from the server',
 		options: [
 			{
-				name: 'userid',
-				description: 'userID of the user',
+				name: 'user',
+				description: 'tag the user',
 				required: true,
 				type: Constants.ApplicationCommandOptionTypes.USER,
 			},
 			{
 				name: 'reason',
 				description: 'reason for kick',
+				required: true,
+				type: Constants.ApplicationCommandOptionTypes.STRING,
+			},
+		],
+	},
+	{
+		name: 'ban',
+		description: 'ban member from the server',
+		options: [
+			{
+				name: 'user',
+				description: 'tag the user',
+				required: true,
+				type: Constants.ApplicationCommandOptionTypes.USER,
+			},
+			{
+				name: 'days',
+				description: 'how many days of message to delete',
+				required: true,
+				type: Constants.ApplicationCommandOptionTypes.NUMBER,
+			},
+			{
+				name: 'reason',
+				description: 'reason for ban',
 				required: true,
 				type: Constants.ApplicationCommandOptionTypes.STRING,
 			},
