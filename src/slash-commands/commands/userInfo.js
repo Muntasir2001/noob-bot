@@ -26,30 +26,38 @@ const userInfo = async (interaction, CMD_NAME, options, client) => {
 		.setColor('#FF4454')
 		.setTitle(`Information about ${member.user.username}`)
 		.setAuthor(
-			`${member.user.username}` || null,
-			`${member.user.displayAvatarURL()}` || null,
+			`${member.user.username}` || 'None',
+			`${member.user.displayAvatarURL()}` || 'None',
 		)
-		.setThumbnail(`${member.user.displayAvatarURL()}` || null)
+		.setThumbnail(`${member.user.displayAvatarURL()}` || 'None')
 		.addFields(
-			{ name: 'User tag', value: member.user.tag || null },
-			// { name: '\u200B', value: '\u200B' },
+			{ name: 'User tag', value: member.user.tag || 'None', inline: true },
+			{ name: '\u200B', value: '\u200B', inline: true },
+			{
+				name: 'Nickname',
+				value: member.user.nickname || 'None',
+				inline: true,
+			},
+			// { name: '\u200B', value: '\u200B', inline: true },
 			{
 				name: 'Account created',
 				value:
-					new Date(member.user.createdTimestamp).toLocaleString() || null,
+					new Date(member.user.createdTimestamp).toLocaleString() ||
+					'None',
 				inline: true,
 			},
+			{ name: '\u200B', value: '\u200B', inline: true },
 			{
 				name: 'Joined the server',
-				value: new Date(member.joinedTimestamp).toLocaleString() || null,
+				value: new Date(member.joinedTimestamp).toLocaleString() || 'None',
 				inline: true,
 			},
 		)
 		.addField('Roles', `${roles}`)
 		.setTimestamp()
 		.setFooter(
-			`${client.user.username}` || null,
-			`${client.user.displayAvatarURL()}` || null,
+			`${client.user.username}` || 'None',
+			`${client.user.displayAvatarURL()}` || 'None',
 			false,
 		);
 

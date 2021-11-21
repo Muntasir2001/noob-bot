@@ -3,12 +3,6 @@ const { MessageEmbed } = require('discord.js');
 const PREFIX = process.env.PREFIX;
 
 const botInfo = async (interaction, CMD_NAME, options, client) => {
-	const { guild } = interaction;
-
-	const { name, memberCount, roles, ownerId, createdTimestamp } = guild;
-	const icon = guild.iconURL();
-	// console.log(guild);
-
 	const member = interaction.user.tag;
 	const { user, guilds } = client;
 
