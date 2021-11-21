@@ -55,16 +55,28 @@ const commandsList = [
 				type: Constants.ApplicationCommandOptionTypes.USER,
 			},
 			{
-				name: 'days',
-				description: 'how many days of message to delete',
-				required: true,
-				type: Constants.ApplicationCommandOptionTypes.NUMBER,
-			},
-			{
 				name: 'reason',
 				description: 'reason for ban',
 				required: true,
 				type: Constants.ApplicationCommandOptionTypes.STRING,
+			},
+			{
+				name: 'days',
+				description: 'how many days of message to delete',
+				required: false,
+				type: Constants.ApplicationCommandOptionTypes.NUMBER,
+			},
+		],
+	},
+	{
+		name: 'userinfo',
+		description: 'get userinfo of a member',
+		options: [
+			{
+				name: 'user',
+				description: 'tag the user',
+				// required: false,
+				type: Constants.ApplicationCommandOptionTypes.USER,
 			},
 		],
 	},

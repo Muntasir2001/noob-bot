@@ -37,27 +37,6 @@ client.on('ready', () => {
 });
 
 client.on('interactionCreate', async (interaction) => {
-	if (!interaction.isCommand()) {
-		interaction.reply({ content: 'Wrong/unknown command' });
-
-		return 'Unknown command';
-	}
-	// const { commandName, options } = interaction;
-
-	// if (commandName === 'ping') {
-	// 	interaction.reply({
-	// 		content: 'pong',
-	// 		ephemeral: false,
-	// 	});
-	// } else if (commandName === 'add') {
-	// 	const num1 = options.getNumber('num1');
-	// 	const num2 = options.getNumber('num2');
-
-	// 	interaction.reply({
-	// 		content: `The sum is ${num1 + num2}`,
-	// 		ephemeral: false,
-	// 	});
-	// }
 	slashCommandHandler(interaction, client);
 });
 

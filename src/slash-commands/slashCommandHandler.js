@@ -9,7 +9,7 @@ const slashCommandHandler = async (interaction, client) => {
 	if (commandName in slashCommands) {
 		// console.log('command name in object', slashCommands[commandName]);
 
-		slashCommands[commandName](interaction, commandName, options);
+		slashCommands[commandName](interaction, commandName, options, client);
 	}
 };
 

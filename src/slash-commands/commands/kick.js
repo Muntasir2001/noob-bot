@@ -31,8 +31,8 @@ const kick = (interaction, CMD_NAME, options) => {
 
 	// get user id (if using mentionable)
 	// console.log(userID.user.id);
-	console.log(target);
-	console.log(user);
+	// console.log(target);
+	// console.log(user);
 
 	target
 		.kick(reason)

@@ -3,12 +3,14 @@ const ping = require('./commands/ping');
 const add = require('./commands/add');
 const kick = require('./commands/kick');
 const ban = require('./commands/ban');
+const userInfo = require('./commands/userInfo');
 
 const slashCommands = {
 	ping,
 	add,
 	kick,
 	ban,
+	userinfo: userInfo,
 };
 
 module.exports = slashCommands;
