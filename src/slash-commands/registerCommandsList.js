@@ -28,7 +28,7 @@ const commandsList = [
 	},
 	{
 		name: 'kick',
-		description: 'kick member from the server',
+		description: 'Kick member from the server',
 		options: [
 			{
 				name: 'user',
@@ -46,7 +46,7 @@ const commandsList = [
 	},
 	{
 		name: 'ban',
-		description: 'ban member from the server',
+		description: 'Ban member from the server',
 		options: [
 			{
 				name: 'user',
@@ -70,7 +70,7 @@ const commandsList = [
 	},
 	{
 		name: 'userinfo',
-		description: 'get userinfo of a member',
+		description: 'Get userinfo of a member',
 		options: [
 			{
 				name: 'user',
@@ -79,6 +79,11 @@ const commandsList = [
 				type: Constants.ApplicationCommandOptionTypes.USER,
 			},
 		],
+	},
+	{
+		name: 'serverinfo',
+		description: 'Get serverinfo',
+		options: [],
 	},
 ];
 
