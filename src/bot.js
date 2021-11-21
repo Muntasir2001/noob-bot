@@ -19,6 +19,11 @@ const slashCommandHandler = require('./slash-commands/slashCommandHandler');
 const commandsList = require('./slash-commands/registerCommandsList');
 const welcome = require('./commands/welcome');
 
+//mongodb related
+// const mongoose = require('mongoose');
+// const express = require('express');
+// const cors = require('cors');
+
 //status of the bot
 client.on('ready', () => {
 	console.log(`${client.user.tag} has logged in BEEP BEEP 🤖`);
