@@ -112,6 +112,11 @@ const commandsList = [
 			},
 		],
 	},
+	{
+		name: 'botinfo',
+		description: 'Get botinfo',
+		options: [],
+	},
 ];
 
 module.exports = commandsList;
