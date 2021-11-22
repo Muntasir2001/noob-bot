@@ -1,6 +1,6 @@
 const ban = (interaction, CMD_NAME, options) => {
 	const user = options.getUser('user', true);
-	const days = options.getNumber('days', true);
+	const days = options.getNumber('days');
 	const reason = options.getString('reason');
 
 	if (!interaction.memberPermissions.has('KICK_MEMBERS')) {
