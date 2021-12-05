@@ -8,6 +8,7 @@ const serverInfo = require('./commands/serverInfo');
 const goodMorning = require('./commands/goodMorning');
 const goodNight = require('./commands/goodNight');
 const hello = require('./commands/hello');
+const bye = require('./commands/bye');
 const noYou = require('./commands/noYou');
 const botInfo = require('./commands/botInfo');
 const help = require('./commands/help');
@@ -25,6 +26,7 @@ const slashCommands = {
 	nou: noYou,
 	botinfo: botInfo,
 	help,
+	bye,
 };
 
 module.exports = slashCommands;

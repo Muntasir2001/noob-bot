@@ -29,11 +29,12 @@ client.on('ready', () => {
 	console.log(`${client.user.tag} has logged in BEEP BEEP 🤖`);
 
 	// const guildId = '808385971418693652';
-	const guildId = '';
+	const guildId = process.env.GUILD_ID;
+
 	const guild = client.guilds.cache.get(guildId);
 	let commands;
 
-	if (guild && guildId.length !== 0) {
+	if (guild && guildId != undefined) {
 		commands = guild.commands;
 	} else {
 		commands = client.application.commands;

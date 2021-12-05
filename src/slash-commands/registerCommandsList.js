@@ -101,6 +101,11 @@ const commandsList = [
 		options: [],
 	},
 	{
+		name: 'bye',
+		description: 'Replies with bye',
+		options: [],
+	},
+	{
 		name: 'nou',
 		description: 'Say no you to an user or in general',
 		options: [
