@@ -6,18 +6,18 @@ const clearMessages = (message, CMD_NAME, args) => {
 		// message.channel.messages.fetch().then((results) => {
 
 		// });
-		if (message.member.hasPermission('MANAGE_MESSAGES')) {
+		if (message.member.permissions.has('MANAGE_MESSAGES')) {
 			if (args.length === 0) {
 				message.channel
 					.bulkDelete(parseInt(2))
 					.catch((e) =>
-						message.channel.send(`Welp, I do not have the permission`),
+						message.channel.send(`Welp, something went wrong`),
 					);
 			} else {
 				message.channel
 					.bulkDelete(parseInt(args[0]) + 1)
 					.catch((e) =>
-						message.channel.send(`Welp, I do not have the permission`),
+						message.channel.send(`Welp, something went wrong`),
 					);
 			}
 		} else {
