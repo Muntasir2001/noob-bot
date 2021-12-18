@@ -7,13 +7,13 @@ My first discord bot!
 ## For starting bot
 
 ```
-$ forever start bot.js
+forever start bot.js
 ```
 
 ## If you want to specify the logging files for any console output
 
 ```
-$ forever -o out.log -e err.log start bot.js
+forever -o out.log -e err.log start bot.js
 ```
 
 ## You can also stop, restart, and list as follows:
