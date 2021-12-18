@@ -18,6 +18,10 @@ const help = async (interaction, CMD_NAME, options, client) => {
 				value: '`/ban @mention reason days` to ban the user from the server',
 			},
 			{
+				name: 'Clear',
+				value: '`/clear number` to clear that number of messages. "number" default value is 1',
+			},
+			{
 				name: 'serverinfo',
 				value: '`/serverinfo` to see info about the server (under development)',
 			},

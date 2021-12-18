@@ -75,7 +75,6 @@ const commandsList = [
 			{
 				name: 'user',
 				description: 'tag the user',
-				// required: false,
 				type: Constants.ApplicationCommandOptionTypes.USER,
 			},
 		],
@@ -88,22 +87,46 @@ const commandsList = [
 	{
 		name: 'gm',
 		description: 'Replies with goodmorning',
-		options: [],
+		options: [
+			{
+				name: 'user',
+				description: 'tag the user',
+				type: Constants.ApplicationCommandOptionTypes.USER,
+			},
+		],
 	},
 	{
 		name: 'gn',
 		description: 'Replies with goodnight',
-		options: [],
+		options: [
+			{
+				name: 'user',
+				description: 'tag the user',
+				type: Constants.ApplicationCommandOptionTypes.USER,
+			},
+		],
 	},
 	{
 		name: 'hello',
 		description: 'Replies with hello',
-		options: [],
+		options: [
+			{
+				name: 'user',
+				description: 'tag the user',
+				type: Constants.ApplicationCommandOptionTypes.USER,
+			},
+		],
 	},
 	{
 		name: 'bye',
 		description: 'Replies with bye',
-		options: [],
+		options: [
+			{
+				name: 'user',
+				description: 'tag the user',
+				type: Constants.ApplicationCommandOptionTypes.USER,
+			},
+		],
 	},
 	{
 		name: 'nou',
@@ -112,7 +135,6 @@ const commandsList = [
 			{
 				name: 'user',
 				description: 'tag the user',
-				// required: false,
 				type: Constants.ApplicationCommandOptionTypes.USER,
 			},
 		],
@@ -134,7 +156,6 @@ const commandsList = [
 			{
 				name: 'number',
 				description: 'number of messages to delete',
-				required: false,
 				type: Constants.ApplicationCommandOptionTypes.NUMBER,
 			},
 		],
