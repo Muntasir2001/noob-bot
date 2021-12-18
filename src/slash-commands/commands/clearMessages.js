@@ -10,10 +10,19 @@ const clearMessages = async (interaction, CMD_NAME, options) => {
 		});
 	}
 
-	const { size } = await interaction.channel.bulkDelete(
-		numberOfMessages,
-		true,
-	);
+	// first way of deleting the messages
+	// const { size } = await interaction.channel.bulkDelete(
+	// 	numberOfMessages,
+	// 	true,
+	// );
+
+	// second way of deleting the messages
+	const messages = await interaction.channel.messages.fetch({
+		limit: numberOfMessages,
+	});
+	const { size } = messages;
+
+	messages.forEach((message) => message.delete());
 
 	return interaction.reply({
 		content: `Deleted ${size} messages`,
