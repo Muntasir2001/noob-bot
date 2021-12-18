@@ -50,7 +50,7 @@ const serverInfo = (message, CMD_NAME, args, client) => {
 		// 	message.channel.send(`<@&${key}>`);
 		// });
 
-		message.channel.send(infoEmbed);
+		message.channel.send({ embeds: [infoEmbed] });
 	}
 };
 

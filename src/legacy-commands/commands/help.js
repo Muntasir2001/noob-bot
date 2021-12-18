@@ -58,7 +58,7 @@ const helpEmbed = new Discord.MessageEmbed()
 
 const help = (message, CMD_NAME) => {
 	if (CMD_NAME === 'help') {
-		message.channel.send(helpEmbed);
+		message.channel.send({ embeds: [helpEmbed] });
 	}
 };
 

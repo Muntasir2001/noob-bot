@@ -14,15 +14,10 @@ const client = new Client({
 
 // const basicCommands = require('./commands/basicCommands');
 const registerCommands = require('./slash-commands/registerCommands');
-const commandHandler = require('./commands');
+const commandHandler = require('./legacy-commands/commands');
 const slashCommandHandler = require('./slash-commands/slashCommandHandler');
 const commandsList = require('./slash-commands/registerCommandsList');
-const welcome = require('./commands/welcome');
-
-//mongodb related
-// const mongoose = require('mongoose');
-// const express = require('express');
-// const cors = require('cors');
+const welcome = require('./legacy-commands/commands/welcome');
 
 //status of the bot
 client.on('ready', () => {
