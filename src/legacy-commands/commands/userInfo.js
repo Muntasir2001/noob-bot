@@ -9,6 +9,14 @@ const userInfo = async (message, CMD_NAME, args, client) => {
 		.catch((err) => message.channel.send(`${user} is an unknown user`));
 	console.log(message.member);
 
+	console.log(member);
+
+	let roles = member.roles.cache
+		.map((r) => r)
+		.join(' ')
+		.replace('@everyone', ' ');
+	roles = roles.length > 1 ? roles : 'No Roles';
+
 	if (args.length !== 0) {
 		const userInfoEmbed = new MessageEmbed()
 			.setColor('#FF4454')
@@ -55,48 +63,48 @@ const userInfo = async (message, CMD_NAME, args, client) => {
 	} else {
 		const userInfoEmbed = new MessageEmbed()
 			.setColor('#FF4454')
-			.setTitle(`Information about ${message.member.user.username}`)
+			.setTitle(`Information about ${member.user.username}`)
 			.setAuthor(
-				`${message.member.user.username}`,
-				`${message.member.user.displayAvatarURL()}`,
+				`${member.user.username}`,
+				`${member.user.displayAvatarURL()}`,
 			)
 			.setThumbnail(`${member.user.displayAvatarURL()}`)
 			.addFields(
-				{ name: 'User tag', value: message.member.user.tag },
-				// { name: '\u200B', value: '\u200B' },
 				{
-					name: 'Status',
-					value: message.member.presence.status,
+					name: 'User tag',
+					value: member.user.tag || 'None',
 					inline: true,
 				},
+				{ name: '\u200B', value: '\u200B', inline: true },
+				{
+					name: 'Nickname',
+					value: member.user.nickname || 'None',
+					inline: true,
+				},
+				// { name: '\u200B', value: '\u200B', inline: true },
 				{
 					name: 'Account created',
-					value: new Date(
-						message.member.user.createdTimestamp,
-					).toLocaleDateString(),
+					value:
+						new Date(member.user.createdTimestamp).toLocaleString() ||
+						'None',
 					inline: true,
 				},
+				{ name: '\u200B', value: '\u200B', inline: true },
 				{
 					name: 'Joined the server',
-					value: new Date(
-						message.member.joinedTimestamp,
-					).toLocaleDateString(),
+					value:
+						new Date(member.joinedTimestamp).toLocaleString() || 'None',
 					inline: true,
 				},
 			)
-			.addField(
-				'Roles',
-				message.member._roles.map((role) => {
-					return `<@&${role}>`;
-				}),
-			)
+			.addField('Roles', `${roles}`)
 			.setTimestamp()
 			.setFooter(
 				`${client.user.username}`,
 				`${client.user.displayAvatarURL()}`,
 			);
 
-		message.channel.send(userInfoEmbed);
+		message.channel.send({ embeds: [userInfoEmbed] });
 	}
 };
 

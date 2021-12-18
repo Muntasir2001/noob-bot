@@ -28,7 +28,7 @@ const botInfo = (message, CMD_NAME, args, client) => {
 		.setTimestamp();
 
 	if (CMD_NAME === 'botinfo') {
-		message.channel.send(botInfoEmbed);
+		message.channel.send({ embeds: [botInfoEmbed] });
 	}
 };
 
