@@ -28,7 +28,6 @@ const welcome = require('./commands/welcome');
 client.on('ready', () => {
 	console.log(`${client.user.tag} has logged in BEEP BEEP 🤖`);
 
-	// const guildId = '808385971418693652';
 	const guildId = process.env.GUILD_ID;
 
 	const guild = client.guilds.cache.get(guildId);

@@ -12,6 +12,7 @@ const bye = require('./commands/bye');
 const noYou = require('./commands/noYou');
 const botInfo = require('./commands/botInfo');
 const help = require('./commands/help');
+const clearMessages = require('./commands/clearMessages');
 
 const slashCommands = {
 	ping,
@@ -27,6 +28,7 @@ const slashCommands = {
 	botinfo: botInfo,
 	help,
 	bye,
+	clear: clearMessages,
 };
 
 module.exports = slashCommands;

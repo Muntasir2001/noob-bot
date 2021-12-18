@@ -127,6 +127,18 @@ const commandsList = [
 		description: 'Get list of all the commands',
 		options: [],
 	},
+	{
+		name: 'clear',
+		description: 'Delete messages',
+		options: [
+			{
+				name: 'number',
+				description: 'number of messages to delete',
+				required: false,
+				type: Constants.ApplicationCommandOptionTypes.NUMBER,
+			},
+		],
+	},
 ];
 
 module.exports = commandsList;
