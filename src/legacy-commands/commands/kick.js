@@ -3,7 +3,7 @@ const PREFIX = process.env.PREFIX;
 const kick = async (message, CMD_NAME, args) => {
 	//kicking people out
 	if (CMD_NAME === 'kick') {
-		if (!message.member.hasPermission('KICK_MEMBERS')) {
+		if (!message.member.permissions.has('KICK_MEMBERS')) {
 			return message.reply(
 				'HEY HEY HEY there, I see what you trynna do there :eyes:',
 			);
