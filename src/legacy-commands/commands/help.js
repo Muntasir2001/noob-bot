@@ -30,19 +30,19 @@ const helpEmbed = new Discord.MessageEmbed()
 		},
 		{
 			name: 'hello',
-			value: `${PREFIX}hello to say hello`,
+			value: `${PREFIX}hello @mention to say hello (@mention is optional)`,
 		},
 		{
 			name: 'bye',
-			value: `${PREFIX}bye to say bye`,
+			value: `${PREFIX}bye @mention to say bye (@mention is optional)`,
 		},
 		{
 			name: 'gm',
-			value: `${PREFIX}gm to say good morning`,
+			value: `${PREFIX}gm @mention to say good morning (@mention is optional)`,
 		},
 		{
 			name: 'gn',
-			value: `${PREFIX}gn to say good night`,
+			value: `${PREFIX}gn @mention to say good night (@mention is optional)`,
 		},
 		{
 			name: 'no u',

@@ -39,15 +39,15 @@ const help = async (interaction, CMD_NAME, options, client) => {
 			},
 			{
 				name: 'bye',
-				value: '`/bye` to say bye to an user (@mention is optional)',
+				value: '`/bye @mention` to say bye to an user (@mention is optional)',
 			},
 			{
 				name: 'gm',
-				value: '`/gm` to say good morning to an user (@mention is optional)',
+				value: '`/gm @mention` to say good morning to an user (@mention is optional)',
 			},
 			{
 				name: 'gn',
-				value: '`/gn` to say good night to an user (@mention is optional)',
+				value: '`/gn @mention` to say good night to an user (@mention is optional)',
 			},
 			{
 				name: 'no u',
