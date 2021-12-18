@@ -2,11 +2,11 @@ const Discord = require('discord.js');
 
 const serverInfo = (message, CMD_NAME, args, client) => {
 	const { guild } = message;
-	const { name, region, memberCount, roles, owner } = guild;
+
+	const { name, memberCount, roles, ownerId, createdTimestamp } = guild;
 	const icon = guild.iconURL();
 
-	// console.log(name, region, memberCount, icon);
-	console.log();
+	const member = message.member.user.tag;
 
 	const infoEmbed = new Discord.MessageEmbed()
 		.setColor('#FF4454')
@@ -17,27 +17,27 @@ const serverInfo = (message, CMD_NAME, args, client) => {
 			// { name: '\u200B', value: '\u200B' },
 			{
 				name: 'Server Owner',
-				value: owner,
-				inline: true,
-			},
-			{
-				name: 'Region',
-				value: region,
+				value: `<@${ownerId}>`,
 				inline: true,
 			},
 			{
 				name: 'Role count',
-				value: roles.cache.size,
+				value: roles.cache.size.toString(),
 				inline: true,
 			},
 			{
 				name: 'Number of Members',
-				value: memberCount,
+				value: memberCount.toString(),
 				inline: true,
+			},
+			{
+				name: 'Server created',
+				value: new Date(createdTimestamp).toLocaleString(),
+				inline: false,
 			},
 		)
 		.setTimestamp()
-		.setFooter('Requested by: ');
+		.setFooter(`Requested by: ${member}`);
 
 	if (CMD_NAME === 'serverinfo') {
 		// client.guilds.cache.forEach((guild) => {

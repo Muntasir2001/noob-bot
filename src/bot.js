@@ -42,7 +42,7 @@ client.on('interactionCreate', async (interaction) => {
 });
 
 //message event listener - when anyone types a message/certain command in the text chat (v12)
-// client.on('messageCreate', (message) => commandHandler(message, client));
+client.on('messageCreate', (message) => commandHandler(message, client));
 
 /* when some joins the server */
 /* STILL INCOMPLETE */
