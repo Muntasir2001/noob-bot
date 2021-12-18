@@ -28,7 +28,7 @@ const kick = async (message, CMD_NAME, args) => {
 					);
 				})
 				.catch((err) =>
-					message.channel.send('Welp, I do not have the permissions ;-;'),
+					message.channel.send('Welp, something went wrong ;-;'),
 				);
 		} else {
 			message.reply('Welp, member is not in the server :/');
