@@ -1,5 +1,11 @@
 require('dotenv').config();
 const { Client, Intents, Constants } = require('discord.js');
+const registerCommands = require('./slash-commands/registerCommands');
+const commandHandler = require('./legacy-commands/commands');
+const slashCommandHandler = require('./slash-commands/slashCommandHandler');
+const commandsList = require('./slash-commands/registerCommandsList');
+const welcome = require('./legacy-commands/commands/welcome');
+const messageDelete = require('./events/messageDelete');
 
 const client = new Client({
 	partials: ['MESSAGE', 'REACTION'],
@@ -11,13 +17,6 @@ const client = new Client({
 		Intents.FLAGS.GUILD_MESSAGE_TYPING,
 	],
 });
-
-// const basicCommands = require('./commands/basicCommands');
-const registerCommands = require('./slash-commands/registerCommands');
-const commandHandler = require('./legacy-commands/commands');
-const slashCommandHandler = require('./slash-commands/slashCommandHandler');
-const commandsList = require('./slash-commands/registerCommandsList');
-const welcome = require('./legacy-commands/commands/welcome');
 
 //status of the bot
 client.on('ready', () => {
@@ -41,8 +40,10 @@ client.on('interactionCreate', async (interaction) => {
 	slashCommandHandler(interaction, client);
 });
 
-//message event listener - when anyone types a message/certain command in the text chat (v12)
+//message event listener - when anyone types a message/certain command in the text chat (v13)
 client.on('messageCreate', (message) => commandHandler(message, client));
+
+client.on('messageDelete', (message) => messageDelete(message, client));
 
 /* when some joins the server */
 /* STILL INCOMPLETE */
