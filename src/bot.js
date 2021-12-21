@@ -45,44 +45,6 @@ client.on('messageCreate', (message) => commandHandler(message, client));
 
 client.on('messageDelete', (message) => messageDelete(message, client));
 
-/* when some joins the server */
-/* STILL INCOMPLETE */
-// client.on('guildMemberAdd', welcome);
-
-// //add reaction roles
-// client.on('messageReactionAdd', (reaction, user) => {
-// 	const { name } = reaction.emoji;
-// 	const member = reaction.message.guild.members.cache.get(user.id);
-// 	if (reaction.message.id === '845261229776830464') {
-// 		switch (name) {
-// 			case '🖥️':
-// 				member.roles.add('845297466521813043');
-// 				break;
-
-// 			case '💻':
-// 				member.roles.add('845297666069233735');
-// 				break;
-// 		}
-// 	}
-// });
-
-// //remove roles with reactions
-// client.on('messageReactionRemove', (reaction, user) => {
-// 	const { name } = reaction.emoji;
-// 	const member = reaction.message.guild.members.cache.get(user.id);
-// 	if (reaction.message.id === '845261229776830464') {
-// 		switch (name) {
-// 			case '🖥️':
-// 				member.roles.remove('845297466521813043');
-// 				break;
-
-// 			case '💻':
-// 				member.roles.remove('845297666069233735');
-// 				break;
-// 		}
-// 	}
-// });
-
 client.login(process.env.DISCORDJS_BOT_TOKEN);
 
 module.exports = { client };
