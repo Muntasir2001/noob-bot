@@ -40,6 +40,8 @@ const messageDeleteLogger = (
 		)
 		.setFooter(`MessageID: ${id}`);
 
+	if (!guild.channels.resolve(logChannelId)) return;
+
 	const logChannel = guild.channels.resolve(logChannelId);
 
 	logChannel.send({ embeds: [logEmbed] });
