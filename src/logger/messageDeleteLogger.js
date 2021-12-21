@@ -13,9 +13,38 @@ const messageDeleteLogger = (
 	const logEmbed = new Discord.MessageEmbed()
 		.setColor('#FF4454')
 		.setTitle('Message Deleted')
-		.setThumbnail('https://i.ibb.co/0YQ68pT/noobot.png');
+		.setThumbnail(executor.displayAvatarURL())
+		.setAuthor(executor.tag || 'Unknown Deleter', executor.displayAvatarURL())
+		.addFields(
+			{
+				name: 'Message Sender',
+				value: author ? `<@${author.id}>` : target ? target : 'Unknown',
+				// value: author || target || 'Unknown',
+				inline: true,
+			},
+			{
+				name: 'Deleted by',
+				value: executor ? `<@${executor.id}>` : 'Unknown',
+				inline: true,
+			},
+			{
+				name: 'Channel',
+				value: `<#${channelId}>` || 'Unknown',
+				inline: true,
+			},
+			{
+				name: 'Content of the message',
+				value: content || 'Unknown',
+				inline: false,
+			},
+		)
+		.setFooter(`MessageID: ${id}`);
 
-	// console.log(executor.displayAvatarURL());
+	const logChannel = guild.channels.resolve(logChannelId);
+
+	logChannel.send({ embeds: [logEmbed] });
+
+	// console.log('message', message);
 };
 
 module.exports = messageDeleteLogger;
