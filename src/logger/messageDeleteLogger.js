@@ -45,8 +45,6 @@ const messageDeleteLogger = (
 	const logChannel = guild.channels.resolve(logChannelId);
 
 	logChannel.send({ embeds: [logEmbed] });
-
-	// console.log('message', message);
 };
 
 module.exports = messageDeleteLogger;

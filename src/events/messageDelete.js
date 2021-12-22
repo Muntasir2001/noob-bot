@@ -13,8 +13,6 @@ const messageDelete = async (message, client) => {
 	let target = action.target;
 
 	messageDeleteLogger(message, executor, target, guild, logChannelId, client);
-
-	// console.log('action', action);
 };
 
 module.exports = messageDelete;
