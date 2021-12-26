@@ -18,7 +18,11 @@ const messageDeleteLogger = (
 		.addFields(
 			{
 				name: 'Message Sender',
-				value: author ? `<@${author.id}>` : target ? target : 'Unknown',
+				value: author
+					? `<@${author.id}>`
+					: target
+					? `<@${target.id}>`
+					: 'Unknown',
 				// value: author || target || 'Unknown',
 				inline: true,
 			},
@@ -38,7 +42,7 @@ const messageDeleteLogger = (
 				inline: false,
 			},
 		)
-		.setFooter(`MessageID: ${id}`);
+		.setFooter(`MessageID: ${id ? id : 'Unknown'}`);
 
 	if (!guild.channels.resolve(logChannelId)) return;
 

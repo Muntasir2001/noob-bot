@@ -6,6 +6,8 @@ const slashCommandHandler = require('./slash-commands/slashCommandHandler');
 const commandsList = require('./slash-commands/registerCommandsList');
 const welcome = require('./legacy-commands/commands/welcome');
 const messageDelete = require('./events/messageDelete');
+const messageDeleteBulk = require('./events/messageDeleteBulk');
+const timeout = require('./events/timeout');
 
 const client = new Client({
 	partials: ['MESSAGE', 'REACTION'],
@@ -44,6 +46,10 @@ client.on('interactionCreate', async (interaction) => {
 client.on('messageCreate', (message) => commandHandler(message, client));
 
 client.on('messageDelete', (message) => messageDelete(message, client));
+
+client.on('messageDeleteBulk', (message) => messageDeleteBulk(message, client));
+
+// client.on('guildMemberUpdate', (message) => timeout(message, client));
 
 client.login(process.env.DISCORDJS_BOT_TOKEN);
 
