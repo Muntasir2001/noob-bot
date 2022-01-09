@@ -7,10 +7,10 @@ const warn = async (message, CMD_NAME, args, client) => {
 	 * @param {Message} message
 	 */
 
-	// if (!message.member.permissions.has('KICK_MEMBERS'))
-	// 	return message.reply(
-	// 		'HEY HEY HEY there, I see what you trynna do there :eyes:',
-	// 	);
+	if (!message.member.permissions.has('KICK_MEMBERS'))
+		return message.reply(
+			'HEY HEY HEY there, I see what you trynna do there :eyes:',
+		);
 
 	if (CMD_NAME === 'warn') {
 		const guildId = process.env.GUILD_ID;
