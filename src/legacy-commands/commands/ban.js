@@ -7,7 +7,7 @@ const ban = async (message, CMD_NAME, args, client) => {
 				'HEY HEY HEY there, I see what you trynna do there :eyes:',
 			);
 
-		if (args.length === 0) return message.reply('please provide an ID');
+		if (args.length === 0) return message.reply('please provide an user ID');
 
 		message.mentions.members.first() ||
 			(await client.users.fetch(args[0]).catch((err) => {
