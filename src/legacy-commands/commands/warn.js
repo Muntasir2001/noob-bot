@@ -14,7 +14,10 @@ const warn = async (message, CMD_NAME, args, client) => {
 
 	if (CMD_NAME === 'warn') {
 		const guildId = process.env.GUILD_ID;
-		const guild = client.guilds.cache.get(guildId);
+		const guild = guildId
+			? client.guilds.cache.get(guildId)
+			: client.guilds.cache.get(message.guild.id);
+
 		let member;
 		let user;
 
