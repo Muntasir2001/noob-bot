@@ -17,6 +17,10 @@ const helpEmbed = new Discord.MessageEmbed()
 			value: `${PREFIX}ban <uid> or @mention to ban the user from the server`,
 		},
 		{
+			name: 'Warn',
+			value: `${PREFIX}warn <uid> or @mention and reason to warn the user`,
+		},
+		{
 			name: 'serverinfo',
 			value: `${PREFIX}serverinfo to see info about the server (under development)`,
 		},
