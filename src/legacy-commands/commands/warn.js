@@ -1,6 +1,6 @@
 const { Message, Permissions, MessageEmbed } = require('discord.js');
-const { modRole } = require('../../configs/roleIDs');
 const roleIDs = require('../../configs/roleIDs');
+const getReason = require('../../utilities/getReason');
 
 const warn = async (message, CMD_NAME, args, client) => {
 	/**
@@ -13,16 +13,6 @@ const warn = async (message, CMD_NAME, args, client) => {
 		);
 
 	if (CMD_NAME === 'warn') {
-		const guildId = process.env.GUILD_ID;
-		const guild = guildId
-			? client.guilds.cache.get(guildId)
-			: client.guilds.cache.get(message.guild.id);
-
-		let member;
-		let user;
-
-		let isWarnable = true;
-
 		if (!args[0]) {
 			return message.reply('Please provide an user ID');
 		}
@@ -30,6 +20,16 @@ const warn = async (message, CMD_NAME, args, client) => {
 		if (!args[1]) {
 			return message.reply('Please provide a message');
 		}
+
+		const guildId = process.env.GUILD_ID;
+		const guild = guildId
+			? client.guilds.cache.get(guildId)
+			: client.guilds.cache.get(message.guild.id);
+
+		let member;
+		let user;
+		let isWarnable = true;
+		const reason = getReason(args);
 
 		if (message.mentions.members.first()) {
 			member = message.mentions.members.first();
@@ -87,7 +87,7 @@ const warn = async (message, CMD_NAME, args, client) => {
 				.setColor('#FF4454')
 				.setTitle(`:warning: Warned ${user.tag}`)
 				.addField('Moderator', `<@${message.author.id}>`)
-				.addField('Message', `${args[1]}`)
+				.addField('Reason', `${reason}`)
 				.addField('Warning channel', `<#${warningChannelId}>`)
 				.setTimestamp()
 				.setFooter(`${member.id}`);
@@ -95,7 +95,7 @@ const warn = async (message, CMD_NAME, args, client) => {
 			const warningMessage = new MessageEmbed()
 				.setColor('#FF4454')
 				.setTitle(`:warning: You have received a warning`)
-				.addField('Message', `${args[1]}`)
+				.addField('Reason', `${reason}`)
 				.setTimestamp()
 				.setFooter(`Reach out to mods if you have any questions`);
 
