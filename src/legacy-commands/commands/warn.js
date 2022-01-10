@@ -1,6 +1,8 @@
 const { Message, Permissions, MessageEmbed } = require('discord.js');
+
 const roleIDs = require('../../configs/roleIDs');
 const getReason = require('../../utilities/getReason');
+const closeChannelBtn = require('./buttons/closeChannelBtn');
 
 const warn = async (message, CMD_NAME, args, client) => {
 	/**
@@ -29,7 +31,6 @@ const warn = async (message, CMD_NAME, args, client) => {
 		let member;
 		let user;
 		let isWarnable = true;
-		const reason = getReason(args);
 
 		if (message.mentions.members.first()) {
 			member = message.mentions.members.first();
@@ -83,6 +84,9 @@ const warn = async (message, CMD_NAME, args, client) => {
 				warningChannelId = data.id;
 			});
 
+			// *** temp bug - if u do this, then the original "args" changes as well and removes the first element of the args, IDK WHYYYY ***
+			const reason = getReason(args);
+
 			const warnRequest = new MessageEmbed()
 				.setColor('#FF4454')
 				.setTitle(`:warning: Warned ${user.tag}`)
@@ -104,6 +108,7 @@ const warn = async (message, CMD_NAME, args, client) => {
 			warningChannel.send({
 				content: `<@${member.id}>`,
 				embeds: [warningMessage],
+				// components: [closeChannelBtn],
 			});
 		}
 	}

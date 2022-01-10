@@ -1,7 +1,9 @@
 const getReason = (args) => {
-	args.splice(0, 1);
+	let tempArgs = args;
 
-	return args.join(' ');
+	tempArgs.splice(0, 1);
+
+	return tempArgs.join(' ');
 };
 
 module.exports = getReason;
