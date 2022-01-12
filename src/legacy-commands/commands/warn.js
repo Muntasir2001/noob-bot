@@ -1,8 +1,14 @@
-const { Message, Permissions, MessageEmbed } = require('discord.js');
+const {
+	Message,
+	Permissions,
+	MessageEmbed,
+	MessageActionRow,
+	MessageButton,
+} = require('discord.js');
 
 const roleIDs = require('../../configs/roleIDs');
 const getReason = require('../../utilities/getReason');
-const closeChannelBtn = require('./buttons/closeChannelBtn');
+// const closeChannelBtn = require('./buttons/closeChannelBtn');
 
 const warn = async (message, CMD_NAME, args, client) => {
 	/**
@@ -94,21 +100,53 @@ const warn = async (message, CMD_NAME, args, client) => {
 				.addField('Reason', `${reason}`)
 				.addField('Warning channel', `<#${warningChannelId}>`)
 				.setTimestamp()
-				.setFooter(`${member.id}`);
+				.setFooter(`Member ID: ${member.id}`);
 
 			const warningMessage = new MessageEmbed()
 				.setColor('#FF4454')
 				.setTitle(`:warning: You have received a warning`)
 				.addField('Reason', `${reason}`)
 				.setTimestamp()
-				.setFooter(`Reach out to mods if you have any questions`);
+				.setFooter(`Reach out to mods if you have any question`);
 
 			message.channel.send({ embeds: [warnRequest] });
+
+			const close = new MessageActionRow().addComponents(
+				new MessageButton()
+					.setCustomId('close_current_channel')
+					.setLabel('Close channel')
+					.setStyle('DANGER'),
+			);
 
 			warningChannel.send({
 				content: `<@${member.id}>`,
 				embeds: [warningMessage],
-				// components: [closeChannelBtn],
+				components: [close],
+			});
+
+			// const collector = warningChannel.createMessageComponentCollector({
+			// 	time: 5,
+			// });
+
+			// collector.on('end', (collection) => {
+			// 	console.log(collection);
+
+			// 	if (collection.first()?.customId === 'close_current_channel') {
+			// 		warningChannel.delete();
+			// 	}
+			// });
+
+			client.on('interactionCreate', async (interaction) => {
+				if (!interaction.isButton()) return;
+
+				const channel = await guild.channels.resolve(
+					interaction.message.channelId,
+				);
+
+				await channel
+					.delete()
+					.then((data) => console.log(data))
+					.catch((err) => console.error(err));
 			});
 		}
 	}
