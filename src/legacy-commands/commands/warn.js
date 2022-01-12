@@ -8,7 +8,6 @@ const {
 
 const roleIDs = require('../../configs/roleIDs');
 const getReason = require('../../utilities/getReason');
-// const closeChannelBtn = require('./buttons/closeChannelBtn');
 
 const warn = async (message, CMD_NAME, args, client) => {
 	/**
@@ -90,7 +89,7 @@ const warn = async (message, CMD_NAME, args, client) => {
 				warningChannelId = data.id;
 			});
 
-			// *** temp bug - if u do this, then the original "args" changes as well and removes the first element of the args, IDK WHYYYY ***
+			// *** temp bug - if u do this, then the original "args" changes as well and removes the first element of the args which is the user id, IDK WHYYYY ***
 			const reason = getReason(args);
 
 			const warnRequest = new MessageEmbed()
@@ -123,18 +122,6 @@ const warn = async (message, CMD_NAME, args, client) => {
 				embeds: [warningMessage],
 				components: [close],
 			});
-
-			// const collector = warningChannel.createMessageComponentCollector({
-			// 	time: 5,
-			// });
-
-			// collector.on('end', (collection) => {
-			// 	console.log(collection);
-
-			// 	if (collection.first()?.customId === 'close_current_channel') {
-			// 		warningChannel.delete();
-			// 	}
-			// });
 
 			client.on('interactionCreate', async (interaction) => {
 				if (!interaction.isButton()) return;
