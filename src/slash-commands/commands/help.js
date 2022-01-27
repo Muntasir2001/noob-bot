@@ -5,9 +5,9 @@ const help = async (interaction, CMD_NAME, options, client) => {
 
 	const helpEmbed = new MessageEmbed()
 		.setColor('#FF4454')
-		.setTitle('Noob Bot')
+		.setTitle(`${client.user.username}`)
 		.setDescription('Here is the list of commands you can use')
-		.setThumbnail('https://i.ibb.co/0YQ68pT/noobot.png')
+		.setThumbnail(`${client.user.displayAvatarURL()}`)
 		.addFields(
 			{
 				name: `Kick`,
