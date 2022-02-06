@@ -15,6 +15,7 @@ const botInfo = require('./commands/botInfo');
 const basicCommands = require('./commands/basicCommands');
 const userInfo = require('./commands/userInfo');
 const warn = require('./commands/warn');
+const salam = require('./commands/salam');
 
 const cmds = {
 	hello,
@@ -31,6 +32,7 @@ const cmds = {
 	nou: basicCommands,
 	userinfo: userInfo,
 	warn,
+	salam,
 };
 
 const commands = (message, client) => {

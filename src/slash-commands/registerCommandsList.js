@@ -160,6 +160,17 @@ const commandsList = [
 			},
 		],
 	},
+	{
+		name: 'salam',
+		description: 'Replies with Waalaikumassalam Warahmatullahi Wabarakatuhu',
+		options: [
+			{
+				name: 'user',
+				description: 'tag the user',
+				type: Constants.ApplicationCommandOptionTypes.USER,
+			},
+		],
+	},
 ];
 
 module.exports = commandsList;
