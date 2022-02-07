@@ -1,4 +1,4 @@
-export const getMessagesInRange = async (channel, start, end) => {
+const getMessagesInRange = async (channel, start, end) => {
    if (start.createdTimestamp > end.createdTimestamp) {
       const temp = start;
       start = end;
@@ -33,3 +33,5 @@ export const getMessagesInRange = async (channel, start, end) => {
    }
    return [msgs, stoppedEarly];
 };
+
+module.exports = { getMessagesInRange };

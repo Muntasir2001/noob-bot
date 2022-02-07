@@ -27,7 +27,7 @@ const moveMessage = async (channel, message, replyTo) => {
    return newMessage;
 };
 
-const moveMessages = (interaction, CMD_NAME, options) => {
+const moveMessages = async (interaction, CMD_NAME, options) => {
    const channelId = interaction.options.getChannel('to_channel', true).id;
    const startId = interaction.options.getString('start_message_id', true);
    const endId = interaction.options.getString('end_message_id');
@@ -69,73 +69,76 @@ const moveMessages = (interaction, CMD_NAME, options) => {
 
    const authorAndBot = filterOutFalsy([author, client.user]);
 
-   if (
-      !usersHavePermission(toChannel, authorAndBot, [
-         'SEND_MESSAGES',
-         'VIEW_CHANNEL',
-      ])
-   ) {
-      await interaction.editReply(
-         `One of us not have access to send messages in <#${toChannel.id}>`
-      );
-      return null;
-   }
+   // permission, need to fix
+   // if (
+   //    !usersHavePermission(toChannel, authorAndBot, [
+   //       'SEND_MESSAGES',
+   //       'VIEW_CHANNEL',
+   //    ])
+   // ) {
+   //    await interaction.editReply(
+   //       `One of us not have access to send messages in <#${toChannel.id}>`
+   //    );
+   //    return null;
+   // }
 
-   if (
-      !usersHavePermission(fromChannel, authorAndBot, [
-         'MANAGE_MESSAGES',
-         'VIEW_CHANNEL',
-      ])
-   ) {
-      await interaction.editReply(
-         `One of us not have access to delete messages in <#${fromChannel.id}>`
-      );
-      return null;
-   }
+   // if (
+   //    !usersHavePermission(fromChannel, authorAndBot, [
+   //       'MANAGE_MESSAGES',
+   //       'VIEW_CHANNEL',
+   //    ])
+   // ) {
+   //    await interaction.editReply(
+   //       `One of us not have access to delete messages in <#${fromChannel.id}>`
+   //    );
+   //    return null;
+   // }
 
    // single message; not a range
    if (!endId) {
       await toChannel.sendTyping();
       await toChannel.send(`__Messages moved from__ <#${fromChannel.id}>`);
-      await moveMessage(toChannel, startMsg);
-      await interaction.editReply('1 message moved.');
+      // await moveMessage(toChannel, startMsg);
+      await interaction.editReply({ content: '1 message moved.' });
       return null;
    }
 
-   let endMsg;
+   // for more than one message
 
-   try {
-      endMsg = await fromChannel.messages.fetch(endId);
-   } catch (err) {
-      await interaction.editReply(
-         'End message is not in the same channel as start message.'
-      );
-      return null;
-   }
+   // let endMsg;
 
-   const [msgs, stoppedEarly] = await getMessagesInRange(
-      fromChannel,
-      startMsg,
-      endMsg
-   );
+   // try {
+   //    endMsg = await fromChannel.messages.fetch(endId);
+   // } catch (err) {
+   //    await interaction.editReply(
+   //       'End message is not in the same channel as start message.'
+   //    );
+   //    return null;
+   // }
 
-   const confirmPrompt = `Are you sure you want to move ${
-      msgs.length
-   } messages to <#${toChannel.id}>?${
-      stoppedEarly
-         ? '\nNote: Some messages in the range were not included due to a rate limit precaution.'
-         : ''
-   }`;
+   // const [msgs, stoppedEarly] = await getMessagesInRange(
+   //    fromChannel,
+   //    startMsg,
+   //    endMsg
+   // );
 
-   const workingMessage = `Moving ${msgs.length} messages to <#${toChannel.id}>...`;
+   // const confirmPrompt = `Are you sure you want to move ${
+   //    msgs.length
+   // } messages to <#${toChannel.id}>?${
+   //    stoppedEarly
+   //       ? '\nNote: Some messages in the range were not included due to a rate limit precaution.'
+   //       : ''
+   // }`;
 
-   const res = {
-      intermediateResult: { msgs, toChannel, fromChannel },
-      confirmPrompt,
-      workingMessage,
-   };
+   // const workingMessage = `Moving ${msgs.length} messages to <#${toChannel.id}>...`;
 
-   return res;
+   // const res = {
+   //    intermediateResult: { msgs, toChannel, fromChannel },
+   //    confirmPrompt,
+   //    workingMessage,
+   // };
+
+   // return res;
 };
 
 module.exports = moveMessages;

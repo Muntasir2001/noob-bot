@@ -14,23 +14,25 @@ const botInfo = require('./commands/botInfo');
 const help = require('./commands/help');
 const clearMessages = require('./commands/clearMessages');
 const salam = require('./commands/salam');
+const moveMessages = require('./commands/moveMessages');
 
 const slashCommands = {
-	ping,
-	add,
-	kick,
-	ban,
-	userinfo: userInfo,
-	serverinfo: serverInfo,
-	gm: goodMorning,
-	gn: goodNight,
-	hello,
-	nou: noYou,
-	botinfo: botInfo,
-	help,
-	bye,
-	clear: clearMessages,
-	salam,
+   ping,
+   add,
+   kick,
+   ban,
+   userinfo: userInfo,
+   serverinfo: serverInfo,
+   gm: goodMorning,
+   gn: goodNight,
+   hello,
+   nou: noYou,
+   botinfo: botInfo,
+   help,
+   bye,
+   clear: clearMessages,
+   salam,
+   moveMessages,
 };
 
 module.exports = slashCommands;
