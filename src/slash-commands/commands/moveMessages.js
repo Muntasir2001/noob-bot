@@ -33,7 +33,6 @@ const moveMessage = async (channel, message, replyTo) => {
 };
 
 const moveMessages = async (interaction, CMD_NAME, options, client) => {
-   console.log('start1');
    const channelId = options.getChannel('to_channel').id;
    const startId = options.getString('start_message_id');
    const endId = options.getString('end_message_id');
@@ -104,10 +103,9 @@ const moveMessages = async (interaction, CMD_NAME, options, client) => {
 
    // single message; not a range
    if (!endId) {
-      // await toChannel.sendTyping();
-      // await toChannel.send(`__Messages moved from__ <#${fromChannel.id}>`);
-      // await moveMessage(toChannel, startMsg);
-      console.log('etstn');
+      await toChannel.sendTyping();
+      await toChannel.send(`__Messages moved from__ <#${fromChannel.id}>`);
+      await moveMessage(toChannel, startMsg);
       await interaction.reply({ content: '1 message moved.' });
       // return null;
    }

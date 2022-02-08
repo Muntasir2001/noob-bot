@@ -44,7 +44,7 @@ const findMessageInGuild = async (messageId, guild, startingChannel) => {
       }
    }
    // TODO: Search threads as well
-   console.log(await guild.channels.fetch());
+   // console.log(await guild.channels.fetch());
    const channels = Array.from((await guild.channels.fetch()).values());
    for (let i = 0; i < channels.length; i++) {
       const channel = channels[i];
