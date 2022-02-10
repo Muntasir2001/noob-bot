@@ -2,4 +2,8 @@ const filterOutFalsy = (items) => {
    return items.filter((item) => Boolean(item));
 };
 
-module.exports = { filterOutFalsy };
+const array = (t) => {
+   return Array.isArray(t) ? t : [t];
+};
+
+module.exports = { filterOutFalsy, array };

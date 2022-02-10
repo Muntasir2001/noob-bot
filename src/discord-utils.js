@@ -1,3 +1,5 @@
+const { array } = require('./utils');
+
 const getMessagesInRange = async (channel, start, end) => {
    if (start.createdTimestamp > end.createdTimestamp) {
       const temp = start;
@@ -105,8 +107,19 @@ const getInfoFromCommandInteraction = async (interaction, options = {}) => {
    };
 };
 
+const usersHavePermission = (channel, userOrUsers, permission) => {
+   const users = array(userOrUsers);
+   // DOUBT: no clue what is this if statement for
+   if (!('permissionsFor' in channel)) return true;
+
+   return users.every((user) =>
+      Boolean(channel.permissionsFor(user)?.has(permission))
+   );
+};
+
 module.exports = {
    getMessagesInRange,
    findMessageInGuild,
    getInfoFromCommandInteraction,
+   usersHavePermission,
 };
