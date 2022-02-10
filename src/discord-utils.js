@@ -1,4 +1,5 @@
 const { array } = require('./utils');
+const { MAX_MESSAGES_FETCH, BULK_MESSAGES_LIMIT } = require('./constants');
 
 const getMessagesInRange = async (channel, start, end) => {
    if (start.createdTimestamp > end.createdTimestamp) {
