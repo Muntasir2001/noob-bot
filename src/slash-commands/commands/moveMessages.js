@@ -147,6 +147,10 @@ const moveMessages = async (interaction, CMD_NAME, options, client) => {
 			const newMessage = await moveMessage(toChannel, msg);
 
 			oldToNewMessageMapping[msg.id] = newMessage;
+
+			await interaction.editReply(
+				`Working on it. ${msgs.length - i} messages left to move`,
+			);
 		}
 
 		await interaction.editReply(
