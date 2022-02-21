@@ -24,35 +24,35 @@ const help = (message, CMD_NAME, args, client) => {
 				},
 				{
 					name: 'serverinfo',
-					value: `${PREFIX}serverinfo to see info about the server (under development)`,
+					value: `${PREFIX`serverinfo`} to see info about the server (under development)`,
 				},
 				{
 					name: 'botinfo',
-					value: `${PREFIX}botinfo to see info about the bot (under development)`,
+					value: `${PREFIX`botinfo`} to see info about the bot (under development)`,
 				},
 				{
 					name: 'userinfo',
-					value: `${PREFIX}userinfo <uid> or @user to see info about the user. Just putting ${PREFIX} will show info about you (under development)`,
+					value: `${PREFIX`userinfo <uid>`} or @user to see info about the user. Just putting ${PREFIX} will show info about you (under development)`,
 				},
 				{
 					name: 'hello',
-					value: `${PREFIX}hello @mention to say hello (@mention is optional)`,
+					value: `${PREFIX`hello @mention`} to say hello (@mention is optional)`,
 				},
 				{
 					name: 'bye',
-					value: `${PREFIX}bye @mention to say bye (@mention is optional)`,
+					value: `${PREFIX`bye @mention`} to say bye (@mention is optional)`,
 				},
 				{
 					name: 'gm',
-					value: `${PREFIX}gm @mention to say good morning (@mention is optional)`,
+					value: `${PREFIX`gm @mention`} to say good morning (@mention is optional)`,
 				},
 				{
 					name: 'gn',
-					value: `${PREFIX}gn @mention to say good night (@mention is optional)`,
+					value: `${PREFIX`gn @mention`} to say good night (@mention is optional)`,
 				},
 				{
 					name: 'no u',
-					value: `${PREFIX}nou <@user> or nou to say no u`,
+					value: `${PREFIX`nou <@user>`} or ${`nou`} to say no u`,
 				},
 				{
 					name: 'clear',
