@@ -15,6 +15,7 @@ const help = require('./commands/help');
 const clearMessages = require('./commands/clearMessages');
 const salam = require('./commands/salam');
 const moveMessages = require('./commands/moveMessages');
+const avatar = require('./commands/avatar');
 
 const slashCommands = {
 	ping,
@@ -33,6 +34,7 @@ const slashCommands = {
 	clear: clearMessages,
 	salam,
 	movemssg: moveMessages,
+	avatar,
 };
 
 module.exports = slashCommands;
