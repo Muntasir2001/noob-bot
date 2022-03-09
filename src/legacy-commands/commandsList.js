@@ -13,6 +13,7 @@ const basicCommands = require('./commands/basicCommands');
 const userInfo = require('./commands/userInfo');
 const warn = require('./commands/warn');
 const salam = require('./commands/salam');
+const avatar = require('./commands/avatar');
 
 const legacyCommands = {
    hello,
@@ -30,6 +31,7 @@ const legacyCommands = {
    userinfo: userInfo,
    warn,
    salam,
+   avatar,
 };
 
 module.exports = legacyCommands;
