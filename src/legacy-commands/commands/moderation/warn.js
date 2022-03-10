@@ -7,7 +7,7 @@ const {
 } = require('discord.js');
 
 const roleIDs = require('../../../configs/roleIDs');
-const getReason = require('../../../utilities/getReason');
+const getReason = require('../../../globalUtils/getReason');
 
 const warn = async (message, CMD_NAME, args, client) => {
    if (!message.member.permissions.has('KICK_MEMBERS'))
@@ -17,11 +17,11 @@ const warn = async (message, CMD_NAME, args, client) => {
 
    if (CMD_NAME === 'warn') {
       if (!args[0]) {
-         return message.reply('Please provide an user ID');
+         return message.reply('Please provide an user ID or tag an User');
       }
 
       if (!args[1]) {
-         return message.reply('Please provide a message');
+         return message.reply('Please provide a message/reason');
       }
 
       const guildId = process.env.GUILD_ID;
@@ -85,7 +85,7 @@ const warn = async (message, CMD_NAME, args, client) => {
             warningChannelId = data.id;
          });
 
-         // *** temp bug - if u do this, then the original "args" changes as well and removes the first element of the args which is the user id, IDK WHYYYY ***
+         // BUG: if u do this, then the original "args" changes as well and removes the first element of the args which is the user id, IDK WHYYYY ***
          const reason = getReason(args);
 
          const warnRequest = new MessageEmbed()

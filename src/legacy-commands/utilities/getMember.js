@@ -1,16 +1,16 @@
-const getMember = async (client, userID, channel, force) => {
-	try {
-		const user = await client.users
-			.fetch(userID, { force: force })
-			.catch((err) => {
-				channel.send(`${userID} is an unknown user`);
-				console.log(err);
-			});
+const getMember = async (client, userID, message, force) => {
+   try {
+      const member = await message.guild.members
+         .fetch(userID, { force: force })
+         .catch((err) => {
+            message.channel.send(`${userID} is an unknown user`);
+            console.log(err);
+         });
 
-		return user;
-	} catch (errr) {
-		return;
-	}
+      return member;
+   } catch (errr) {
+      return;
+   }
 };
 
 module.exports = getMember;

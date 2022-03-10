@@ -5,37 +5,37 @@ const getMember = require('../utilities/getMember');
 const avatar = async (message, CMD_NAME, args, client) => {
    if (CMD_NAME === 'avatar') {
       let avatar;
-      let user;
+      let member;
 
       if (message.mentions.members.first()) {
-         user = message.mentions.members.first().user;
+         member = message.mentions.members.first().user;
          avatar = message.mentions.members
             .first()
             .displayAvatarURL({ size: 4096 });
       } else {
-         user = await getMember(
+         member = await getMember(
             client,
             args[0] || message.member.user,
-            message.channel,
+            message,
             true
          );
-         avatar = user.displayAvatarURL({ size: 2048 });
+         avatar = member.displayAvatarURL({ size: 2048 });
       }
 
       const avatarEmbed = new MessageEmbed()
-         .setColor(user.hexAccentColor || '#FF4454')
-         .setTitle(`Avatar for ${user.tag}`)
+         .setColor(member.user.hexAccentColor || '#FF4454')
+         .setTitle(`Avatar for ${member.user.tag}`)
          .setDescription(
-            `[jpg](${user.displayAvatarURL({
+            `[jpg](${member.displayAvatarURL({
                format: 'jpg',
                size: 4096,
-            })}) | [png](${user.displayAvatarURL({
+            })}) | [png](${member.displayAvatarURL({
                format: 'png',
                size: 4096,
-            })}) | [webp](${user.displayAvatarURL({
+            })}) | [webp](${member.displayAvatarURL({
                format: 'webp',
                size: 4096,
-            })}) | [jpeg](${user.displayAvatarURL({
+            })}) | [jpeg](${member.displayAvatarURL({
                format: 'jpeg',
                size: 4096,
             })})`
