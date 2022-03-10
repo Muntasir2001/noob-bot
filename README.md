@@ -28,3 +28,7 @@ $ forever stopall
 ## Reference
 
 https://shiffman.net/a2z/bot-ec2/
+
+# SSH Instruction
+
+`ssh -i noob-dev-oracle-cloud.key ubuntu@<server-public-ip-address>`
