@@ -6,14 +6,10 @@ const {
    MessageButton,
 } = require('discord.js');
 
-const roleIDs = require('../../configs/roleIDs');
-const getReason = require('../../utilities/getReason');
+const roleIDs = require('../../../configs/roleIDs');
+const getReason = require('../../../utilities/getReason');
 
 const warn = async (message, CMD_NAME, args, client) => {
-   /**
-    * @param {Message} message
-    */
-
    if (!message.member.permissions.has('KICK_MEMBERS'))
       return message.reply(
          'HEY HEY HEY there, I see what you trynna do there :eyes:'
