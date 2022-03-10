@@ -32,3 +32,7 @@ https://shiffman.net/a2z/bot-ec2/
 # SSH Instruction
 
 `ssh -i noob-dev-oracle-cloud.key ubuntu@<server-public-ip-address>`
+
+# Note
+
+-  **IMPORTANT:** Make sure you are using nodejs v16.6.0 or above (Wasted more than an hour the other day because of this)
