@@ -22,41 +22,41 @@ const help = async (interaction, CMD_NAME, options, client) => {
             value: '`/clear number` to clear that number of messages. "number" default value is 1',
          },
          {
-            name: 'serverinfo',
+            name: 'Serverinfo',
             value: '`/serverinfo` to see info about the server (under development)',
          },
          {
-            name: 'botinfo',
+            name: 'Botinfo',
             value: '`/botinfo` to see info about the bot (under development)',
          },
          {
-            name: 'userinfo',
+            name: 'Userinfo',
             value: '`/userinfo @user` to see info about the user. Just putting `/userinfo` will show info about you (under development)',
          },
          {
-            name: 'hello',
-            value: '`/hello @mention` to say hello to an user (@mention is optional)',
+            name: 'Hello',
+            value: '`/hello @user` to say hello to an user (@user is optional)',
          },
          {
-            name: 'bye',
-            value: '`/bye @mention` to say bye to an user (@mention is optional)',
+            name: 'Bye',
+            value: '`/bye @user` to say bye to an user (@user is optional)',
          },
          {
             name: 'gm',
-            value: '`/gm @mention` to say good morning to an user (@mention is optional)',
+            value: '`/gm @user` to say good morning to an user (@user is optional)',
          },
          {
             name: 'gn',
-            value: '`/gn @mention` to say good night to an user (@mention is optional)',
+            value: '`/gn @user` to say good night to an user (@user is optional)',
          },
          {
             name: 'no u',
-            value: '`/nou @user` or nou to say no u',
+            value: '`/nou @user` or nou to say no u (@user is optional)',
+         },
+         {
+            name: 'Avatar',
+            value: '`/avatar @user` to see avatar of an user. Just putting `/avatar` will show you the avatar of yourself (@user is optional)',
          }
-         // {
-         // 	name: 'clear',
-         // 	value: `${PREFIX}clear <no of messages to clear> to delete the messages above. Just putting ${PREFIX}clear will delete one message`,
-         // },
          // { name: '\u200B', value: '\u200B' },
       )
       .setTimestamp()

@@ -23,23 +23,23 @@ const help = (message, CMD_NAME, args, client) => {
                value: `\`${PREFIX}warn <uid>\` or \`@mention\` and reason to warn the user`,
             },
             {
-               name: 'serverinfo',
+               name: 'Serverinfo',
                value: `\`${PREFIX}serverinfo\` to see info about the server (under development)`,
             },
             {
-               name: 'botinfo',
+               name: 'Botinfo',
                value: `\`${PREFIX}botinfo\` to see info about the bot (under development)`,
             },
             {
-               name: 'userinfo',
+               name: 'Userinfo',
                value: `\`${PREFIX}userinfo <uid>\` or \`@user\` to see info about the user. Just putting ${PREFIX} will show info about you (under development)`,
             },
             {
-               name: 'hello',
+               name: 'Hello',
                value: `\`${PREFIX}hello @mention\` to say hello (@mention is optional)`,
             },
             {
-               name: 'bye',
+               name: 'Bye',
                value: `\`${PREFIX}bye @mention\` to say bye (@mention is optional)`,
             },
             {
@@ -55,8 +55,12 @@ const help = (message, CMD_NAME, args, client) => {
                value: `\`${PREFIX}nou <@user>\` or ${`nou`} to say no u`,
             },
             {
-               name: 'clear',
-               value: `\`${PREFIX}clear <no of messages to clear>\` to delete the messages above. Just putting ${PREFIX}clear will delete one message`,
+               name: 'Clear',
+               value: `\`${PREFIX}clear <no of messages to clear>\` to delete the messages above. Just putting \`${PREFIX}clear\` will delete one message`,
+            },
+            {
+               name: 'Avatar',
+               value: `\`${PREFIX}avatar <uid>\` or \`@user\` to see avatar of an user. Just putting \`${PREFIX}avatar\` will display avatar of yours.`,
             }
             // { name: '\u200B', value: '\u200B' },
          )
