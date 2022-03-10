@@ -10,36 +10,37 @@ const messageDeleteBulk = require('./events/messageDeleteBulk');
 const timeout = require('./events/timeout');
 
 const client = new Client({
-	partials: ['MESSAGE', 'REACTION'],
-	intents: [
-		Intents.FLAGS.GUILDS,
-		Intents.FLAGS.GUILD_MESSAGES,
-		Intents.FLAGS.DIRECT_MESSAGES,
-		Intents.FLAGS.GUILD_BANS,
-		Intents.FLAGS.GUILD_MESSAGE_TYPING,
-	],
+   partials: ['MESSAGE', 'REACTION'],
+   intents: [
+      Intents.FLAGS.GUILDS,
+      Intents.FLAGS.GUILD_MESSAGES,
+      Intents.FLAGS.DIRECT_MESSAGES,
+      Intents.FLAGS.GUILD_BANS,
+      Intents.FLAGS.GUILD_MESSAGE_TYPING,
+   ],
 });
 
 //status of the bot
 client.on('ready', () => {
-	console.log(`${client.user.tag} has logged in BEEP BEEP 🤖`);
+   console.log(`${client.user.tag} has logged in BEEP BEEP 🤖`);
 
-	const guildId = process.env.GUILD_ID;
+   const guildId = process.env.GUILD_ID;
 
-	const guild = client.guilds.cache.get(guildId);
-	let commands;
+   const guild = client.guilds.cache.get(guildId);
+   let commands;
 
-	if (guild && guildId != undefined) {
-		commands = guild.commands;
-	} else {
-		commands = client.application.commands;
-	}
+   if (guild && guildId != undefined) {
+      commands = guild.commands;
+   } else {
+      commands = client.application.commands;
+   }
 
-	registerCommands(commands, guild, commandsList);
+   // slash command register
+   registerCommands(commands, guild, commandsList);
 });
 
 client.on('interactionCreate', async (interaction) => {
-	slashCommandHandler(interaction, client);
+   slashCommandHandler(interaction, client);
 });
 
 //message event listener - when anyone types a message/certain command in the text chat (v13)
