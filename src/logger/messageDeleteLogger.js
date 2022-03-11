@@ -14,7 +14,10 @@ const messageDeleteLogger = (
 		.setColor('#FF4454')
 		.setTitle('Message Deleted')
 		.setThumbnail(executor.displayAvatarURL())
-		.setAuthor(executor.tag || 'Unknown Deleter', executor.displayAvatarURL())
+		.setAuthor({
+			name: executor.tag || 'Unknown Deleter',
+			iconURL: executor.displayAvatarURL(),
+		})
 		.addFields(
 			{
 				name: 'Message Sender',

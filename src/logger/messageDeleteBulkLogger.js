@@ -12,7 +12,10 @@ const messageDeleteBulkLogger = (
 		.setColor('#FF4454')
 		.setTitle('Bulk Messages Deleted')
 		.setThumbnail(executor.displayAvatarURL())
-		.setAuthor(executor.tag || 'Unknown Deleter', executor.displayAvatarURL())
+		.setAuthor({
+			name: executor.tag || 'Unknown Deleter',
+			iconURL: executor.displayAvatarURL(),
+		})
 		.setDescription(
 			`${amount} messages were deleted from ${channel} by <@${executor.id}>`,
 		)
