@@ -1,6 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 
-const getClientMember = require('../utilities/getClientMember');
+const getClientMember = require('../../globalUtils/getClientMember');
 
 const avatar = async (message, CMD_NAME, args, client) => {
 	if (CMD_NAME === 'avatar') {
