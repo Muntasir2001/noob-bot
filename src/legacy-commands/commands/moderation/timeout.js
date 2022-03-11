@@ -27,7 +27,7 @@ const timeout = async (message, CMD_NAME, args, client) => {
 			}
 
 			let member;
-			const time = args[1] * 1000 * 60;
+			const time = parseInt(args[1]);
 			let isTimeout = true;
 
 			if (message.mentions.members.first()) {
@@ -38,7 +38,7 @@ const timeout = async (message, CMD_NAME, args, client) => {
 
 			const reason = getReason(args, 2);
 
-			await member.timeout(time, reason).catch((err) => {
+			await member.timeout(time * 1000 * 60, reason).catch((err) => {
 				console.log(err);
 
 				message.reply(`Couldn't timeout <@${member.id}>`);
@@ -56,8 +56,12 @@ const timeout = async (message, CMD_NAME, args, client) => {
 							value: `<@${message.author.id}>`,
 						},
 						{
+							name: 'Timed out user',
+							value: `<@${member.user.id}>`,
+						},
+						{
 							name: 'Timeout length',
-							value: `${time / 1000 / 60} minutes`,
+							value: time === 1 ? `${time} minute` : `${time} minutes`,
 						},
 						{
 							name: 'Reason',
