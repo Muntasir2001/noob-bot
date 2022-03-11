@@ -1,8 +1,8 @@
 /* this will import all the slash commands and make a json object and export it to slashCommandHandler */
 const ping = require('./commands/ping');
 const add = require('./commands/add');
-const kick = require('./commands/kick');
-const ban = require('./commands/ban');
+const kick = require('./commands/moderation/kick');
+const ban = require('./commands/moderation/ban');
 const userInfo = require('./commands/userInfo');
 const serverInfo = require('./commands/serverInfo');
 const goodMorning = require('./commands/goodMorning');

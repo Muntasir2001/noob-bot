@@ -1,13 +1,23 @@
-const getClientMember = async (client, userID, message, force) => {
+const getClientMember = async ({
+	client,
+	user,
+	message,
+	interaction,
+	force,
+}) => {
 	try {
-		const user = await client.users
-			.fetch(userID, { force: force })
+		const clientUser = await client.users
+			.fetch(user, { force: force })
 			.catch((err) => {
-				message.channel.send(`${userID} is an unknown user`);
+				if (message) {
+					message.reply(`${user} is an unknown user`);
+				} else {
+					interaction.reply(`${user} is an unknown user`);
+				}
 				console.log(err);
 			});
 
-		return user;
+		return clientUser;
 	} catch (errr) {
 		return;
 	}

@@ -13,12 +13,12 @@ const avatar = async (message, CMD_NAME, args, client) => {
 				.first()
 				.displayAvatarURL({ size: 4096 });
 		} else {
-			member = await getClientMember(
-				client,
-				args[0] || message.member.user,
-				message,
-				true,
-			);
+			member = await getClientMember({
+				client: client,
+				user: args[0] || message.member.user,
+				message: message,
+				force: true,
+			});
 			avatar = member.displayAvatarURL({ size: 4096 });
 		}
 
