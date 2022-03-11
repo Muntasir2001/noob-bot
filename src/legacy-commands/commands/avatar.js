@@ -1,6 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 
-const getClientMember = require('../utilities/getMember');
+const getClientMember = require('../utilities/getClientMember');
 
 const avatar = async (message, CMD_NAME, args, client) => {
 	if (CMD_NAME === 'avatar') {
@@ -19,7 +19,7 @@ const avatar = async (message, CMD_NAME, args, client) => {
 				message,
 				true,
 			);
-			avatar = member.displayAvatarURL({ size: 2048 });
+			avatar = member.displayAvatarURL({ size: 4096 });
 		}
 
 		const avatarEmbed = new MessageEmbed()
