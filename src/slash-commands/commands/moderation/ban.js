@@ -22,18 +22,13 @@ const ban = (interaction, CMD_NAME, options) => {
 		});
 	}
 
-	/* if user kickable */
+	/* if user bannable */
 	if (!target.bannable) {
 		return interaction.reply({
 			content: `User not bannable :(`,
 			ephemeral: false,
 		});
 	}
-
-	// get user id (if using mentionable)
-	// console.log(userID.user.id);
-	// console.log(target);
-	// console.log(user);
 
 	target
 		.ban({ reason, days: days })

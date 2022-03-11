@@ -206,6 +206,30 @@ const commandsList = [
 			},
 		],
 	},
+	{
+		name: 'timeout',
+		description: 'Timeout a member',
+		options: [
+			{
+				name: 'user',
+				description: 'tag the user',
+				required: true,
+				type: Constants.ApplicationCommandOptionTypes.USER,
+			},
+			{
+				name: 'reason',
+				description: 'reason for timeout',
+				required: true,
+				type: Constants.ApplicationCommandOptionTypes.STRING,
+			},
+			{
+				name: 'time',
+				description: 'length of timeout in minutes',
+				required: true,
+				type: Constants.ApplicationCommandOptionTypes.NUMBER,
+			},
+		],
+	},
 ];
 
 module.exports = commandsList;
