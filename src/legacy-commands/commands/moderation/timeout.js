@@ -56,6 +56,10 @@ const timeout = async (message, CMD_NAME, args, client) => {
 							value: `<@${message.author.id}>`,
 						},
 						{
+							name: 'Timeout length',
+							value: `${time / 1000 / 60} minutes`,
+						},
+						{
 							name: 'Reason',
 							value: reason,
 						},
