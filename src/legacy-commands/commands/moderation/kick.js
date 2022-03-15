@@ -1,43 +1,78 @@
-const kick = async (message, CMD_NAME, args) => {
-   let isKickable = true;
+const { MessageEmbed } = require('discord.js');
 
-   //kicking people out
-   if (CMD_NAME === 'kick') {
-      if (!message.member.permissions.has('KICK_MEMBERS')) {
-         return message.reply(
-            'HEY HEY HEY there, I see what you trynna do there :eyes:'
-         );
-      }
+const getReason = require('../../../globalUtils/getReason');
+const infoMessageEmbed = require('../../../globalUtils/infoMessageEmbed');
+const getMember = require('../../utilities/getMember');
 
-      if (!args[0]) {
-         return message.reply('Please provide an user ID or tag an User');
-      }
-
-      if (!args[1]) {
-         return message.reply('Please provide a reason');
-      }
-
-      // const member = message.guild.members.cache.get(args[0]);
-      const member =
-         message.mentions.members.first() ||
-         (await message.guild.members.fetch(args[0]).catch((err) => {
-            message.channel.send(`${args[0]} is an unknown user`);
-
-            isKickable = false;
-         }));
-
-      if (isKickable) {
-         await member
-            .kick()
-            .then((member) => {
-               message.channel.send(
-                  `${member} was kicked out of the server :3`
-               );
-            })
-            .catch((err) =>
-               message.channel.send('Welp, something went wrong ;-;')
+const kick = async (message, CMD_NAME, args, client) => {
+   try {
+      if (CMD_NAME === 'kick') {
+         if (!message.member.permissions.has('KICK_MEMBERS')) {
+            return message.reply(
+               'HEY HEY HEY there, I see what you trynna do there :eyes:'
             );
+         }
+
+         if (!args[0]) {
+            return message.reply('Please provide an user ID or tag an User');
+         }
+
+         if (!args[1]) {
+            return message.reply('Please provide a reason');
+         }
+
+         let member;
+
+         if (message.mentions.members.first()) {
+            member = message.mentions.members.first();
+         } else {
+            member = await getMember(client, args[0], message, false);
+         }
+
+         const reason = getReason(args);
+
+         await member
+            .kick(reason)
+            .then((data) => {
+               const kickEmbed = new MessageEmbed()
+                  .setColor('#FF4454')
+                  .setTitle(`:stop_sign: Kicked ${member.user.tag}`)
+                  .addFields(
+                     {
+                        name: 'Moderator',
+                        value: `<@${message.author.id}>`,
+                     },
+                     {
+                        name: 'Kicked user',
+                        value: `<@${member.id}>`,
+                     },
+                     {
+                        name: 'Reason',
+                        value: reason,
+                     }
+                  )
+                  .setTimestamp()
+                  .setFooter({ text: `Member ID: ${member.id}` });
+
+               message.channel.send({ embeds: [kickEmbed] });
+            })
+            .catch((err) => {
+               console.log(err);
+
+               message.reply({
+                  embeds: [
+                     infoMessageEmbed(
+                        `:x: Couldn't kick ${member.user.tag}`,
+                        'ERROR'
+                     ),
+                  ],
+               });
+            });
       }
+   } catch (err) {
+      console.log(err);
+
+      return;
    }
 };
 
