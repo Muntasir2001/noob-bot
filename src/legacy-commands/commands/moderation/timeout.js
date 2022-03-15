@@ -2,6 +2,7 @@ const { MessageEmbed } = require('discord.js');
 
 const getMember = require('../../utilities/getMember');
 const getReason = require('../../../globalUtils/getReason');
+const infoMessageEmbed = require('../../../globalUtils/infoMessageEmbed');
 
 const timeout = async (message, CMD_NAME, args, client) => {
    try {
@@ -38,41 +39,48 @@ const timeout = async (message, CMD_NAME, args, client) => {
 
          const reason = getReason(args, 2);
 
-         await member.timeout(time * 1000 * 60, reason).catch((err) => {
-            console.log(err);
+         await member
+            .timeout(time * 1000 * 60, reason)
+            .then((data) => {
+               const timeoutEmbed = new MessageEmbed()
+                  .setColor('#FF4454')
+                  .setTitle(`:mute: Timed out ${member.user.tag}`)
+                  .addFields(
+                     {
+                        name: 'Moderator',
+                        value: `<@${message.author.id}>`,
+                     },
+                     {
+                        name: 'Timed out user',
+                        value: `<@${member.id}>`,
+                     },
+                     {
+                        name: 'Timeout length',
+                        value:
+                           time === 1 ? `${time} minute` : `${time} minutes`,
+                     },
+                     {
+                        name: 'Reason',
+                        value: reason,
+                     }
+                  )
+                  .setTimestamp()
+                  .setFooter({ text: `Member ID: ${member.id}` });
 
-            message.reply(`Couldn't timeout <@${member.id}>`);
+               message.channel.send({ embeds: [timeoutEmbed] });
+            })
+            .catch((err) => {
+               console.log(err);
 
-            isTimeout = false;
-         });
-
-         if (isTimeout) {
-            const timeoutEmbed = new MessageEmbed()
-               .setColor('#FF4454')
-               .setTitle(`:mute: Timed out ${member.user.tag}`)
-               .addFields(
-                  {
-                     name: 'Moderator',
-                     value: `<@${message.author.id}>`,
-                  },
-                  {
-                     name: 'Timed out user',
-                     value: `<@${member.user.id}>`,
-                  },
-                  {
-                     name: 'Timeout length',
-                     value: time === 1 ? `${time} minute` : `${time} minutes`,
-                  },
-                  {
-                     name: 'Reason',
-                     value: reason,
-                  }
-               )
-               .setTimestamp()
-               .setFooter({ text: `Member ID: ${member.id}` });
-
-            message.channel.send({ embeds: [timeoutEmbed] });
-         }
+               message.reply({
+                  embeds: [
+                     infoMessageEmbed(
+                        `:x: Couldn't timeout ${member.user.tag}`,
+                        'ERROR'
+                     ),
+                  ],
+               });
+            });
       }
    } catch (err) {
       console.log(err);
