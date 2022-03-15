@@ -1,39 +1,85 @@
+const { MessageEmbed } = require('discord.js');
+
+const getClientMember = require('../../../globalUtils/getClientMember');
+const getReason = require('../../../globalUtils/getReason');
+const infoMessageEmbed = require('../../../globalUtils/infoMessageEmbed');
+
 const ban = async (message, CMD_NAME, args, client) => {
-   let isBannable = true;
+   try {
+      if (CMD_NAME === 'ban') {
+         if (!message.member.permissions.has('BAN_MEMBERS'))
+            return message.reply(
+               'HEY HEY HEY there, I see what you trynna do there :eyes:'
+            );
 
-   if (CMD_NAME === 'ban') {
-      if (!message.member.permissions.has('BAN_MEMBERS'))
-         return message.reply(
-            'HEY HEY HEY there, I see what you trynna do there :eyes:'
-         );
+         if (!args[0]) {
+            return message.reply('Please provide an user ID or tag an User');
+         }
 
-      if (!args[0]) {
-         return message.reply('Please provide an user ID or tag an User');
-      }
+         if (!args[1]) {
+            return message.reply('Please provide a reason');
+         }
 
-      if (!args[1]) {
-         return message.reply('Please provide a reason');
-      }
+         let member;
 
-      message.mentions.members.first() ||
-         (await client.users.fetch(args[0]).catch((err) => {
-            message.channel.send(`${args[0]} is an unknown user`);
+         if (message.mentions.members.first()) {
+            member = await getClientMember({
+               user: message.mentions.members.first().id,
+               client: client,
+               message: message,
+            });
+         } else {
+            member = await getClientMember({
+               client: client,
+               user: args[0],
+               message: message,
+            });
+         }
 
-            isBannable = false;
-         }));
+         const reason = getReason(args);
 
-      if (isBannable) {
          await message.guild.members
-            .ban(args[0])
-            .then((member) => {
-               message.channel.send(
-                  `${member} has been banned from this server :3`
-               );
+            .ban(member.id, { days: 0, reason: reason })
+            .then((data) => {
+               const banEmbed = new MessageEmbed()
+                  .setColor('#FF4454')
+                  .setTitle(`:no_entry: Banned ${member.tag}`)
+                  .addFields(
+                     {
+                        name: 'Moderator',
+                        value: `<@${message.author.id}>`,
+                     },
+                     {
+                        name: 'Banned user',
+                        value: `<@${member.id}>`,
+                     },
+                     {
+                        name: 'Reason',
+                        value: reason,
+                     }
+                  )
+                  .setTimestamp()
+                  .setFooter({ text: `Member ID: ${member.id}` });
+
+               message.channel.send({ embeds: [banEmbed] });
             })
             .catch((err) => {
-               message.channel.send('Welp, something went wrong');
+               console.log(err);
+
+               message.reply({
+                  embeds: [
+                     infoMessageEmbed(
+                        `:x: Couldn't ban ${member.tag}`,
+                        'ERROR'
+                     ),
+                  ],
+               });
             });
       }
+   } catch (err) {
+      console.log(err);
+
+      return;
    }
 };
 

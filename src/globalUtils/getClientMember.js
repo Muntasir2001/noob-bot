@@ -1,26 +1,42 @@
-const getClientMember = async ({
-	client,
-	user,
-	message,
-	interaction,
-	force,
-}) => {
-	try {
-		const clientUser = await client.users
-			.fetch(user, { force: force })
-			.catch((err) => {
-				if (message) {
-					message.reply(`${user} is an unknown user`);
-				} else {
-					interaction.reply(`${user} is an unknown user`);
-				}
-				console.log(err);
-			});
+const infoMessageEmbed = require('./infoMessageEmbed');
 
-		return clientUser;
-	} catch (errr) {
-		return;
-	}
+const getClientMember = async ({
+   client,
+   user,
+   message,
+   interaction,
+   force,
+}) => {
+   try {
+      const clientUser = await client.users
+         .fetch(user, { force: force })
+         .catch((err) => {
+            if (message) {
+               message.reply({
+                  embeds: [
+                     infoMessageEmbed(
+                        `:x: ${user} is an unknown user`,
+                        'ERROR'
+                     ),
+                  ],
+               });
+            } else {
+               interaction.reply({
+                  embeds: [
+                     infoMessageEmbed(
+                        `:x: ${user} is an unknown user`,
+                        'ERROR'
+                     ),
+                  ],
+               });
+            }
+            console.log(err);
+         });
+
+      return clientUser;
+   } catch (errr) {
+      return;
+   }
 };
 
 module.exports = getClientMember;
