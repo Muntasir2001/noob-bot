@@ -1,7 +1,7 @@
 const PREFIX = process.env.PREFIX;
-const Discord = require('discord.js');
 
 const legacyCommands = require('./commandsList');
+const infoMessageEmbed = require('../globalUtils/infoMessageEmbed');
 
 const commands = (message, client) => {
    if (!message.author.bot && message.content.startsWith(PREFIX)) {
@@ -13,7 +13,9 @@ const commands = (message, client) => {
       if (CMD_NAME in legacyCommands) {
          legacyCommands[CMD_NAME](message, CMD_NAME, args, client);
       } else {
-         message.channel.send(':x: Wrong Command :x:');
+         message.channel.send({
+            embeds: [infoMessageEmbed(':x: Wrong Command :x:')],
+         });
       }
    }
 };
