@@ -1,48 +1,68 @@
-const kick = (interaction, CMD_NAME, options) => {
-	const user = options.getUser('user', true);
-	const reason = options.getString('reason');
+const { MessageEmbed } = require('discord.js');
 
-	if (!interaction.memberPermissions.has('KICK_MEMBERS')) {
-		return interaction.reply({
-			content: 'HEY HEY HEY there, I see what you trynna do there :eyes:',
-			ephemeral: false,
-		});
-	}
+const getMember = require('../../utilities/getMember');
+const infoMessageEmbed = require('../../../globalUtils/infoMessageEmbed');
 
-	const target = interaction.options.getMember('user');
+const kick = async (interaction, CMD_NAME, options) => {
+   const user = options.getUser('user', true);
+   const reason = options.getString('reason');
 
-	/* if user not found */
-	if (!target) {
-		console.log('Please tag an user to kick');
+   if (!interaction.memberPermissions.has('KICK_MEMBERS')) {
+      return interaction.reply({
+         content: 'HEY HEY HEY there, I see what you trynna do there :eyes:',
+         ephemeral: false,
+      });
+   }
 
-		return interaction.reply({
-			content: `Please tag an user to kick`,
-			ephemeral: false,
-		});
-	}
+   const target = await getMember(interaction, user, false);
 
-	/* if user kickable */
-	if (!target.kickable) {
-		return interaction.reply({
-			content: `User not kickable :(`,
-			ephemeral: false,
-		});
-	}
+   /* if user not found */
+   if (!target) {
+      console.log('Please tag an user to kick');
 
-	// get user id (if using mentionable)
-	// console.log(userID.user.id);
-	// console.log(target);
-	// console.log(user);
+      return interaction.reply({
+         content: `Please tag an user to kick`,
+         ephemeral: false,
+      });
+   }
 
-	target
-		.kick(reason)
-		.then(() => {
-			interaction.reply({
-				content: `User ${user} has been kicked. **Reason**: ${reason}`,
-				ephemeral: false,
-			});
-		})
-		.catch((err) => console.log(err));
+   /* if user kickable */
+   if (!target.kickable) {
+      return interaction.reply({
+         embeds: [infoMessageEmbed(`User not kickable :(`)],
+         ephemeral: false,
+      });
+   }
+
+   await target
+      .kick(reason)
+      .then(() => {
+         const kickEmbed = new MessageEmbed()
+            .setColor('#FF4454')
+            .setTitle(`:stop_sign: Kicked ${target.user.tag}`)
+            .addFields(
+               {
+                  name: 'Moderator',
+                  value: `${interaction.member.user}`,
+               },
+               {
+                  name: 'Kicked user',
+                  value: `${user}`,
+               },
+               {
+                  name: 'Reason',
+                  value: reason,
+               }
+            )
+            .setTimestamp()
+            .setFooter({ text: `Member ID: ${target.user.id}` });
+
+         interaction.reply({
+            embeds: [kickEmbed],
+            ephemeral: false,
+         });
+      })
+      .catch((err) => console.log(err));
 };
 
 module.exports = kick;
