@@ -8,16 +8,26 @@ const ban = async (message, CMD_NAME, args, client) => {
    try {
       if (CMD_NAME === 'ban') {
          if (!message.member.permissions.has('BAN_MEMBERS'))
-            return message.reply(
-               'HEY HEY HEY there, I see what you trynna do there :eyes:'
-            );
+            return message.reply({
+               embeds: [
+                  infoMessageEmbed(
+                     'HEY HEY HEY there, I see what you trynna do there :eyes:'
+                  ),
+               ],
+            });
 
          if (!args[0]) {
-            return message.reply('Please provide an user ID or tag an User');
+            return message.reply({
+               embeds: [
+                  infoMessageEmbed('Please provide an user ID or tag an User'),
+               ],
+            });
          }
 
          if (!args[1]) {
-            return message.reply('Please provide a reason');
+            return message.reply({
+               embeds: [infoMessageEmbed('Please provide a reason')],
+            });
          }
 
          let member;

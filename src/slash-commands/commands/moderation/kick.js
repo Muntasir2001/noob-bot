@@ -9,7 +9,11 @@ const kick = async (interaction, CMD_NAME, options) => {
 
    if (!interaction.memberPermissions.has('KICK_MEMBERS')) {
       return interaction.reply({
-         content: 'HEY HEY HEY there, I see what you trynna do there :eyes:',
+         embeds: [
+            infoMessageEmbed(
+               'HEY HEY HEY there, I see what you trynna do there :eyes:'
+            ),
+         ],
          ephemeral: false,
       });
    }
@@ -21,7 +25,7 @@ const kick = async (interaction, CMD_NAME, options) => {
       console.log('Please tag an user to kick');
 
       return interaction.reply({
-         content: `Please tag an user to kick`,
+         embeds: [infoMessageEmbed(`Please tag an user to kick`)],
          ephemeral: false,
       });
    }

@@ -8,20 +8,31 @@ const {
 
 const roleIDs = require('../../../configs/roleIDs');
 const getReason = require('../../../globalUtils/getReason');
+const infoMessageEmbed = require('../../../globalUtils/infoMessageEmbed');
 
 const warn = async (message, CMD_NAME, args, client) => {
    if (!message.member.permissions.has('KICK_MEMBERS'))
-      return message.reply(
-         'HEY HEY HEY there, I see what you trynna do there :eyes:'
-      );
+      return message.reply({
+         embeds: [
+            infoMessageEmbed(
+               'HEY HEY HEY there, I see what you trynna do there :eyes:'
+            ),
+         ],
+      });
 
    if (CMD_NAME === 'warn') {
       if (!args[0]) {
-         return message.reply('Please provide an user ID or tag an User');
+         return message.reply({
+            embeds: [
+               infoMessageEmbed('Please provide an user ID or tag an User'),
+            ],
+         });
       }
 
       if (!args[1]) {
-         return message.reply('Please provide a message/reason');
+         return message.reply({
+            embeds: [infoMessageEmbed('Please provide a message/reason')],
+         });
       }
 
       const guildId = process.env.GUILD_ID;
