@@ -1,11 +1,17 @@
 const { Channel } = require('discord.js');
 
+const infoMessageEmbed = require('../../../globalUtils/infoMessageEmbed');
+
 const clearMessages = async (interaction, CMD_NAME, options) => {
 	const numberOfMessages = options.getNumber('number') || 1;
 
 	if (!interaction.memberPermissions.has('MANAGE_MESSAGES')) {
 		return interaction.reply({
-			content: 'HEY HEY HEY there, I see what you trynna do there :eyes:',
+			embeds: [
+				infoMessageEmbed(
+					'HEY HEY HEY there, I see what you trynna do there :eyes:',
+				),
+			],
 			ephemeral: false,
 		});
 	}
@@ -25,7 +31,7 @@ const clearMessages = async (interaction, CMD_NAME, options) => {
 	messages.forEach((message) => message.delete());
 
 	return interaction.reply({
-		content: `Deleted ${size} messages`,
+		embeds: [infoMessageEmbed(`Deleted ${size} messages`)],
 		ephemeral: true,
 	});
 };
