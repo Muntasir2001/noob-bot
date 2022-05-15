@@ -16,7 +16,13 @@ const sendMessage = async (message, CMD_NAME, args) => {
 			});
 		}
 
-		const channel = await getTextChannel(args[0], message);
+		let channel;
+
+		if (args[0].charAt(0) === '<' && args[0].charAt(1) === '#') {
+			channel = await getTextChannel(args[0].slice(2).slice(0, -1), message);
+		} else {
+			channel = await getTextChannel(args[0], message);
+		}
 
 		args.shift();
 
