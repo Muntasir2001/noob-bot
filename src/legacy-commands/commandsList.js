@@ -15,25 +15,27 @@ const warn = require('./commands/moderation/warn');
 const salam = require('./commands/salam');
 const avatar = require('./commands/avatar');
 const timeout = require('./commands/moderation/timeout');
+const sendMessage = require('./commands/sendMessage');
 
 const legacyCommands = {
-   hello,
-   bye,
-   ban,
-   kick,
-   clear: clearMessages,
-   help,
-   serverinfo: serverInfo,
-   setstatus: setStatus,
-   gm: goodMorning,
-   gn: goodNight,
-   botinfo: botInfo,
-   nou: basicCommands,
-   userinfo: userInfo,
-   warn,
-   salam,
-   avatar,
-   timeout,
+	hello,
+	bye,
+	ban,
+	kick,
+	clear: clearMessages,
+	help,
+	serverinfo: serverInfo,
+	setstatus: setStatus,
+	gm: goodMorning,
+	gn: goodNight,
+	botinfo: botInfo,
+	nou: basicCommands,
+	userinfo: userInfo,
+	warn,
+	salam,
+	avatar,
+	timeout,
+	sm: sendMessage,
 };
 
 module.exports = legacyCommands;
