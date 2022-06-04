@@ -230,6 +230,24 @@ const commandsList = [
 			},
 		],
 	},
+	{
+		name: 'sendmessage',
+		description: 'Send message in a channel',
+		options: [
+			{
+				name: 'channel',
+				description: 'select channel',
+				required: true,
+				type: Constants.ApplicationCommandOptionTypes.CHANNEL,
+			},
+			{
+				name: 'message',
+				description: 'type your message',
+				required: true,
+				type: Constants.ApplicationCommandOptionTypes.STRING,
+			},
+		],
+	},
 ];
 
 module.exports = commandsList;
