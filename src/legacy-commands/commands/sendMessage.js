@@ -1,6 +1,14 @@
 const getTextChannel = require('../utilities/getTextChannel');
 const infoMessageEmbed = require('../../globalUtils/infoMessageEmbed');
+const checkUserIds = require('../../globalUtils/checkUserIDs');
+
 const sendMessage = async (message, CMD_NAME, args) => {
+	if (!checkUserIds(message)) {
+		return message.reply({
+			embeds: [infoMessageEmbed('You are not allowed to run this command')],
+		});
+	}
+
 	if (!args[0]) {
 		return message.reply({
 			embeds: [
