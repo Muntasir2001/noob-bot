@@ -16,6 +16,7 @@ const salam = require('./commands/salam');
 const avatar = require('./commands/avatar');
 const timeout = require('./commands/moderation/timeout');
 const sendMessage = require('./commands/sendMessage');
+const initialServerMessage = require('./commands/staticMessage/initialServerMessage');
 
 const legacyCommands = {
 	hello,
@@ -36,6 +37,7 @@ const legacyCommands = {
 	avatar,
 	timeout,
 	sm: sendMessage,
+	ism: initialServerMessage,
 };
 
 module.exports = legacyCommands;
