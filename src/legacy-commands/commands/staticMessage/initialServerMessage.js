@@ -13,7 +13,6 @@ const resolveChannelCategoryByID = require('../../../globalUtils/resolveChannelC
 const getTextChannel = require('../../utilities/getTextChannel');
 const roleIDs = require('../../../configs/roleIDs');
 
-const VERIFY_CHANNEL_ID = process.env.VERIFY_CHANNEL_ID;
 const guildId = process.env.GUILD_ID;
 
 const initialServerMessage = async (message, CMD_NAME, args, client) => {
@@ -26,7 +25,26 @@ const initialServerMessage = async (message, CMD_NAME, args, client) => {
 			});
 		}
 
+		if (!args[0]) {
+			return message.reply({
+				embeds: [
+					infoMessageEmbed('Please provide channel ID or tag a channel'),
+				],
+			});
+		}
+
 		const { channel } = message;
+
+		let verifyChannel;
+
+		if (args[0].charAt(0) === '<' && args[0].charAt(1) === '#') {
+			verifyChannel = await getTextChannel(
+				args[0].slice(2).slice(0, -1),
+				message,
+			);
+		} else {
+			verifyChannel = await getTextChannel(args[0], message);
+		}
 
 		const guild = guildId
 			? client.guilds.cache.get(guildId)
@@ -34,7 +52,6 @@ const initialServerMessage = async (message, CMD_NAME, args, client) => {
 
 		const { name, memberCount, roles, ownerId, createdTimestamp } = guild;
 		const icon = guild.iconURL();
-		const verifyChannel = await getTextChannel(VERIFY_CHANNEL_ID, message);
 
 		const verifyMessageEmbed = new MessageEmbed()
 			.setColor('#FF4454')
