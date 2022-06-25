@@ -32,7 +32,25 @@ const commandsList = [
 		options: [
 			{
 				name: 'user',
-				description: 'tag the user',
+				description: 'select user',
+				required: true,
+				type: Constants.ApplicationCommandOptionTypes.USER,
+			},
+			{
+				name: 'reason',
+				description: 'reason for kick',
+				required: true,
+				type: Constants.ApplicationCommandOptionTypes.STRING,
+			},
+		],
+	},
+	{
+		name: 'warn',
+		description: 'Warn a user',
+		options: [
+			{
+				name: 'user',
+				description: 'select user',
 				required: true,
 				type: Constants.ApplicationCommandOptionTypes.USER,
 			},
@@ -50,7 +68,7 @@ const commandsList = [
 		options: [
 			{
 				name: 'user',
-				description: 'tag the user',
+				description: 'select user',
 				required: true,
 				type: Constants.ApplicationCommandOptionTypes.USER,
 			},
@@ -74,7 +92,7 @@ const commandsList = [
 		options: [
 			{
 				name: 'user',
-				description: 'tag the user',
+				description: 'select user',
 				type: Constants.ApplicationCommandOptionTypes.USER,
 			},
 		],
@@ -112,7 +130,7 @@ const commandsList = [
 		options: [
 			{
 				name: 'user',
-				description: 'tag the user',
+				description: 'select user',
 				type: Constants.ApplicationCommandOptionTypes.USER,
 			},
 		],
@@ -123,7 +141,7 @@ const commandsList = [
 		options: [
 			{
 				name: 'user',
-				description: 'tag the user',
+				description: 'select user',
 				type: Constants.ApplicationCommandOptionTypes.USER,
 			},
 		],
@@ -134,7 +152,7 @@ const commandsList = [
 		options: [
 			{
 				name: 'user',
-				description: 'tag the user',
+				description: 'select user',
 				type: Constants.ApplicationCommandOptionTypes.USER,
 			},
 		],
@@ -166,7 +184,7 @@ const commandsList = [
 		options: [
 			{
 				name: 'user',
-				description: 'tag the user',
+				description: 'select user',
 				type: Constants.ApplicationCommandOptionTypes.USER,
 			},
 		],
@@ -201,7 +219,7 @@ const commandsList = [
 		options: [
 			{
 				name: 'user',
-				description: 'tag the user',
+				description: 'select user',
 				type: Constants.ApplicationCommandOptionTypes.USER,
 			},
 		],
@@ -212,7 +230,7 @@ const commandsList = [
 		options: [
 			{
 				name: 'user',
-				description: 'tag the user',
+				description: 'select user',
 				required: true,
 				type: Constants.ApplicationCommandOptionTypes.USER,
 			},
