@@ -24,7 +24,7 @@ const help = (message, CMD_NAME, args, client) => {
 				},
 				{
 					name: 'Warn',
-					value: `\`${PREFIX}warn <uid>\` or \`@mention\` and reason to warn the user`,
+					value: `\`${PREFIX}warn <uid>\` or \`@mention\` and \`reason\` to warn the user`,
 				},
 				{
 					name: 'Serverinfo',
