@@ -50,7 +50,7 @@ const initialServerMessage = async (message, CMD_NAME, args, client) => {
 			? client.guilds.cache.get(guildId)
 			: client.guilds.cache.get(message.guild.id);
 
-		const { name, memberCount, roles, ownerId, createdTimestamp } = guild;
+		const { name } = guild;
 		const icon = guild.iconURL();
 
 		const verifyMessageEmbed = new MessageEmbed()
@@ -78,12 +78,10 @@ const initialServerMessage = async (message, CMD_NAME, args, client) => {
 			components: [buttons],
 		});
 
-		const collector = channel.createMessageComponentCollector({
-			// max: 1,
-			time: 15_000,
-		});
+		client.on('interactionCreate', async (i) => {
+			if (!i.isButton()) return;
+			console.log(i.customId);
 
-		collector.on('collect', async (i) => {
 			if (i.customId === 'verify') {
 				let verifyChannel;
 
@@ -150,15 +148,6 @@ const initialServerMessage = async (message, CMD_NAME, args, client) => {
 				});
 			}
 		});
-
-		// collector.on('end', async (i) => {
-		// 	if (i.customId === 'verify') {
-		// 		await i.reply({
-		// 			content: `Timer expired`,
-		// 			ephemeral: true,
-		// 		});
-		// 	}
-		// });
 	} catch (err) {
 		console.log(err);
 
