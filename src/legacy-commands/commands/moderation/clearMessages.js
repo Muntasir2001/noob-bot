@@ -1,7 +1,7 @@
 const infoMessageEmbed = require('../../../globalUtils/infoMessageEmbed');
 
 const clearMessages = async (message, CMD_NAME, args) => {
-	if (CMD_NAME === 'clear') {
+	try {
 		//fetches all the messages****use it for clearChannel command
 		// message.channel.messages.fetch().then((results) => {
 
@@ -29,6 +29,13 @@ const clearMessages = async (message, CMD_NAME, args) => {
 				],
 			});
 		}
+	} catch (err) {
+		console.log({
+			message: 'something went wrong in legacy clearMessages.js',
+			actualErr: err,
+		});
+
+		return;
 	}
 };
 
