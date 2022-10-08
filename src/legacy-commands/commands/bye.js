@@ -8,10 +8,10 @@ const bye = (message, CMD_NAME, args) => {
 			message.channel.send('bye :wave:');
 		}
 	} catch (err) {
-		return {
+		console.log({
 			message: 'something went wrong in legacy bye.js',
 			actualErr: err,
-		};
+		});
 	}
 };
 

@@ -8,10 +8,10 @@ const hello = (message, CMD_NAME, args) => {
 			message.channel.send('hello :slight_smile:');
 		}
 	} catch (err) {
-		return {
+		console.log({
 			message: 'something went wrong in legacy hello.js',
 			actualErr: err,
-		};
+		});
 	}
 };
 

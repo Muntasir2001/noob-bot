@@ -12,10 +12,10 @@ const goodMorning = (message, CMD_NAME, args) => {
 			message.channel.send(`Good Morning :slight_smile: :cityscape:`);
 		}
 	} catch (err) {
-		return {
-			message: 'something went wrong in legacy bye.js',
+		console.log({
+			message: 'something went wrong in legacy goodMorning.js',
 			actualErr: err,
-		};
+		});
 	}
 };
 

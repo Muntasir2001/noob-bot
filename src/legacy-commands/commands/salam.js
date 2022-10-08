@@ -12,10 +12,10 @@ const salam = (message, CMD_NAME, args) => {
 			);
 		}
 	} catch (err) {
-		return {
+		console.log({
 			message: 'something went wrong in legacy salam.js',
 			actualErr: err,
-		};
+		});
 	}
 };
 

@@ -72,10 +72,10 @@ const help = (message, CMD_NAME, args, client) => {
 
 		message.channel.send({ embeds: [helpEmbed] });
 	} catch (err) {
-		return {
+		console.log({
 			message: 'something went wrong in legacy help.js',
 			actualErr: err,
-		};
+		});
 	}
 };
 

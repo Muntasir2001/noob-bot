@@ -61,10 +61,10 @@ const userInfo = async (message, CMD_NAME, args, client) => {
 
 		message.channel.send({ embeds: [userInfoEmbed] });
 	} catch (err) {
-		return {
+		console.log({
 			message: 'something went wrong in legacy userInfo.js',
 			actualErr: err,
-		};
+		});
 	}
 };
 

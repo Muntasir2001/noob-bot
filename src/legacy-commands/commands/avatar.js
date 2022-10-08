@@ -44,10 +44,10 @@ const avatar = async (message, CMD_NAME, args, client) => {
 
 		message.channel.send({ embeds: [avatarEmbed] });
 	} catch (err) {
-		return {
+		console.log({
 			message: 'something went wrong in legacy avatar.js',
 			actualErr: err,
-		};
+		});
 	}
 };
 

@@ -14,10 +14,10 @@ const setStatus = (message, CMD_NAME, args, client) => {
 			);
 		}
 	} catch (err) {
-		return {
+		console.log({
 			message: 'something went wrong in legacy setStatus.js',
 			actualErr: err,
-		};
+		});
 	}
 };
 

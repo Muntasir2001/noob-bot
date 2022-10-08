@@ -54,10 +54,10 @@ const serverInfo = (message, CMD_NAME, args, client) => {
 			message.channel.send({ embeds: [infoEmbed] });
 		}
 	} catch (err) {
-		return {
+		console.log({
 			message: 'something went wrong in legacy serverInfo.js',
 			actualErr: err,
-		};
+		});
 	}
 };
 

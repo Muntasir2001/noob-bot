@@ -33,10 +33,10 @@ const botInfo = (message, CMD_NAME, args, client) => {
 			message.channel.send({ embeds: [botInfoEmbed] });
 		}
 	} catch (err) {
-		return {
+		console.log({
 			message: 'something went wrong in legacy botInfo.js',
 			actualErr: err,
-		};
+		});
 	}
 };
 

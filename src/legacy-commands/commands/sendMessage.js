@@ -46,10 +46,10 @@ const sendMessage = async (message, CMD_NAME, args) => {
 			});
 		}
 	} catch (err) {
-		return {
+		console.log({
 			message: 'something went wrong in legacy sendMessage.js',
 			actualErr: err,
-		};
+		});
 	}
 };
 
