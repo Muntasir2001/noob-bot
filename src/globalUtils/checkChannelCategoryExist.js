@@ -1,22 +1,31 @@
 const checkChannelCategoryExist = async (guild, categoryName) => {
-	let allChannels;
-	let isCategoryExist = false;
-	// GUILD_CATEGORY
+	try {
+		let allChannels;
+		let isCategoryExist = false;
+		// GUILD_CATEGORY
 
-	await guild.channels
-		.fetch()
-		.then((channels) => (allChannels = channels))
-		.catch(console.error);
+		await guild.channels
+			.fetch()
+			.then((channels) => (allChannels = channels))
+			.catch((err) => console.log(err));
 
-	allChannels.forEach((channel) => {
-		if (channel.type === 'GUILD_CATEGORY' && channel.name === categoryName) {
-			isCategoryExist = true;
+		allChannels.find((channel) => {
+			if (
+				channel &&
+				channel.type === 'GUILD_CATEGORY' &&
+				channel.name === categoryName
+			) {
+				isCategoryExist = true;
 
-			return;
-		}
-	});
+				return true;
+			}
+		});
 
-	return isCategoryExist;
+		return isCategoryExist;
+	} catch (err) {
+		console.log(err);
+		return false;
+	}
 };
 
 module.exports = checkChannelCategoryExist;

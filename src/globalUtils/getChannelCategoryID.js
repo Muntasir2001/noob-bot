@@ -7,23 +7,23 @@ const getChannelCategory = async (guild, categoryName) => {
 		await guild.channels
 			.fetch()
 			.then((channels) => (allChannels = channels))
-			.catch(console.error);
+			.catch((err) => console.log(err));
 
-		allChannels.forEach((channel) => {
+		allChannels.find((channel) => {
 			if (
-				channel.name === categoryName &&
-				channel.type === 'GUILD_CATEGORY'
+				channel &&
+				channel.type === 'GUILD_CATEGORY' &&
+				channel.name === categoryName
 			) {
 				wantedChannelID = channel.id;
 
-				return;
+				return true;
 			}
 		});
 
-		// console.log(wantedChannelID);
 		return wantedChannelID;
-	} catch (e) {
-		if (e !== 'Break') throw e;
+	} catch (err) {
+		console.log(err);
 	}
 };
 

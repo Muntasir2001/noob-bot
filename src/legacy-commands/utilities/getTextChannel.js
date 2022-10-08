@@ -1,7 +1,11 @@
 const getTextChannel = (channelID, message) => {
-	const textChannel = message.guild.channels.resolve(channelID);
+	try {
+		const textChannel = message.guild.channels.resolve(channelID);
 
-	return textChannel;
+		return textChannel;
+	} catch (err) {
+		console.log(err);
+	}
 };
 
 module.exports = getTextChannel;

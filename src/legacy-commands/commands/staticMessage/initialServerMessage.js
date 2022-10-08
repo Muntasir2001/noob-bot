@@ -80,7 +80,6 @@ const initialServerMessage = async (message, CMD_NAME, args, client) => {
 
 		client.on('interactionCreate', async (i) => {
 			if (!i.isButton()) return;
-			console.log(i.customId);
 
 			if (i.customId === 'verify') {
 				let verifyChannel;
@@ -140,12 +139,17 @@ const initialServerMessage = async (message, CMD_NAME, args, client) => {
 							),
 						],
 					});
-				}
 
-				await i.reply({
-					content: `${verifyChannel} was created, please go there to get verified.`,
-					ephemeral: true,
-				});
+					await i.reply({
+						content: `${verifyChannel} was created, please go there to get verified.`,
+						ephemeral: true,
+					});
+				} else {
+					return i.reply({
+						embeds: [infoMessageEmbed('Something went wrong!')],
+						ephemeral: true,
+					});
+				}
 			}
 		});
 	} catch (err) {
