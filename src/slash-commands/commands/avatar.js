@@ -3,7 +3,7 @@ const { MessageEmbed } = require('discord.js');
 const getClientMember = require('../../globalUtils/getClientMember');
 
 const avatar = async (interaction, CMD_NAME, options, client) => {
-	if (CMD_NAME === 'avatar') {
+	try {
 		const user = options.getUser('user');
 		const member = await getClientMember({
 			client: client,
@@ -36,6 +36,11 @@ const avatar = async (interaction, CMD_NAME, options, client) => {
 			.setImage(avatar);
 
 		interaction.reply({ embeds: [avatarEmbed] });
+	} catch (err) {
+		console.log({
+			message: 'something went wrong in slashCommand avatar.js',
+			actualErr: err,
+		});
 	}
 };
 
