@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 require('dotenv').config();
 const { Client, Intents, Constants } = require('discord.js');
 const registerCommands = require('./slash-commands/registerCommands');
@@ -24,6 +26,10 @@ const client = new Client({
 client.on('ready', () => {
 	console.log(`${client.user.tag} has logged in BEEP BEEP 🤖`);
 
+	// write to file whenever bot restarts
+	// ${new Date()} : Bot restarted
+	fs.writeFileSync('log.txt', `hello`, (err) => console.log(err));
+
 	const guildId = process.env.GUILD_ID;
 
 	const guild = client.guilds.cache.get(guildId);
@@ -46,9 +52,9 @@ client.on('interactionCreate', async (interaction) => {
 //message event listener - when anyone types a message/certain command in the text chat (v13)
 client.on('messageCreate', (message) => commandHandler(message, client));
 
-client.on('messageDelete', (message) => messageDelete(message, client));
+// client.on('messageDelete', (message) => messageDelete(message, client));
 
-client.on('messageDeleteBulk', (message) => messageDeleteBulk(message, client));
+// client.on('messageDeleteBulk', (message) => messageDeleteBulk(message, client));
 
 // client.on('guildMemberUpdate', (message) => timeout(message, client));
 
