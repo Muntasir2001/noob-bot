@@ -28,7 +28,17 @@ client.on('ready', () => {
 
 	// write to file whenever bot restarts
 	// ${new Date()} : Bot restarted
-	fs.writeFileSync('log.txt', `hello`, (err) => console.log(err));
+	try {
+		fs.appendFile(
+			'logs/restart.txt',
+			`${new Date()} : Bot restarted \n`,
+			(err) => {
+				if (err) throw err;
+			},
+		);
+	} catch (err) {
+		console.log('Logging failed');
+	}
 
 	const guildId = process.env.GUILD_ID;
 
