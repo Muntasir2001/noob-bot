@@ -15,7 +15,11 @@ const checkUserIds = (command) => {
 
 		return isFoundMatch;
 	} catch (err) {
-		console.log(err);
+		console.log({
+			message: 'something went wrong in global checkUserIDs.js',
+			actualErr: err,
+		});
+
 		return false;
 	}
 };

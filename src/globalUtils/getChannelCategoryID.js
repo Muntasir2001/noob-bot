@@ -23,7 +23,12 @@ const getChannelCategory = async (guild, categoryName) => {
 
 		return wantedChannelID;
 	} catch (err) {
-		console.log(err);
+		console.log({
+			message: 'something went wrong in global getChannelCategory.js',
+			actualErr: err,
+		});
+
+		return;
 	}
 };
 

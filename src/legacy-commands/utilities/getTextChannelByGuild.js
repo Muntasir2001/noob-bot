@@ -4,7 +4,13 @@ const getTextChannelByGuild = async (guildId, channelID, client, message) => {
 		const textChannel = await guild.channels.resolve(channelID);
 
 		return textChannel;
-	} catch (errr) {
+	} catch (err) {
+		console.log({
+			message:
+				'something went wrong in legacy util getTextChannelByGuild.js',
+			actualErr: err,
+		});
+
 		return;
 	}
 };

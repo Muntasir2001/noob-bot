@@ -23,7 +23,11 @@ const checkChannelCategoryExist = async (guild, categoryName) => {
 
 		return isCategoryExist;
 	} catch (err) {
-		console.log(err);
+		console.log({
+			message: 'something went wrong in global checkChannelCategoryExist.js',
+			actualErr: err,
+		});
+
 		return false;
 	}
 };

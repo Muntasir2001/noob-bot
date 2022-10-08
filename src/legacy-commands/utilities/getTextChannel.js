@@ -4,7 +4,10 @@ const getTextChannel = (channelID, message) => {
 
 		return textChannel;
 	} catch (err) {
-		console.log(err);
+		console.log({
+			message: 'something went wrong in legacy util getTextChannel.js',
+			actualErr: err,
+		});
 	}
 };
 
