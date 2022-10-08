@@ -1,5 +1,5 @@
 const hello = (message, CMD_NAME, args) => {
-	if (CMD_NAME === 'hello') {
+	try {
 		if (args.length !== 0) {
 			const member = message.mentions.members.first();
 
@@ -7,6 +7,11 @@ const hello = (message, CMD_NAME, args) => {
 		} else {
 			message.channel.send('hello :slight_smile:');
 		}
+	} catch (err) {
+		return {
+			message: 'something went wrong in legacy hello.js',
+			actualErr: err,
+		};
 	}
 };
 

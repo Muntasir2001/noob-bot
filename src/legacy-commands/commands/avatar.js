@@ -3,7 +3,7 @@ const { MessageEmbed } = require('discord.js');
 const getClientMember = require('../../globalUtils/getClientMember');
 
 const avatar = async (message, CMD_NAME, args, client) => {
-	if (CMD_NAME === 'avatar') {
+	try {
 		let avatar;
 		let member;
 
@@ -43,6 +43,11 @@ const avatar = async (message, CMD_NAME, args, client) => {
 			.setImage(avatar);
 
 		message.channel.send({ embeds: [avatarEmbed] });
+	} catch (err) {
+		return {
+			message: 'something went wrong in legacy avatar.js',
+			actualErr: err,
+		};
 	}
 };
 

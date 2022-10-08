@@ -1,7 +1,7 @@
 const PREFIX = process.env.PREFIX;
 
 const goodNight = (message, CMD_NAME, args) => {
-	if (CMD_NAME === 'gn') {
+	try {
 		if (args.length !== 0) {
 			const member = message.mentions.members.first();
 
@@ -11,6 +11,11 @@ const goodNight = (message, CMD_NAME, args) => {
 		} else {
 			message.channel.send('Good Night :slight_smile: :night_with_stars:');
 		}
+	} catch (err) {
+		return {
+			message: 'something went wrong in legacy bye.js',
+			actualErr: err,
+		};
 	}
 };
 

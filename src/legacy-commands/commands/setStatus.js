@@ -1,5 +1,5 @@
 const setStatus = (message, CMD_NAME, args, client) => {
-	if (CMD_NAME === 'setstatus') {
+	try {
 		if (message.author.id === '374230181889572876') {
 			client.user.setPresence({
 				activities: [
@@ -13,6 +13,11 @@ const setStatus = (message, CMD_NAME, args, client) => {
 				'you do not have the permission to run this command!',
 			);
 		}
+	} catch (err) {
+		return {
+			message: 'something went wrong in legacy setStatus.js',
+			actualErr: err,
+		};
 	}
 };
 

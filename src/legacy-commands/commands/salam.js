@@ -1,5 +1,5 @@
 const salam = (message, CMD_NAME, args) => {
-	if (CMD_NAME === 'salam') {
+	try {
 		if (args.length !== 0) {
 			const member = message.mentions.members.first();
 
@@ -11,6 +11,11 @@ const salam = (message, CMD_NAME, args) => {
 				'Waalaikumassalam Warahmatullahi Wabarakatuhu  :slight_smile:',
 			);
 		}
+	} catch (err) {
+		return {
+			message: 'something went wrong in legacy salam.js',
+			actualErr: err,
+		};
 	}
 };
 

@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const PREFIX = process.env.PREFIX;
 
 const help = (message, CMD_NAME, args, client) => {
-	if (CMD_NAME === 'help') {
+	try {
 		const helpEmbed = new Discord.MessageEmbed()
 			.setColor('#FF4454')
 			.setTitle(`${client.user.username}`)
@@ -71,6 +71,11 @@ const help = (message, CMD_NAME, args, client) => {
 			.setTimestamp();
 
 		message.channel.send({ embeds: [helpEmbed] });
+	} catch (err) {
+		return {
+			message: 'something went wrong in legacy help.js',
+			actualErr: err,
+		};
 	}
 };
 
