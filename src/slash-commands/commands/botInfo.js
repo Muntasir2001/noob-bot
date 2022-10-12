@@ -17,6 +17,7 @@ const botInfo = async (interaction, CMD_NAME, options, client) => {
 			.addFields(
 				// { name: '\u200B', value: '\u200B' },
 				{ name: 'Bot Tag', value: `${user.tag}` },
+				{ name: 'Bot creator', value: `mz10ah#0054` },
 				{ name: 'Bot version', value: `1.0.0` },
 				{ name: 'Bot command prefix', value: `${PREFIX}` },
 				{
