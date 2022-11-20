@@ -53,6 +53,11 @@ client.on('ready', () => {
 
 	// slash command register
 	registerCommands(commands, guild, commandsList);
+
+	// set bot status
+	client.user.setPresence({
+		activities: [{ name: `/help` }],
+	});
 });
 
 client.on('interactionCreate', async (interaction) => {
