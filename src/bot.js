@@ -58,6 +58,13 @@ client.on('ready', () => {
 	client.user.setPresence({
 		activities: [{ name: `/help` }],
 	});
+
+	// run every 12 hours again to make sure it stays visible
+	setInterval(() => {
+		client.user.setPresence({
+			activities: [{ name: `/help` }],
+		});
+	}, 1000 * 60 * 720);
 });
 
 client.on('interactionCreate', async (interaction) => {
