@@ -153,11 +153,21 @@ const initialServerMessage = async (message, CMD_NAME, args, client) => {
 			}
 		});
 	} catch (err) {
-		console.log(err);
-
-		return message.reply({
+		message.reply({
 			embeds: [infoMessageEmbed('Something went wrong!')],
 		});
+
+		try {
+			fs.appendFile(
+				'logs/crash_logs.txt',
+				`${new Date().toUTCString()} : Something went wrong in legacyCommands/staticMessage/initialServerMessage.js \n Actual error: ${err} \n \n`,
+				(err) => {
+					if (err) throw err;
+				},
+			);
+		} catch (err) {
+			console.log('Error logging failed');
+		}
 	}
 };
 
