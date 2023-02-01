@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 // const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed } = require('discord.js');
 
@@ -166,10 +168,19 @@ const moveMessages = async (interaction, CMD_NAME, options, client) => {
 			`__${msgs.length} messages moved from__ <#${fromChannel.id}>`,
 		);
 	} catch (error) {
-		console.log(error);
-		await interaction.editReply(
-			'Error: could be either invalid message ID or channel names',
-		);
+		try {
+			fs.appendFile(
+				'logs/crash_logs.txt',
+				`${new Date().toUTCString()} : Something went wrong in slashCommand/moveMessages.js \n Actual error: ${err} \n \n`,
+				(err) => {
+					if (err) throw err;
+				},
+			);
+
+			return false;
+		} catch (err) {
+			console.log('Error logging failed');
+		}
 	}
 };
 

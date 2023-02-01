@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const { MessageEmbed } = require('discord.js');
 const infoMessageEmbed = require('../../../globalUtils/infoMessageEmbed');
 
@@ -77,10 +79,19 @@ const timeout = async (interaction, CMD_NAME, options) => {
 				return interaction.reply({ content: `Couldn't timeout ${user}` });
 			});
 	} catch (err) {
-		console.log({
-			message: 'something went wrong in slashCommand timeout.js',
-			actualErr: err,
-		});
+		try {
+			fs.appendFile(
+				'logs/crash_logs.txt',
+				`${new Date().toUTCString()} : Something went wrong in slashCommand/timeout.js \n Actual error: ${err} \n \n`,
+				(err) => {
+					if (err) throw err;
+				},
+			);
+
+			return false;
+		} catch (err) {
+			console.log('Error logging failed');
+		}
 	}
 };
 

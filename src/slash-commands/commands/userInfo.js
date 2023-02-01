@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const { MessageEmbed } = require('discord.js');
 
 const userInfo = async (interaction, CMD_NAME, options, client) => {
@@ -75,10 +77,19 @@ const userInfo = async (interaction, CMD_NAME, options, client) => {
 			ephemeral: false,
 		});
 	} catch (err) {
-		console.log({
-			message: 'something went wrong in slashCommand userInfo.js',
-			actualErr: err,
-		});
+		try {
+			fs.appendFile(
+				'logs/crash_logs.txt',
+				`${new Date().toUTCString()} : Something went wrong in slashCommand/userInfo.js \n Actual error: ${err} \n \n`,
+				(err) => {
+					if (err) throw err;
+				},
+			);
+
+			return false;
+		} catch (err) {
+			console.log('Error logging failed');
+		}
 	}
 };
 

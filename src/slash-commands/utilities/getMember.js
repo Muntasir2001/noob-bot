@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const getMember = async (interaction, user, force) => {
 	try {
 		const member = await interaction.guild.members
@@ -9,12 +11,19 @@ const getMember = async (interaction, user, force) => {
 
 		return member;
 	} catch (err) {
-		console.log({
-			message: 'something went wrong in slashCommand util getMember.js',
-			actualErr: err,
-		});
+		try {
+			fs.appendFile(
+				'logs/crash_logs.txt',
+				`${new Date().toUTCString()} : Something went wrong in slashCommand/utils/getMember.js \n Actual error: ${err} \n \n`,
+				(err) => {
+					if (err) throw err;
+				},
+			);
 
-		return;
+			return false;
+		} catch (err) {
+			console.log('Error logging failed');
+		}
 	}
 };
 

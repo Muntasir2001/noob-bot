@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const { MessageEmbed } = require('discord.js');
 
 const getMember = require('../../utilities/getMember');

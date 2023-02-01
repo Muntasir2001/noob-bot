@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const { Channel } = require('discord.js');
 
 const infoMessageEmbed = require('../../../globalUtils/infoMessageEmbed');
@@ -36,10 +38,19 @@ const clearMessages = async (interaction, CMD_NAME, options) => {
 			ephemeral: true,
 		});
 	} catch (err) {
-		console.log({
-			message: 'something went wrong in slashCommand clearMessages.js',
-			actualErr: err,
-		});
+		try {
+			fs.appendFile(
+				'logs/crash_logs.txt',
+				`${new Date().toUTCString()} : Something went wrong in legacyCommand/clearMessages.js \n Actual error: ${err} \n \n`,
+				(err) => {
+					if (err) throw err;
+				},
+			);
+
+			return false;
+		} catch (err) {
+			console.log('Error logging failed');
+		}
 	}
 };
 
