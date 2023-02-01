@@ -37,7 +37,7 @@ const legacyCommands = {
 	avatar,
 	timeout,
 	sm: sendMessage,
-	uv: verifyUser,
+	vu: verifyUser,
 };
 
 module.exports = legacyCommands;
