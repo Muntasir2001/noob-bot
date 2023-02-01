@@ -1,3 +1,11 @@
-const buttonList = {};
+const buttonList = require('./buttonList');
 
-module.exports = buttonList;
+const buttonHandler = async (interaction, client) => {
+	const { customId } = interaction;
+
+	if (customId in buttonList) {
+		buttonList[customId](interaction, client);
+	}
+};
+
+module.exports = buttonHandler;

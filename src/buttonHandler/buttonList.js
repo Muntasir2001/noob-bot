@@ -1,11 +1,7 @@
-const buttonList = require('./buttonList');
+const verifyUser = require('./buttonFunctions/verifyUser');
 
-const buttonHandler = async (interaction, client) => {
-	const { customId } = interaction;
-
-	if (customId in buttonList) {
-		buttonList[customId](interaction, client);
-	}
+const buttonList = {
+	verifyUser,
 };
 
-module.exports = buttonHandler;
+module.exports = buttonList;

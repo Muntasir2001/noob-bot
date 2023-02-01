@@ -6,7 +6,7 @@ const {
 	MessageButton,
 } = require('discord.js');
 
-const roleIDs = require('../../../configs/roleIDs');
+const roleIDs = require('../../../TEST_ROLE_IDS/roleIDs');
 const getReason = require('../../../globalUtils/getReason');
 const infoMessageEmbed = require('../../../globalUtils/infoMessageEmbed');
 

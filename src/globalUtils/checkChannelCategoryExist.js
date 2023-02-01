@@ -3,6 +3,7 @@ const fs = require('fs');
 const checkChannelCategoryExist = async (guild, categoryName) => {
 	try {
 		let allChannels;
+		let isCategoryExist = false;
 		// GUILD_CATEGORY
 
 		await guild.channels
@@ -16,11 +17,12 @@ const checkChannelCategoryExist = async (guild, categoryName) => {
 				channel.type === 'GUILD_CATEGORY' &&
 				channel.name === categoryName
 			) {
+				isCategoryExist = true;
 				return true;
 			}
 		});
 
-		return false;
+		return isCategoryExist;
 	} catch (err) {
 		try {
 			fs.appendFile(

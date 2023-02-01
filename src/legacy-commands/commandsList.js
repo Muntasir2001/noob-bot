@@ -16,7 +16,7 @@ const salam = require('./commands/salam');
 const avatar = require('./commands/avatar');
 const timeout = require('./commands/moderation/timeout');
 const sendMessage = require('./commands/sendMessage');
-const userVerify = require('./commands/staticMessage/userVerify');
+const verifyUser = require('./commands/staticMessage/verifyUser');
 
 const legacyCommands = {
 	hello,
@@ -37,7 +37,7 @@ const legacyCommands = {
 	avatar,
 	timeout,
 	sm: sendMessage,
-	uv: userVerify,
+	uv: verifyUser,
 };
 
 module.exports = legacyCommands;

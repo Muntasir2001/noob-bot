@@ -5,6 +5,7 @@ const { Client, Intents, Constants } = require('discord.js');
 const registerCommands = require('./slash-commands/registerCommands');
 const commandHandler = require('./legacy-commands/commands');
 const slashCommandHandler = require('./slash-commands/slashCommandHandler');
+const buttonHandler = require('./buttonHandler/buttonHandler');
 const commandsList = require('./slash-commands/registerCommandsList');
 const welcome = require('./legacy-commands/commands/welcome');
 const messageDelete = require('./events/messageDelete');
@@ -68,7 +69,11 @@ client.on('ready', () => {
 });
 
 client.on('interactionCreate', async (interaction) => {
-	slashCommandHandler(interaction, client);
+	if (interaction.isButton()) {
+		await buttonHandler(interaction, client);
+	} else {
+		await slashCommandHandler(interaction, client);
+	}
 });
 
 //message event listener - when anyone types a message/certain command in the text chat (v13)
