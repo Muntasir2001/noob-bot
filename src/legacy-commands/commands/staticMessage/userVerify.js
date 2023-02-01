@@ -17,7 +17,7 @@ const roleIDs = require('../../../configs/roleIDs');
 
 const guildId = process.env.GUILD_ID;
 
-const initialServerMessage = async (message, CMD_NAME, args, client) => {
+const userVerify = async (message, CMD_NAME, args, client) => {
 	try {
 		if (!checkUserIds(message)) {
 			return message.reply({
@@ -162,7 +162,7 @@ const initialServerMessage = async (message, CMD_NAME, args, client) => {
 		try {
 			fs.appendFile(
 				'logs/crash_logs.txt',
-				`${new Date().toUTCString()} : Something went wrong in legacyCommands/staticMessage/initialServerMessage.js \n Actual error: ${err} \n \n`,
+				`${new Date().toUTCString()} : Something went wrong in legacyCommands/staticMessage/userVerify.js \n Actual error: ${err} \n \n`,
 				(err) => {
 					if (err) throw err;
 				},
@@ -173,4 +173,4 @@ const initialServerMessage = async (message, CMD_NAME, args, client) => {
 	}
 };
 
-module.exports = initialServerMessage;
+module.exports = userVerify;
