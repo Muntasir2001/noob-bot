@@ -40,7 +40,7 @@ const userInfo = async (message, CMD_NAME, args, client) => {
 				{
 					name: 'Account created',
 					value:
-						new Date(member.user.createdTimestamp).toLocaleString() ||
+						`<t:${Math.floor(member.user.createdTimestamp / 1000)}:F>` ||
 						'None',
 					inline: true,
 				},
@@ -48,15 +48,17 @@ const userInfo = async (message, CMD_NAME, args, client) => {
 				{
 					name: 'Joined the server',
 					value:
-						new Date(member.joinedTimestamp).toLocaleString() || 'None',
+						`<t:${Math.floor(member.joinedTimestamp / 1000)}:F>` ||
+						'None',
 					inline: true,
 				},
 			)
 			.addField('Roles', `${roles}`)
+			.addField('User ID', `\`${member.id}\``)
 			.setTimestamp()
 			.setFooter({
 				text: `${client.user.username}`,
-				iconURL: `${client.user.displayAvatarURL()}`,
+				iconURL: client.user.displayAvatarURL(),
 			});
 
 		message.channel.send({ embeds: [userInfoEmbed] });

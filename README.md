@@ -4,7 +4,7 @@ My first discord bot!
 
 # Before you start running the bot
 
--  Make sure you create `logs` folder in the root directory as well as `restart.txt` inside it.
+-  Make sure you create `logs` folder in the root directory as well as `restart.txt` and `crash_logs.txt` inside it.
 
 # Instruction for forever node module
 

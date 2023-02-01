@@ -49,7 +49,7 @@ const userInfo = async (interaction, CMD_NAME, options, client) => {
 				{
 					name: 'Account created',
 					value:
-						new Date(member.user.createdTimestamp).toLocaleString() ||
+						`<t:${Math.floor(member.user.createdTimestamp / 1000)}:F>` ||
 						'None',
 					inline: true,
 				},
@@ -57,15 +57,17 @@ const userInfo = async (interaction, CMD_NAME, options, client) => {
 				{
 					name: 'Joined the server',
 					value:
-						new Date(member.joinedTimestamp).toLocaleString() || 'None',
+						`<t:${Math.floor(member.joinedTimestamp / 1000)}:F>` ||
+						'None',
 					inline: true,
 				},
 			)
 			.addField('Roles', `${roles}`)
+			.addField('User ID', `\`${member.id}\``)
 			.setTimestamp()
 			.setFooter({
 				text: `${client.user.username}` || 'None',
-				icon: `${client.user.displayAvatarURL()}` || 'None',
+				iconURL: client.user.displayAvatarURL(),
 			});
 
 		return interaction.reply({
