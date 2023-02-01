@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const { MessageEmbed } = require('discord.js');
 
 const getReason = require('../../../globalUtils/getReason');
@@ -78,12 +80,19 @@ const kick = async (message, CMD_NAME, args, client) => {
 				});
 			});
 	} catch (err) {
-		console.log({
-			message: 'something went wrong in legacy kick.js',
-			actualErr: err,
-		});
+		try {
+			fs.appendFile(
+				'logs/crash_logs.txt',
+				`${new Date().toUTCString()} : Something went wrong in legacyCommand/kick.js \n Actual error: ${err} \n \n`,
+				(err) => {
+					if (err) throw err;
+				},
+			);
 
-		return;
+			return false;
+		} catch (err) {
+			console.log('Error logging failed');
+		}
 	}
 };
 

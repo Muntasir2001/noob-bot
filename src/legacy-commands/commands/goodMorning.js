@@ -1,4 +1,4 @@
-const PREFIX = process.env.PREFIX;
+const fs = require('fs');
 
 const goodMorning = (message, CMD_NAME, args) => {
 	try {
@@ -12,10 +12,19 @@ const goodMorning = (message, CMD_NAME, args) => {
 			message.channel.send(`Good Morning :slight_smile: :cityscape:`);
 		}
 	} catch (err) {
-		console.log({
-			message: 'something went wrong in legacy goodMorning.js',
-			actualErr: err,
-		});
+		try {
+			fs.appendFile(
+				'logs/crash_logs.txt',
+				`${new Date().toUTCString()} : Something went wrong in legacyCommand/goodMorning.js \n Actual error: ${err} \n \n`,
+				(err) => {
+					if (err) throw err;
+				},
+			);
+
+			return false;
+		} catch (err) {
+			console.log('Error logging failed');
+		}
 	}
 };
 

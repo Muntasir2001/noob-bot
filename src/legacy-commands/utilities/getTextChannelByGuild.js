@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const getTextChannelByGuild = async (guildId, channelID, client, message) => {
 	try {
 		const guild = await client.guilds.resolve(guildId);
@@ -5,13 +7,19 @@ const getTextChannelByGuild = async (guildId, channelID, client, message) => {
 
 		return textChannel;
 	} catch (err) {
-		console.log({
-			message:
-				'something went wrong in legacy util getTextChannelByGuild.js',
-			actualErr: err,
-		});
+		try {
+			fs.appendFile(
+				'logs/crash_logs.txt',
+				`${new Date().toUTCString()} : Something went wrong in legacyCommand/utils/getTextChannelByGuild.js \n Actual error: ${err} \n \n`,
+				(err) => {
+					if (err) throw err;
+				},
+			);
 
-		return;
+			return false;
+		} catch (err) {
+			console.log('Error logging failed');
+		}
 	}
 };
 

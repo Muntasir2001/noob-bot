@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const infoMessageEmbed = require('../../globalUtils/infoMessageEmbed');
 
 const getMember = async (client, userID, message, force) => {
@@ -15,12 +17,19 @@ const getMember = async (client, userID, message, force) => {
 
 		return member;
 	} catch (err) {
-		console.log({
-			message: 'something went wrong in legacy util getMember.js',
-			actualErr: err,
-		});
+		try {
+			fs.appendFile(
+				'logs/crash_logs.txt',
+				`${new Date().toUTCString()} : Something went wrong in legacyCommand/utils/getMember.js \n Actual error: ${err} \n \n`,
+				(err) => {
+					if (err) throw err;
+				},
+			);
 
-		return;
+			return false;
+		} catch (err) {
+			console.log('Error logging failed');
+		}
 	}
 };
 

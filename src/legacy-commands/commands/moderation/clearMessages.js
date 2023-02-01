@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const infoMessageEmbed = require('../../../globalUtils/infoMessageEmbed');
 
 const clearMessages = async (message, CMD_NAME, args) => {
@@ -30,12 +32,19 @@ const clearMessages = async (message, CMD_NAME, args) => {
 			});
 		}
 	} catch (err) {
-		console.log({
-			message: 'something went wrong in legacy clearMessages.js',
-			actualErr: err,
-		});
+		try {
+			fs.appendFile(
+				'logs/crash_logs.txt',
+				`${new Date().toUTCString()} : Something went wrong in legacyCommand/clearMessages.js \n Actual error: ${err} \n \n`,
+				(err) => {
+					if (err) throw err;
+				},
+			);
 
-		return;
+			return false;
+		} catch (err) {
+			console.log('Error logging failed');
+		}
 	}
 };
 

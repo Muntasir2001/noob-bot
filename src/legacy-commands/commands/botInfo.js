@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const Discord = require('discord.js');
 // const { version } = require('../package.json');
 const PREFIX = process.env.PREFIX;
@@ -34,10 +36,19 @@ const botInfo = (message, CMD_NAME, args, client) => {
 			message.channel.send({ embeds: [botInfoEmbed] });
 		}
 	} catch (err) {
-		console.log({
-			message: 'something went wrong in legacy botInfo.js',
-			actualErr: err,
-		});
+		try {
+			fs.appendFile(
+				'logs/crash_logs.txt',
+				`${new Date().toUTCString()} : Something went wrong in legacyCommand/botInfo.js \n Actual error: ${err} \n \n`,
+				(err) => {
+					if (err) throw err;
+				},
+			);
+
+			return false;
+		} catch (err) {
+			console.log('Error logging failed');
+		}
 	}
 };
 

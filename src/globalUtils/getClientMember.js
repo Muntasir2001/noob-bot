@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const infoMessageEmbed = require('./infoMessageEmbed');
 
 const getClientMember = async ({
@@ -35,12 +37,19 @@ const getClientMember = async ({
 
 		return clientUser;
 	} catch (err) {
-		console.log({
-			message: 'something went wrong in global getClientMember.js',
-			actualErr: err,
-		});
+		try {
+			fs.appendFile(
+				'logs/crash_logs.txt',
+				`${new Date().toUTCString()} : Something went wrong in globalUtils/getClientMember.js \n Actual error: ${err} \n \n`,
+				(err) => {
+					if (err) throw err;
+				},
+			);
 
-		return;
+			return false;
+		} catch (err) {
+			console.log('Error logging failed');
+		}
 	}
 };
 

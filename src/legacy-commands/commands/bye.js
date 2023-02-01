@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const bye = (message, CMD_NAME, args) => {
 	try {
 		if (args.length !== 0) {
@@ -8,10 +10,19 @@ const bye = (message, CMD_NAME, args) => {
 			message.channel.send('bye :wave:');
 		}
 	} catch (err) {
-		console.log({
-			message: 'something went wrong in legacy bye.js',
-			actualErr: err,
-		});
+		try {
+			fs.appendFile(
+				'logs/crash_logs.txt',
+				`${new Date().toUTCString()} : Something went wrong in legacyCommand/bye.js \n Actual error: ${err} \n \n`,
+				(err) => {
+					if (err) throw err;
+				},
+			);
+
+			return false;
+		} catch (err) {
+			console.log('Error logging failed');
+		}
 	}
 };
 

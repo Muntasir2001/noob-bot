@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const getReason = (args, numItemsToRemove = 1) => {
 	try {
 		let tempArgs = args;
@@ -6,10 +8,19 @@ const getReason = (args, numItemsToRemove = 1) => {
 
 		return tempArgs.join(' ');
 	} catch {
-		console.log({
-			message: 'something went wrong in global getReason.js',
-			actualErr: err,
-		});
+		try {
+			fs.appendFile(
+				'logs/crash_logs.txt',
+				`${new Date().toUTCString()} : Something went wrong in globalUtils/getReason.js \n Actual error: ${err} \n \n`,
+				(err) => {
+					if (err) throw err;
+				},
+			);
+
+			return false;
+		} catch (err) {
+			console.log('Error logging failed');
+		}
 	}
 };
 

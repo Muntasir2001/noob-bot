@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const Discord = require('discord.js');
 
 const serverInfo = (message, CMD_NAME, args, client) => {
@@ -54,10 +56,19 @@ const serverInfo = (message, CMD_NAME, args, client) => {
 			message.channel.send({ embeds: [infoEmbed] });
 		}
 	} catch (err) {
-		console.log({
-			message: 'something went wrong in legacy serverInfo.js',
-			actualErr: err,
-		});
+		try {
+			fs.appendFile(
+				'logs/crash_logs.txt',
+				`${new Date().toUTCString()} : Something went wrong in legacyCommand/serverInfo.js \n Actual error: ${err} \n \n`,
+				(err) => {
+					if (err) throw err;
+				},
+			);
+
+			return false;
+		} catch (err) {
+			console.log('Error logging failed');
+		}
 	}
 };
 

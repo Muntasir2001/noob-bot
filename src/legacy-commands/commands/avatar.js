@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const { MessageEmbed } = require('discord.js');
 
 const getClientMember = require('../../globalUtils/getClientMember');
@@ -44,10 +46,19 @@ const avatar = async (message, CMD_NAME, args, client) => {
 
 		message.channel.send({ embeds: [avatarEmbed] });
 	} catch (err) {
-		console.log({
-			message: 'something went wrong in legacy avatar.js',
-			actualErr: err,
-		});
+		try {
+			fs.appendFile(
+				'logs/crash_logs.txt',
+				`${new Date().toUTCString()} : Something went wrong in legacyCommand/avatar.js \n Actual error: ${err} \n \n`,
+				(err) => {
+					if (err) throw err;
+				},
+			);
+
+			return false;
+		} catch (err) {
+			console.log('Error logging failed');
+		}
 	}
 };
 

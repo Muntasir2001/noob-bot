@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const getTextChannel = require('../utilities/getTextChannel');
 const infoMessageEmbed = require('../../globalUtils/infoMessageEmbed');
 const checkUserIds = require('../../globalUtils/checkUserIDs');
@@ -46,10 +48,19 @@ const sendMessage = async (message, CMD_NAME, args) => {
 			});
 		}
 	} catch (err) {
-		console.log({
-			message: 'something went wrong in legacy sendMessage.js',
-			actualErr: err,
-		});
+		try {
+			fs.appendFile(
+				'logs/crash_logs.txt',
+				`${new Date().toUTCString()} : Something went wrong in legacyCommand/sendMessage.js \n Actual error: ${err} \n \n`,
+				(err) => {
+					if (err) throw err;
+				},
+			);
+
+			return false;
+		} catch (err) {
+			console.log('Error logging failed');
+		}
 	}
 };
 

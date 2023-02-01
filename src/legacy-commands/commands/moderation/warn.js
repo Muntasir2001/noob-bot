@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const {
 	Message,
 	Permissions,
@@ -147,10 +149,19 @@ const warn = async (message, CMD_NAME, args, client) => {
 			}
 		}
 	} catch (err) {
-		console.log({
-			message: 'something went wrong in legacy warn.js',
-			actualErr: err,
-		});
+		try {
+			fs.appendFile(
+				'logs/crash_logs.txt',
+				`${new Date().toUTCString()} : Something went wrong in legacyCommand/warn.js \n Actual error: ${err} \n \n`,
+				(err) => {
+					if (err) throw err;
+				},
+			);
+
+			return false;
+		} catch (err) {
+			console.log('Error logging failed');
+		}
 	}
 };
 

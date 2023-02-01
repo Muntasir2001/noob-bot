@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const Discord = require('discord.js');
 
 const PREFIX = process.env.PREFIX;
@@ -72,10 +74,19 @@ const help = (message, CMD_NAME, args, client) => {
 
 		message.channel.send({ embeds: [helpEmbed] });
 	} catch (err) {
-		console.log({
-			message: 'something went wrong in legacy help.js',
-			actualErr: err,
-		});
+		try {
+			fs.appendFile(
+				'logs/crash_logs.txt',
+				`${new Date().toUTCString()} : Something went wrong in legacyCommand/help.js \n Actual error: ${err} \n \n`,
+				(err) => {
+					if (err) throw err;
+				},
+			);
+
+			return false;
+		} catch (err) {
+			console.log('Error logging failed');
+		}
 	}
 };
 

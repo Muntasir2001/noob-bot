@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const { MessageEmbed } = require('discord.js');
 
 const userInfo = async (message, CMD_NAME, args, client) => {
@@ -63,10 +65,19 @@ const userInfo = async (message, CMD_NAME, args, client) => {
 
 		message.channel.send({ embeds: [userInfoEmbed] });
 	} catch (err) {
-		console.log({
-			message: 'something went wrong in legacy userInfo.js',
-			actualErr: err,
-		});
+		try {
+			fs.appendFile(
+				'logs/crash_logs.txt',
+				`${new Date().toUTCString()} : Something went wrong in legacyCommand/userInfo.js \n Actual error: ${err} \n \n`,
+				(err) => {
+					if (err) throw err;
+				},
+			);
+
+			return false;
+		} catch (err) {
+			console.log('Error logging failed');
+		}
 	}
 };
 

@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const { MessageEmbed } = require('discord.js');
 
 const getClientMember = require('../../../globalUtils/getClientMember');
@@ -87,12 +89,19 @@ const ban = async (message, CMD_NAME, args, client) => {
 				});
 		}
 	} catch (err) {
-		console.log({
-			message: 'something went wrong in legacy ban.js',
-			actualErr: err,
-		});
+		try {
+			fs.appendFile(
+				'logs/crash_logs.txt',
+				`${new Date().toUTCString()} : Something went wrong in legacyCommand/ban.js \n Actual error: ${err} \n \n`,
+				(err) => {
+					if (err) throw err;
+				},
+			);
 
-		return;
+			return false;
+		} catch (err) {
+			console.log('Error logging failed');
+		}
 	}
 };
 
