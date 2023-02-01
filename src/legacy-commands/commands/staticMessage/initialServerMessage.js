@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const {
 	Permissions,
 	MessageEmbed,
@@ -20,36 +22,17 @@ const initialServerMessage = async (message, CMD_NAME, args, client) => {
 		if (!checkUserIds(message)) {
 			return message.reply({
 				embeds: [
-					infoMessageEmbed('You are not allowed to run this command'),
+					infoMessageEmbed(
+						'You are not allowed to run this command',
+						'WARNING',
+					),
 				],
 			});
-		}
-
-		if (!args[0]) {
-			return message.reply({
-				embeds: [
-					infoMessageEmbed('Please provide channel ID or tag a channel'),
-				],
-			});
-		}
-
-		const { channel } = message;
-
-		let verifyChannel;
-
-		if (args[0].charAt(0) === '<' && args[0].charAt(1) === '#') {
-			verifyChannel = await getTextChannel(
-				args[0].slice(2).slice(0, -1),
-				message,
-			);
-		} else {
-			verifyChannel = await getTextChannel(args[0], message);
 		}
 
 		const guild = guildId
 			? client.guilds.cache.get(guildId)
 			: client.guilds.cache.get(message.guild.id);
-
 		const { name } = guild;
 		const icon = guild.iconURL();
 
@@ -68,15 +51,33 @@ const initialServerMessage = async (message, CMD_NAME, args, client) => {
 
 		const buttons = new MessageActionRow().addComponents(
 			new MessageButton()
-				.setCustomId('verify')
+				.setCustomId('userVerify')
 				.setLabel('Verify me')
 				.setStyle('PRIMARY'),
 		);
 
-		verifyChannel.send({
-			embeds: [verifyMessageEmbed],
-			components: [buttons],
-		});
+		if (args[0]) {
+			let verifyChannel;
+
+			if (args[0].charAt(0) === '<' && args[0].charAt(1) === '#') {
+				verifyChannel = await getTextChannel(
+					args[0].slice(2).slice(0, -1),
+					message,
+				);
+			} else {
+				verifyChannel = await getTextChannel(args[0], message);
+			}
+
+			verifyChannel.send({
+				embeds: [verifyMessageEmbed],
+				components: [buttons],
+			});
+		} else {
+			message.channel.send({
+				embeds: [verifyMessageEmbed],
+				components: [buttons],
+			});
+		}
 
 		client.on('interactionCreate', async (i) => {
 			if (!i.isButton()) return;
@@ -95,37 +96,38 @@ const initialServerMessage = async (message, CMD_NAME, args, client) => {
 						channelCategoryID,
 					);
 
-					let verifyChannelCreate = channelCategoryResolved.createChannel(
-						`verify-${i.user.username}`,
-						{
-							type: 'GUILD_TEXT',
-							topic: `Verify ${i.user.id}`,
-							reason: `Verify ${i.user.id}`,
-							permissionOverwrites: [
-								{
-									id: guild.roles.everyone,
-									deny: [Permissions.FLAGS.VIEW_CHANNEL],
-								},
-								{
-									id: await guild.roles.fetch(roleIDs.modRole),
-									allow: [
-										Permissions.FLAGS.VIEW_CHANNEL,
-										Permissions.FLAGS.SEND_MESSAGES,
-										Permissions.FLAGS.ATTACH_FILES,
-										Permissions.FLAGS.EMBED_LINKS,
-										Permissions.FLAGS.READ_MESSAGE_HISTORY,
-									],
-								},
-								{
-									id: i.user.id,
-									allow: [
-										Permissions.FLAGS.VIEW_CHANNEL,
-										Permissions.FLAGS.SEND_MESSAGES,
-									],
-								},
-							],
-						},
-					);
+					const verifyChannelCreate =
+						channelCategoryResolved.createChannel(
+							`verify-${i.user.username}`,
+							{
+								type: 'GUILD_TEXT',
+								topic: `Verify ${i.user.id}`,
+								reason: `Verify ${i.user.id}`,
+								permissionOverwrites: [
+									{
+										id: guild.roles.everyone,
+										deny: [Permissions.FLAGS.VIEW_CHANNEL],
+									},
+									{
+										id: await guild.roles.fetch(roleIDs.modRole),
+										allow: [
+											Permissions.FLAGS.VIEW_CHANNEL,
+											Permissions.FLAGS.SEND_MESSAGES,
+											Permissions.FLAGS.ATTACH_FILES,
+											Permissions.FLAGS.EMBED_LINKS,
+											Permissions.FLAGS.READ_MESSAGE_HISTORY,
+										],
+									},
+									{
+										id: i.user.id,
+										allow: [
+											Permissions.FLAGS.VIEW_CHANNEL,
+											Permissions.FLAGS.SEND_MESSAGES,
+										],
+									},
+								],
+							},
+						);
 
 					await verifyChannelCreate.then((data) => {
 						verifyChannel = data;
@@ -146,7 +148,7 @@ const initialServerMessage = async (message, CMD_NAME, args, client) => {
 					});
 				} else {
 					return i.reply({
-						embeds: [infoMessageEmbed('Something went wrong!')],
+						embeds: [infoMessageEmbed('Something went wrong!', 'ERROR')],
 						ephemeral: true,
 					});
 				}

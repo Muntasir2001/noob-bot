@@ -1,26 +1,30 @@
+const fs = require('fs');
+
 const ADMIN_USER_IDS = process.env.ADMIN_USER_IDS;
 
-const checkUserIds = (command) => {
+const checkUserIds = (message) => {
 	try {
 		const adminUserIDsArray = ADMIN_USER_IDS.split(' ');
-		let isFoundMatch = false;
 
-		adminUserIDsArray.find((userID) => {
-			if (command.member.id == userID) {
-				isFoundMatch = true;
-
-				return true;
-			}
-		});
-
-		return isFoundMatch;
+		if (adminUserIDsArray.indexOf(message.member.id !== -1)) {
+			return true;
+		} else {
+			return false;
+		}
 	} catch (err) {
-		console.log({
-			message: 'something went wrong in global checkUserIDs.js',
-			actualErr: err,
-		});
+		try {
+			fs.appendFile(
+				'logs/crash_logs.txt',
+				`${new Date().toUTCString()} : Something went wrong in globalUtils/checkUserIDs.js \n Actual error: ${err} \n \n`,
+				(err) => {
+					if (err) throw err;
+				},
+			);
 
-		return false;
+			return false;
+		} catch (err) {
+			console.log('Error logging failed');
+		}
 	}
 };
 

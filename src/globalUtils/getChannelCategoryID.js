@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const getChannelCategory = async (guild, categoryName) => {
 	try {
 		let allChannels;
@@ -23,12 +25,17 @@ const getChannelCategory = async (guild, categoryName) => {
 
 		return wantedChannelID;
 	} catch (err) {
-		console.log({
-			message: 'something went wrong in global getChannelCategory.js',
-			actualErr: err,
-		});
-
-		return;
+		try {
+			fs.appendFile(
+				'logs/crash_logs.txt',
+				`${new Date().toUTCString()} : Something went wrong in globalUtils/getChannelCategoryID.js \n Actual error: ${err} \n \n`,
+				(err) => {
+					if (err) throw err;
+				},
+			);
+		} catch (err) {
+			console.log('Error logging failed');
+		}
 	}
 };
 
