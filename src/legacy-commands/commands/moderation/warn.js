@@ -49,23 +49,19 @@ const warn = async (message, CMD_NAME, args, client) => {
 			? client.guilds.cache.get(guildId)
 			: client.guilds.cache.get(message.guild.id);
 
-		let member;
 		let user;
 		let isWarnable = true;
 
 		if (message.mentions.members.first()) {
-			member = message.mentions.members.first();
-			user = member.user;
+			user = message.mentions.members.first().user;
 		} else {
-			member = await client.users.fetch(args[0]).catch((err) => {
+			user = await client.users.fetch(args[0]).catch((err) => {
 				message.channel.send(`${args[0]} is an unknown user`);
 			});
-
-			user = await member;
 		}
 
 		// see if member exists
-		if (!member) {
+		if (!user) {
 			isWarnable = false;
 		}
 
@@ -73,10 +69,10 @@ const warn = async (message, CMD_NAME, args, client) => {
 			let warningChannelId;
 			let warningChannel;
 
-			let warnGuild = guild.channels.create(`Warning-${user.tag}`, {
+			const warnGuild = guild.channels.create(`Warning-${user.tag}`, {
 				type: 'GUILD_TEXT',
-				topic: `Warning to ${member.id}`,
-				reason: `<@${message.author.id}> has warned <@${member.id}>`,
+				topic: `Warning to ${user.id}`,
+				reason: `<@${message.author.id}> has warned <@${user.id}>`,
 				permissionOverwrites: [
 					{
 						id: guild.roles.everyone,
@@ -93,7 +89,7 @@ const warn = async (message, CMD_NAME, args, client) => {
 						],
 					},
 					{
-						id: member.id,
+						id: user.id,
 						allow: [Permissions.FLAGS.VIEW_CHANNEL],
 						deny: [Permissions.FLAGS.SEND_MESSAGES],
 					},
@@ -105,7 +101,7 @@ const warn = async (message, CMD_NAME, args, client) => {
 				warningChannelId = data.id;
 			});
 
-			// BUG: if u do this, then the original "args" changes as well and removes the first element of the args which is the user id, IDK WHYYYY ***
+			// BUG: if u do this, then the original "args" changes as well and removes the first element of the args which is the user id, IDK WHYYYY. EDIT: IK why, args/objects are mutable in JS :)***
 			const reason = getReason(args);
 
 			const warnRequest = new MessageEmbed()
@@ -115,7 +111,7 @@ const warn = async (message, CMD_NAME, args, client) => {
 				.addField('Reason', `${reason}`)
 				.addField('Warning channel', `<#${warningChannelId}>`)
 				.setTimestamp()
-				.setFooter({ text: `Member ID: ${member.id}` });
+				.setFooter({ text: `Member ID: ${user.id}` });
 
 			const warningMessage = new MessageEmbed()
 				.setColor('#FF4454')
@@ -128,7 +124,7 @@ const warn = async (message, CMD_NAME, args, client) => {
 
 			message.channel.send({ embeds: [warnRequest] });
 
-			const close = new MessageActionRow().addComponents(
+			const button = new MessageActionRow().addComponents(
 				new MessageButton()
 					.setCustomId('closeWarnChannel')
 					.setLabel('Close channel')
@@ -136,9 +132,9 @@ const warn = async (message, CMD_NAME, args, client) => {
 			);
 
 			warningChannel.send({
-				content: `<@${member.id}>`,
+				content: `<@${user.id}>`,
 				embeds: [warningMessage],
-				components: [close],
+				components: [button],
 			});
 		}
 	} catch (err) {
