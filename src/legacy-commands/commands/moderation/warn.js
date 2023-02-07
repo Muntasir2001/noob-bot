@@ -14,14 +14,21 @@ const infoMessageEmbed = require('../../../globalUtils/infoMessageEmbed');
 
 const warn = async (message, CMD_NAME, args, client) => {
 	try {
-		if (!message.member.permissions.has('KICK_MEMBERS'))
-			return message.reply({
+		if (
+			!message.member.permissions.has('KICK_MEMBERS') &&
+			!interaction.member.roles.cache.some(
+				(role) => role.id === roleIDs.modRole,
+			)
+		) {
+			return interaction.reply({
 				embeds: [
 					infoMessageEmbed(
-						'HEY HEY HEY there, I see what you trynna do there :eyes:',
+						':warning: You are not allowed to use this button!',
+						'WARNING',
 					),
 				],
 			});
+		}
 
 		if (!args[0]) {
 			return message.reply({

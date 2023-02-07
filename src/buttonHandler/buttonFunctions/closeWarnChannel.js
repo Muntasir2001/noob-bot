@@ -9,6 +9,22 @@ const roleIDs = require('../../TEST_ROLE_IDS/roleIDs');
 
 const closeWarnChannel = async (interaction, client) => {
 	try {
+		if (
+			!interaction.memberPermissions.has('MANAGE_MESSAGES') &&
+			!interaction.member.roles.cache.some(
+				(role) => role.id === roleIDs.modRole,
+			)
+		) {
+			return interaction.reply({
+				embeds: [
+					infoMessageEmbed(
+						':warning: You are not allowed to use this button!',
+						'WARNING',
+					),
+				],
+			});
+		}
+
 		const guildId = process.env.GUILD_ID;
 
 		const guild = guildId
