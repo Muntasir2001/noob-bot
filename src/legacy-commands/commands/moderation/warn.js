@@ -1,7 +1,6 @@
 const fs = require('fs');
 
 const {
-	Message,
 	Permissions,
 	MessageEmbed,
 	MessageActionRow,
@@ -50,22 +49,21 @@ const warn = async (message, CMD_NAME, args, client) => {
 			: client.guilds.cache.get(message.guild.id);
 
 		let user;
-		let isWarnable = true;
 
 		if (message.mentions.members.first()) {
 			user = message.mentions.members.first().user;
 		} else {
-			user = await client.users.fetch(args[0]).catch((err) => {
-				message.channel.send(`${args[0]} is an unknown user`);
-			});
+			await client.users
+				.fetch(args[0])
+				.then((data) => {
+					user = data;
+				})
+				.catch((err) => {
+					return message.reply(`${args[0]} is an unknown user`);
+				});
 		}
 
-		// see if member exists
-		if (!user) {
-			isWarnable = false;
-		}
-
-		if (isWarnable) {
+		if (user) {
 			let warningChannelId;
 			let warningChannel;
 
