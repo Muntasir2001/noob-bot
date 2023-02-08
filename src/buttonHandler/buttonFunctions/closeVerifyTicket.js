@@ -3,7 +3,7 @@ const fs = require('fs');
 const infoMessageEmbed = require('../../globalUtils/infoMessageEmbed');
 const roleIDs = require('../../TEST_ROLE_IDS/roleIDs');
 
-const closeWarnChannel = async (interaction, client) => {
+const closeVerifyTicket = async (interaction, client) => {
 	try {
 		if (
 			!interaction.memberPermissions.has('MANAGE_CHANNELS') &&
@@ -18,6 +18,7 @@ const closeWarnChannel = async (interaction, client) => {
 						'WARNING',
 					),
 				],
+				ephemeral: true,
 			});
 		}
 
@@ -36,7 +37,7 @@ const closeWarnChannel = async (interaction, client) => {
 		try {
 			fs.appendFile(
 				'logs/crash_logs.txt',
-				`${new Date().toUTCString()} : Something went wrong in buttonHandler/buttonFunctions/closeWarnChannel.js \n Actual error: ${err} \n \n`,
+				`${new Date().toUTCString()} : Something went wrong in buttonHandler/buttonFunctions/resolveVerifyTicket.js \n Actual error: ${err} \n \n`,
 				(err) => {
 					if (err) throw err;
 				},
@@ -47,4 +48,4 @@ const closeWarnChannel = async (interaction, client) => {
 	}
 };
 
-module.exports = closeWarnChannel;
+module.exports = closeVerifyTicket;

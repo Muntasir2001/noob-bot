@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const { MessageEmbed, Permissions } = require('discord.js');
+const { Permissions, MessageActionRow, MessageButton } = require('discord.js');
 const infoMessageEmbed = require('../../globalUtils/infoMessageEmbed');
 const checkChannelCategoryExist = require('../../globalUtils/checkChannelCategoryExist');
 const getChannelCategoryID = require('../../globalUtils/getChannelCategoryID');
@@ -59,6 +59,13 @@ const verifyUser = async (interaction, client) => {
 				verifyChannel = data;
 			});
 
+			const buttons = new MessageActionRow().addComponents(
+				new MessageButton()
+					.setCustomId('closeVerifyTicket')
+					.setLabel('Close ticket')
+					.setStyle('DANGER'),
+			);
+
 			verifyChannel.send({
 				content: `<@${interaction.user.id}>`,
 				embeds: [
@@ -66,6 +73,7 @@ const verifyUser = async (interaction, client) => {
 						'Please wait until one of the moderators verifies you.',
 					),
 				],
+				components: [buttons],
 			});
 
 			await interaction.reply({
