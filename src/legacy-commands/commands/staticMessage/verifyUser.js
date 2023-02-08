@@ -4,11 +4,7 @@ const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
 
 const infoMessageEmbed = require('../../../globalUtils/infoMessageEmbed');
 const checkUserIds = require('../../../globalUtils/checkUserIDs');
-const checkChannelCategoryExist = require('../../../globalUtils/checkChannelCategoryExist');
-const getChannelCategoryID = require('../../../globalUtils/getChannelCategoryID');
-const resolveChannelCategoryByID = require('../../../globalUtils/resolveChannelCategoryByID');
 const getTextChannel = require('../../utilities/getTextChannel');
-const roleIDs = require('../../../TEST_ROLE_IDS/roleIDs');
 
 const guildId = process.env.GUILD_ID;
 
@@ -34,13 +30,10 @@ const verifyUser = async (message, CMD_NAME, args, client) => {
 		const verifyMessageEmbed = new MessageEmbed()
 			.setColor('#FF4454')
 			.setTitle(`${name}`)
-			.addFields(
-				{
-					name: '• `Verify me`',
-					value: 'To verify yourself before you get to see all the channel of the server.',
-				},
-				// { name: '\u200B', value: '\u200B' },
-			)
+			.addFields({
+				name: '• `Verify me`',
+				value: 'To verify yourself before you get to see all the channel of the server.',
+			})
 			.setTimestamp()
 			.setFooter({ text: name, iconURL: icon });
 
@@ -63,19 +56,19 @@ const verifyUser = async (message, CMD_NAME, args, client) => {
 				verifyChannel = await getTextChannel(args[0], message);
 			}
 
-			verifyChannel.send({
+			await verifyChannel.send({
 				embeds: [verifyMessageEmbed],
 				components: [buttons],
 			});
 		} else {
-			message.channel.send({
+			await message.channel.send({
 				embeds: [verifyMessageEmbed],
 				components: [buttons],
 			});
 		}
 	} catch (err) {
-		message.reply({
-			embeds: [infoMessageEmbed('Something went wrong!')],
+		await message.reply({
+			embeds: [infoMessageEmbed('Something went wrong!', 'ERROR')],
 		});
 
 		try {
