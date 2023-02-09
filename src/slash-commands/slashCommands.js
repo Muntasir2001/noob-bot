@@ -18,6 +18,7 @@ const moveMessages = require('./commands/moveMessages');
 const avatar = require('./commands/avatar');
 const timeout = require('./commands/moderation/timeout');
 const sendMessage = require('./commands/sendMessage');
+const warn = require('./commands/moderation/warn');
 
 const slashCommands = {
 	ping,
@@ -39,6 +40,7 @@ const slashCommands = {
 	avatar,
 	timeout,
 	sendmessage: sendMessage,
+	warn,
 };
 
 module.exports = slashCommands;

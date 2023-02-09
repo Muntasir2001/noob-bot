@@ -11,13 +11,12 @@ const kick = async (interaction, CMD_NAME, options) => {
 		const reason = options.getString('reason');
 
 		if (!interaction.memberPermissions.has('KICK_MEMBERS')) {
-			return interaction.reply({
+			return await interaction.reply({
 				embeds: [
 					infoMessageEmbed(
 						'HEY HEY HEY there, I see what you trynna do there :eyes:',
 					),
 				],
-				ephemeral: false,
 			});
 		}
 

@@ -56,7 +56,7 @@ const commandsList = [
 			},
 			{
 				name: 'reason',
-				description: 'reason for kick',
+				description: 'reason for warn',
 				required: true,
 				type: Constants.ApplicationCommandOptionTypes.STRING,
 			},

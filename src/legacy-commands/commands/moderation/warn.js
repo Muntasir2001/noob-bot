@@ -15,11 +15,9 @@ const warn = async (message, CMD_NAME, args, client) => {
 	try {
 		if (
 			!message.member.permissions.has('KICK_MEMBERS') &&
-			!interaction.member.roles.cache.some(
-				(role) => role.id === roleIDs.modRole,
-			)
+			!message.member.roles.cache.some((role) => role.id === roleIDs.modRole)
 		) {
-			return interaction.reply({
+			return await interaction.reply({
 				embeds: [
 					infoMessageEmbed(
 						':warning: You are not allowed to use this button!',
