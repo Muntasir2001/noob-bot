@@ -8,7 +8,7 @@ const getTextChannel = require('../../utilities/getTextChannel');
 
 const guildId = process.env.GUILD_ID;
 
-const verifyUser = async (message, CMD_NAME, args, client) => {
+const welcomeMessage = async (message, CMD_NAME, args, client) => {
 	try {
 		if (!checkUserIds(message)) {
 			return message.reply({
@@ -85,4 +85,4 @@ const verifyUser = async (message, CMD_NAME, args, client) => {
 	}
 };
 
-module.exports = verifyUser;
+module.exports = welcomeMessage;
