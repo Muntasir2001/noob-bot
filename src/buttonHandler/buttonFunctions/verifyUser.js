@@ -5,7 +5,7 @@ const infoMessageEmbed = require('../../globalUtils/infoMessageEmbed');
 const checkChannelCategoryExist = require('../../globalUtils/checkChannelCategoryExist');
 const getChannelCategoryID = require('../../globalUtils/getChannelCategoryID');
 const resolveChannelCategoryByID = require('../../globalUtils/resolveChannelCategoryByID');
-const roleIDs = require('../../TEST_ROLE_IDS/roleIDs');
+const roleIDs = require('../../TEST_ROLE_IDS/roleIDs.json');
 
 const verifyUser = async (interaction, client) => {
 	try {
@@ -35,7 +35,7 @@ const verifyUser = async (interaction, client) => {
 							deny: [Permissions.FLAGS.VIEW_CHANNEL],
 						},
 						{
-							id: await guild.roles.fetch(roleIDs.modRole),
+							id: await guild.roles.fetch(roleIDs.MOD_ROLE),
 							allow: [
 								Permissions.FLAGS.VIEW_CHANNEL,
 								Permissions.FLAGS.SEND_MESSAGES,

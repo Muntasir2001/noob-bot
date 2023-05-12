@@ -9,7 +9,7 @@ const {
 
 const getMember = require('../../utilities/getMember');
 const infoMessageEmbed = require('../../../globalUtils/infoMessageEmbed');
-const roleIDs = require('../../../TEST_ROLE_IDS/roleIDs');
+const roleIDs = require('../../../TEST_ROLE_IDS/roleIDs.json');
 
 const warn = async (interaction, CMD_NAME, options, client) => {
 	try {
@@ -19,7 +19,7 @@ const warn = async (interaction, CMD_NAME, options, client) => {
 		if (
 			!interaction.memberPermissions.has('KICK_MEMBERS') &&
 			!interaction.member.roles.cache.some(
-				(role) => role.id === roleIDs.modRole,
+				(role) => role.id === roleIDs.MOD_ROLE,
 			)
 		) {
 			return await interaction.reply({
@@ -50,7 +50,7 @@ const warn = async (interaction, CMD_NAME, options, client) => {
 					deny: [Permissions.FLAGS.VIEW_CHANNEL],
 				},
 				{
-					id: await guild.roles.fetch(roleIDs.modRole),
+					id: await guild.roles.fetch(roleIDs.MOD_ROLE),
 					allow: [
 						Permissions.FLAGS.VIEW_CHANNEL,
 						Permissions.FLAGS.SEND_MESSAGES,

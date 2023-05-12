@@ -30,10 +30,16 @@ const welcomeMessage = async (message, CMD_NAME, args, client) => {
 		const verifyMessageEmbed = new MessageEmbed()
 			.setColor('#FF4454')
 			.setTitle(`${name}`)
-			.addFields({
-				name: '• `Verify me`',
-				value: 'To verify yourself before you get to see all the channel of the server.',
-			})
+			.addFields(
+				{
+					name: '• `Verify me`',
+					value: 'To verify yourself before you get to see all the channel of the server.',
+				},
+				{
+					name: '• `Etourne`',
+					value: 'To gain access to Etourne software related channels to either request for support, share feedback or test bot commands.',
+				},
+			)
 			.setTimestamp()
 			.setFooter({ text: name, iconURL: icon });
 
@@ -42,6 +48,10 @@ const welcomeMessage = async (message, CMD_NAME, args, client) => {
 				.setCustomId('verifyUser')
 				.setLabel('Verify me')
 				.setStyle('PRIMARY'),
+			new MessageButton()
+				.setCustomId('etourne')
+				.setLabel('Etourne')
+				.setStyle('SECONDARY'),
 		);
 
 		if (args[0]) {

@@ -1,14 +1,14 @@
 const fs = require('fs');
 
 const infoMessageEmbed = require('../../globalUtils/infoMessageEmbed');
-const roleIDs = require('../../TEST_ROLE_IDS/roleIDs');
+const roleIDs = require('../../TEST_ROLE_IDS/roleIDs.json');
 
 const closeWarnChannel = async (interaction, client) => {
 	try {
 		if (
 			!interaction.memberPermissions.has('MANAGE_CHANNELS') &&
 			!interaction.member.roles.cache.some(
-				(role) => role.id === roleIDs.modRole,
+				(role) => role.id === roleIDs.MOD_ROLE,
 			)
 		) {
 			return interaction.reply({
@@ -18,6 +18,7 @@ const closeWarnChannel = async (interaction, client) => {
 						'WARNING',
 					),
 				],
+				ephemeral: true,
 			});
 		}
 

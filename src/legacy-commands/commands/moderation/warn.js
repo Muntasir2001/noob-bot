@@ -7,7 +7,7 @@ const {
 	MessageButton,
 } = require('discord.js');
 
-const roleIDs = require('../../../TEST_ROLE_IDS/roleIDs');
+const roleIDs = require('../../../TEST_ROLE_IDS/roleIDs.json');
 const getReason = require('../../../globalUtils/getReason');
 const infoMessageEmbed = require('../../../globalUtils/infoMessageEmbed');
 
@@ -15,7 +15,9 @@ const warn = async (message, CMD_NAME, args, client) => {
 	try {
 		if (
 			!message.member.permissions.has('KICK_MEMBERS') &&
-			!message.member.roles.cache.some((role) => role.id === roleIDs.modRole)
+			!message.member.roles.cache.some(
+				(role) => role.id === roleIDs.MOD_ROLE,
+			)
 		) {
 			return await interaction.reply({
 				embeds: [
@@ -75,7 +77,7 @@ const warn = async (message, CMD_NAME, args, client) => {
 						deny: [Permissions.FLAGS.VIEW_CHANNEL],
 					},
 					{
-						id: await guild.roles.fetch(roleIDs.modRole),
+						id: await guild.roles.fetch(roleIDs.MOD_ROLE),
 						allow: [
 							Permissions.FLAGS.VIEW_CHANNEL,
 							Permissions.FLAGS.SEND_MESSAGES,
