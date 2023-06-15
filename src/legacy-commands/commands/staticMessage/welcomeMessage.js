@@ -52,6 +52,10 @@ const welcomeMessage = async (message, CMD_NAME, args, client) => {
 				.setCustomId('etourne')
 				.setLabel('Etourne')
 				.setStyle('SECONDARY'),
+			new MessageButton()
+				.setCustomId('aboutMe')
+				.setLabel('About noob_dev54')
+				.setStyle('SECONDARY'),
 		);
 
 		if (args[0]) {
