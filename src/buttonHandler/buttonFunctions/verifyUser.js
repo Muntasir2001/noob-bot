@@ -55,13 +55,15 @@ const verifyUser = async (interaction, client) => {
 				},
 			);
 
+			let verifyChannel;
+
 			await verifyChannelCreate.then((data) => {
 				verifyChannel = data;
 			});
 
 			const buttons = new MessageActionRow().addComponents(
 				new MessageButton()
-					.setCustomId('closeVerifyTicket')
+					.setCustomId('closeTicket')
 					.setLabel('Close ticket')
 					.setStyle('DANGER'),
 			);
