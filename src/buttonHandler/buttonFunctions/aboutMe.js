@@ -9,7 +9,7 @@ const aboutMe = async (interaction, client) => {
 			.setColor('#FF4454')
 			.setTitle('About Me')
 			.setDescription(
-				'## Hello there :wave:\nI am `noob_dev54`/`mz10ah`/`Infinityboiz ッ`\n\n`💻  Full Stack Developer` - JavaScript/TypeScript,  Python\n`🎮  Gamer`\n`🚂 🎮  Moderator` - The Coding Train and Muslim Gamers League\n\n:globe_with_meridians:  **Website:** https://noobdev54.com\n\n### Technical Skills:\n1. JavaScript/Typescript - ReactJS/NextJS, Discord.js, Express.js\n2. Python - Flask\n3. Figma/Adobe XD',
+				'## Hello there :wave:\nI am `noob_dev54`/`mz10ah`/`Infinityboiz ッ`\n\n`💻  Full Stack Developer` - JavaScript/TypeScript,  Python\n`🎮  Gamer`\n`🚂 🎮  Moderator` - The Coding Train and Muslim Gamers League\n\n:globe_with_meridians:  **Website:** https://noobdev54.com\n\n### Technical Skills:\n1. JavaScript/Typescript - ReactJS/NextJS, Discord.js, Express.js\n2. Python - Flask\n3. Figma/Adobe XD\n\n### For Enquiries:\n1. DM <@374230181889572876>\nor\n2. Hit the `Enquire` button.',
 			)
 			.setTimestamp();
 
