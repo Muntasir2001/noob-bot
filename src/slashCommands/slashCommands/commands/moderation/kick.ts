@@ -59,6 +59,38 @@ const kick: Command = {
 					ephemeral: true,
 				});
 			}
+
+			await target
+				.kick(reason)
+				.then(async () => {
+					const kickEmbed = new MessageEmbed()
+						.setColor('#FF4454')
+						.setTitle(`:stop_sign: Kicked ${target.user.tag}`)
+						.addFields(
+							{
+								name: 'Moderator',
+								value: `${interaction.member?.user}`,
+							},
+							{
+								name: 'Kicked user',
+								value: `${user}`,
+							},
+							{
+								name: 'Reason',
+								value: reason,
+							},
+						)
+						.setTimestamp()
+						.setFooter({ text: `Member ID: ${target.user.id}` });
+
+					return await interaction.reply({
+						embeds: [kickEmbed],
+						ephemeral: false,
+					});
+				})
+				.catch((err) => {
+					throw err;
+				});
 		} catch (err) {
 			await interaction.reply({
 				embeds: [

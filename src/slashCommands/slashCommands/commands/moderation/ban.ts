@@ -62,7 +62,7 @@ const ban: Command = {
 
 			await target
 				.ban({ reason: reason.value })
-				.then(() => {
+				.then(async () => {
 					const banEmbed = new MessageEmbed()
 						.setColor('#FF4454')
 						.setTitle(`:no_entry: Banned ${target.user.tag}`)
@@ -83,7 +83,7 @@ const ban: Command = {
 						.setTimestamp()
 						.setFooter({ text: `Member ID: ${target.user.id}` });
 
-					interaction.reply({
+					return await interaction.reply({
 						embeds: [banEmbed],
 						ephemeral: false,
 					});
