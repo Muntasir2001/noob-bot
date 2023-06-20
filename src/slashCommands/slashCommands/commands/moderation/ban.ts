@@ -2,6 +2,9 @@ import { BaseCommandInteraction, Client, MessageEmbed } from 'discord.js';
 
 import logFile from '../../utilities/logFile';
 import { Command } from '../../Command';
+import infoMessageEmbed, {
+	types,
+} from '../../../../globalUtilities/infoMessageEmbed';
 
 const ban: Command = {
 	name: 'ban',
@@ -21,7 +24,7 @@ const ban: Command = {
 		},
 		{
 			name: 'days',
-			description: 'how many days of message to delete',
+			description: 'how many days of message to delete (defaults to 0)',
 			required: false,
 			type: 'NUMBER',
 		},
@@ -29,6 +32,21 @@ const ban: Command = {
 	type: 'CHAT_INPUT',
 	run: async (client: Client, interaction: BaseCommandInteraction) => {
 		try {
+			const user = interaction.options.get('user');
+			const reason = interaction.options.get('reason');
+			const days = interaction.options.get('days');
+
+			if (!interaction.memberPermissions?.has('BAN_MEMBERS')) {
+				return interaction.reply({
+					embeds: [
+						infoMessageEmbed({
+							title: 'You are not allowed to run this command!',
+							type: types.ERROR,
+						}),
+					],
+					ephemeral: false,
+				});
+			}
 		} catch (err) {
 			logFile({
 				error: err,
