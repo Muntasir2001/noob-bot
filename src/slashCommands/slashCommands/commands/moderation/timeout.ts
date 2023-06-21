@@ -40,7 +40,7 @@ const timeout: Command = {
 				return await interaction.reply({
 					embeds: [
 						infoMessageEmbed({
-							title: 'You are not allowed to run this command!',
+							title: ':warning: You are not allowed to run this command!',
 							type: types.ERROR,
 						}),
 					],

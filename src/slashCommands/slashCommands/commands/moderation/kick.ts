@@ -27,13 +27,14 @@ const kick: Command = {
 	run: async (client: Client, interaction: BaseCommandInteraction) => {
 		try {
 			const user: User = interaction.options.getUser('user')!;
+			const member = interaction.options.getMember('user')!; // testing
 			const reason: any = interaction.options.get('reason')!;
 
 			if (!interaction.memberPermissions?.has('KICK_MEMBERS')) {
 				return await interaction.reply({
 					embeds: [
 						infoMessageEmbed({
-							title: 'You are not allowed to run this command!',
+							title: ':warning: You are not allowed to run this command!',
 							type: types.ERROR,
 						}),
 					],
@@ -110,3 +111,5 @@ const kick: Command = {
 		}
 	},
 };
+
+export default kick;

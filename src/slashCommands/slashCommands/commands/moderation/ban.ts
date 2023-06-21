@@ -1,4 +1,10 @@
-import { BaseCommandInteraction, Client, MessageEmbed, User } from 'discord.js';
+import {
+	BaseCommandInteraction,
+	Client,
+	GuildMember,
+	MessageEmbed,
+	User,
+} from 'discord.js';
 
 import logFile from '../../../../globalUtilities/logFile';
 import { Command } from '../../Command';
@@ -27,13 +33,14 @@ const ban: Command = {
 	run: async (client: Client, interaction: BaseCommandInteraction) => {
 		try {
 			const user: User = interaction.options.getUser('user')!;
+			const member = interaction.options.getMember('user')!; // testing
 			const reason: any = interaction.options.get('reason')!;
 
 			if (!interaction.memberPermissions?.has('BAN_MEMBERS')) {
 				return await interaction.reply({
 					embeds: [
 						infoMessageEmbed({
-							title: 'You are not allowed to run this command!',
+							title: ':warning: You are not allowed to run this command!',
 							type: types.ERROR,
 						}),
 					],

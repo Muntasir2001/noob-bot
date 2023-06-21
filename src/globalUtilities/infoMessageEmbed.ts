@@ -1,4 +1,5 @@
 import { MessageEmbed } from 'discord.js';
+import botConfig from '../botConfig';
 
 export enum types {
 	INFO,
@@ -28,11 +29,11 @@ const infoMessageEmbed = (props: infoMessageEmbed) => {
 
 	switch (type) {
 		case types.ERROR:
-			embed.setColor('#D83C3E');
+			embed.setColor(botConfig.color.red);
 		case types.SUCCESS:
-			embed.setColor('#3BA55C');
+			embed.setColor(botConfig.color.green);
 		default:
-			embed.setColor('#ff4454');
+			embed.setColor(botConfig.color.default);
 	}
 
 	return embed;
