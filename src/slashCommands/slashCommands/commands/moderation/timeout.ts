@@ -5,6 +5,7 @@ import { Command } from '../../Command';
 import infoMessageEmbed, {
 	types,
 } from '../../../../globalUtilities/infoMessageEmbed';
+import botConfig from '../../../../botConfig';
 
 const timeout: Command = {
 	name: 'timeout',
@@ -67,7 +68,7 @@ const timeout: Command = {
 			}
 
 			const embed = new MessageEmbed()
-				.setColor('#FF4454')
+				.setColor(botConfig.color.default)
 				.setTitle(`:alarm_clock: Timed out ${target.user.tag}`)
 				.addFields(
 					{

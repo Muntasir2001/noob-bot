@@ -11,6 +11,7 @@ import { Command } from '../../Command';
 import infoMessageEmbed, {
 	types,
 } from '../../../../globalUtilities/infoMessageEmbed';
+import botConfig from '../../../../botConfig';
 
 const ban: Command = {
 	name: 'ban',
@@ -71,7 +72,7 @@ const ban: Command = {
 				.ban({ reason: reason.value })
 				.then(async () => {
 					const banEmbed = new MessageEmbed()
-						.setColor('#FF4454')
+						.setColor(botConfig.color.default)
 						.setTitle(`:no_entry: Banned ${target.user.tag}`)
 						.addFields(
 							{

@@ -5,6 +5,7 @@ import { Command } from '../../Command';
 import infoMessageEmbed, {
 	types,
 } from '../../../../globalUtilities/infoMessageEmbed';
+import botConfig from '../../../../botConfig';
 
 const kick: Command = {
 	name: 'ban',
@@ -65,7 +66,7 @@ const kick: Command = {
 				.kick(reason)
 				.then(async () => {
 					const kickEmbed = new MessageEmbed()
-						.setColor('#FF4454')
+						.setColor(botConfig.color.default)
 						.setTitle(`:stop_sign: Kicked ${target.user.tag}`)
 						.addFields(
 							{
