@@ -34,9 +34,10 @@ const timeout: Command = {
 		try {
 			const user: User = interaction.options.getUser('user')!;
 			const reason: any = interaction.options.get('reason')!;
+			const time: any = interaction.options.get('time')!;
 
 			if (!interaction.memberPermissions?.has('MODERATE_MEMBERS')) {
-				return interaction.reply({
+				return await interaction.reply({
 					embeds: [
 						infoMessageEmbed({
 							title: 'You are not allowed to run this command!',
@@ -54,16 +55,55 @@ const timeout: Command = {
 				});
 
 			if (!target.moderatable) {
-				return interaction.reply({
+				return await interaction.reply({
 					embeds: [
 						infoMessageEmbed({
-							title: 'You are not allowed to run this command!',
+							title: ':x: User cannot be timeout out!',
 							type: types.ERROR,
 						}),
 					],
 					ephemeral: false,
 				});
 			}
+
+			const embed = new MessageEmbed()
+				.setColor('#FF4454')
+				.setTitle(`:alarm_clock: Timed out ${target.user.tag}`)
+				.addFields(
+					{
+						name: 'Moderator',
+						value: `${interaction.member?.user}`,
+					},
+					{
+						name: 'Timed out user',
+						value: `<@${target.id}>`,
+					},
+					{
+						name: 'Timeout length',
+						value:
+							time.value === 1
+								? `${time.value} minute`
+								: `${time} minutes`,
+					},
+					{
+						name: 'Reason',
+						value: reason,
+					},
+				)
+				.setTimestamp()
+				.setFooter({ text: `Member ID: ${target.id}` });
+
+			await target
+				.timeout(time * 1000 * 60, reason)
+				.then(async () => {
+					return await interaction.reply({
+						embeds: [embed],
+						ephemeral: false,
+					});
+				})
+				.catch((err) => {
+					throw err;
+				});
 		} catch (err) {
 			await interaction.reply({
 				embeds: [

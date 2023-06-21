@@ -30,7 +30,7 @@ const kick: Command = {
 			const reason: any = interaction.options.get('reason')!;
 
 			if (!interaction.memberPermissions?.has('KICK_MEMBERS')) {
-				return interaction.reply({
+				return await interaction.reply({
 					embeds: [
 						infoMessageEmbed({
 							title: 'You are not allowed to run this command!',

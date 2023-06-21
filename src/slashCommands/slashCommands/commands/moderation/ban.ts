@@ -30,7 +30,7 @@ const ban: Command = {
 			const reason: any = interaction.options.get('reason')!;
 
 			if (!interaction.memberPermissions?.has('BAN_MEMBERS')) {
-				return interaction.reply({
+				return await interaction.reply({
 					embeds: [
 						infoMessageEmbed({
 							title: 'You are not allowed to run this command!',
