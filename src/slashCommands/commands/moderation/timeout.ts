@@ -109,7 +109,7 @@ const timeout: Command = {
 			await interaction.reply({
 				embeds: [
 					infoMessageEmbed({
-						title: ':x: Command failed to execute',
+						title: ':x: Something went wrong',
 						type: types.ERROR,
 					}),
 				],

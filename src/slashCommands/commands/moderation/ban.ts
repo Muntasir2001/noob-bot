@@ -34,7 +34,6 @@ const ban: Command = {
 	run: async (client: Client, interaction: BaseCommandInteraction) => {
 		try {
 			const user: User = interaction.options.getUser('user')!;
-			const member = interaction.options.getMember('user')!; // testing
 			const reason: any = interaction.options.get('reason')!;
 
 			if (!interaction.memberPermissions?.has('BAN_MEMBERS')) {
@@ -103,7 +102,7 @@ const ban: Command = {
 			await interaction.reply({
 				embeds: [
 					infoMessageEmbed({
-						title: ':x: Command failed to execute',
+						title: ':x: Something went wrong',
 						type: types.ERROR,
 					}),
 				],

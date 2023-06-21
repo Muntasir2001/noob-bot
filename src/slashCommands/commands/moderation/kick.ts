@@ -1,4 +1,11 @@
-import { BaseCommandInteraction, Client, MessageEmbed, User } from 'discord.js';
+import {
+	BaseCommandInteraction,
+	Client,
+	MessageEmbed,
+	User,
+	TextBasedChannel,
+	GuildMember,
+} from 'discord.js';
 
 import logFile from '../../../globalUtilities/logFile';
 import { Command } from '../../Command';
@@ -28,7 +35,6 @@ const kick: Command = {
 	run: async (client: Client, interaction: BaseCommandInteraction) => {
 		try {
 			const user: User = interaction.options.getUser('user')!;
-			const member = interaction.options.getMember('user')!; // testing
 			const reason: any = interaction.options.get('reason')!;
 
 			if (!interaction.memberPermissions?.has('KICK_MEMBERS')) {
@@ -67,7 +73,8 @@ const kick: Command = {
 				.then(async () => {
 					const kickEmbed = new MessageEmbed()
 						.setColor(botConfig.color.default)
-						.setTitle(`:stop_sign: Kicked ${target.user.tag}`)
+						.setTitle(`:boot: Kicked ${target.user.tag}`)
+						.setThumbnail(user.displayAvatarURL())
 						.addFields(
 							{
 								name: 'Moderator',
@@ -75,19 +82,33 @@ const kick: Command = {
 							},
 							{
 								name: 'Kicked user',
-								value: `${user}`,
+								value: `${user} ${user.tag}`,
 							},
 							{
 								name: 'Reason',
-								value: reason,
+								value: reason.value,
 							},
 						)
 						.setTimestamp()
 						.setFooter({ text: `Member ID: ${target.user.id}` });
 
+					const logChannel: TextBasedChannel | any =
+						interaction.guild?.channels.resolve(
+							process.env.LOG_CHANNEL_ID!,
+						);
+
+					if (!logChannel) return;
+
+					await logChannel.send({ embeds: [kickEmbed] });
+
 					return await interaction.reply({
-						embeds: [kickEmbed],
-						ephemeral: false,
+						embeds: [
+							infoMessageEmbed({
+								title: `:boot: ${user.tag} has been kicked`,
+								type: types.SUCCESS,
+							}),
+						],
+						ephemeral: true,
 					});
 				})
 				.catch((err) => {
@@ -97,7 +118,7 @@ const kick: Command = {
 			await interaction.reply({
 				embeds: [
 					infoMessageEmbed({
-						title: ':x: Command failed to execute',
+						title: ':x: Something went wrong',
 						type: types.ERROR,
 					}),
 				],
@@ -107,7 +128,7 @@ const kick: Command = {
 			logFile({
 				error: err,
 				folder: 'slashCommands/moderation',
-				file: 'ban',
+				file: 'kick',
 			});
 		}
 	},

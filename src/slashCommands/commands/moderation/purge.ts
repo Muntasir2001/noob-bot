@@ -89,7 +89,7 @@ const purge: Command = {
 				.setFooter({ text: interaction.guild!.name })
 				.setTimestamp();
 
-			logChannel.send({ embeds: [logEmbed] });
+			await logChannel.send({ embeds: [logEmbed] });
 
 			return await interaction.reply({
 				embeds: [
@@ -100,12 +100,13 @@ const purge: Command = {
 						type: types.SUCCESS,
 					}),
 				],
+				ephemeral: true,
 			});
 		} catch (err) {
 			await interaction.reply({
 				embeds: [
 					infoMessageEmbed({
-						title: ':x: Command failed to execute',
+						title: ':x: Something went wrong',
 						type: types.ERROR,
 					}),
 				],
