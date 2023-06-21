@@ -6,12 +6,12 @@ import {
 	User,
 } from 'discord.js';
 
-import logFile from '../../../../globalUtilities/logFile';
+import logFile from '../../../globalUtilities/logFile';
 import { Command } from '../../Command';
 import infoMessageEmbed, {
 	types,
-} from '../../../../globalUtilities/infoMessageEmbed';
-import botConfig from '../../../../botConfig';
+} from '../../../globalUtilities/infoMessageEmbed';
+import botConfig from '../../../botConfig';
 
 const ban: Command = {
 	name: 'ban',

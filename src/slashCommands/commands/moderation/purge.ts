@@ -9,12 +9,12 @@ import {
 	Message,
 } from 'discord.js';
 
-import logFile from '../../../../globalUtilities/logFile';
+import logFile from '../../../globalUtilities/logFile';
 import { Command } from '../../Command';
 import infoMessageEmbed, {
 	types,
-} from '../../../../globalUtilities/infoMessageEmbed';
-import botConfig from '../../../../botConfig';
+} from '../../../globalUtilities/infoMessageEmbed';
+import botConfig from '../../../botConfig';
 
 const purge: Command = {
 	name: 'purge',

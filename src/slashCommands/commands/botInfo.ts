@@ -4,6 +4,7 @@ import { BaseCommandInteraction, Client, MessageEmbed } from 'discord.js';
 
 import { Command } from '../Command';
 import formatProcessUptime from '../utilities/formatProcessUptime';
+import botConfig from '../../botConfig';
 
 const botInfo: Command = {
 	name: 'botinfo',
@@ -12,7 +13,7 @@ const botInfo: Command = {
 	run: async (client: Client, interaction: BaseCommandInteraction) => {
 		try {
 			const botInfoEmbed = new MessageEmbed()
-				.setColor('#ff4454')
+				.setColor(botConfig.color.default)
 				.setThumbnail(client.user!.displayAvatarURL())
 				.setAuthor({
 					name: `${client.user!.username}`,

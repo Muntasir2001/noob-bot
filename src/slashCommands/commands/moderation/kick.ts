@@ -1,14 +1,14 @@
 import { BaseCommandInteraction, Client, MessageEmbed, User } from 'discord.js';
 
-import logFile from '../../../../globalUtilities/logFile';
+import logFile from '../../../globalUtilities/logFile';
 import { Command } from '../../Command';
 import infoMessageEmbed, {
 	types,
-} from '../../../../globalUtilities/infoMessageEmbed';
-import botConfig from '../../../../botConfig';
+} from '../../../globalUtilities/infoMessageEmbed';
+import botConfig from '../../../botConfig';
 
 const kick: Command = {
-	name: 'ban',
+	name: 'kick',
 	description: 'Kick member from the server',
 	options: [
 		{
