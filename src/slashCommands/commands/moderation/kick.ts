@@ -4,7 +4,6 @@ import {
 	MessageEmbed,
 	User,
 	TextBasedChannel,
-	GuildMember,
 } from 'discord.js';
 
 import logFile from '../../../globalUtilities/logFile';
