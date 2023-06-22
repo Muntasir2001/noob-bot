@@ -1,4 +1,10 @@
-import { BaseCommandInteraction, Client, MessageEmbed, User } from 'discord.js';
+import {
+	BaseCommandInteraction,
+	Client,
+	MessageEmbed,
+	User,
+	TextBasedChannel,
+} from 'discord.js';
 
 import logFile from '../../../globalUtilities/logFile';
 import { Command } from '../../Command';
@@ -18,16 +24,16 @@ const timeout: Command = {
 			type: 'USER',
 		},
 		{
-			name: 'reason',
-			description: 'reason for timeout',
-			required: true,
-			type: 'STRING',
-		},
-		{
 			name: 'time',
 			description: 'length of timeout in minutes',
 			required: true,
 			type: 'NUMBER',
+		},
+		{
+			name: 'reason',
+			description: 'reason for timeout',
+			required: true,
+			type: 'STRING',
 		},
 	],
 	type: 'CHAT_INPUT',
@@ -69,7 +75,7 @@ const timeout: Command = {
 
 			const embed = new MessageEmbed()
 				.setColor(botConfig.color.default)
-				.setTitle(`:alarm_clock: Timed out ${target.user.tag}`)
+				.setTitle(`:alarm_clock: Timed out ${user.tag}`)
 				.addFields(
 					{
 						name: 'Moderator',
@@ -77,29 +83,41 @@ const timeout: Command = {
 					},
 					{
 						name: 'Timed out user',
-						value: `<@${target.id}>`,
+						value: `<@${user.id}> (${user.tag})`,
 					},
 					{
 						name: 'Timeout length',
 						value:
 							time.value === 1
 								? `${time.value} minute`
-								: `${time} minutes`,
+								: `${time.value} minutes`,
 					},
 					{
 						name: 'Reason',
-						value: reason,
+						value: reason.value,
 					},
 				)
 				.setTimestamp()
 				.setFooter({ text: `Member ID: ${target.id}` });
 
 			await target
-				.timeout(time * 1000 * 60, reason)
+				.timeout(time.value * 1000 * 60, reason)
 				.then(async () => {
+					const logChannel: TextBasedChannel | any =
+						interaction.guild?.channels.resolve(
+							process.env.LOG_CHANNEL_ID!,
+						);
+
+					if (logChannel) await logChannel.send({ embeds: [embed] });
+
 					return await interaction.reply({
-						embeds: [embed],
-						ephemeral: false,
+						embeds: [
+							infoMessageEmbed({
+								title: `:clock: ${user.tag} has been timed out for ${time.value} minutes`,
+								type: types.SUCCESS,
+							}),
+						],
+						ephemeral: true,
 					});
 				})
 				.catch((err) => {

@@ -82,7 +82,7 @@ const kick: Command = {
 							},
 							{
 								name: 'Kicked user',
-								value: `${user} ${user.tag}`,
+								value: `${user} (${user.tag})`,
 							},
 							{
 								name: 'Reason',
@@ -97,9 +97,7 @@ const kick: Command = {
 							process.env.LOG_CHANNEL_ID!,
 						);
 
-					if (!logChannel) return;
-
-					await logChannel.send({ embeds: [kickEmbed] });
+					if (logChannel) await logChannel.send({ embeds: [kickEmbed] });
 
 					return await interaction.reply({
 						embeds: [
