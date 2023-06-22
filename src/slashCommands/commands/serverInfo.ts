@@ -45,7 +45,10 @@ const serverInfo: Command = {
 						inline: false,
 					},
 				)
-				.setFooter({ text: `Requested by: ${interaction.user.tag}` })
+				.setFooter({
+					text: `Requested by: ${interaction.user.tag}`,
+					iconURL: interaction.user.displayAvatarURL(),
+				})
 				.setTimestamp();
 
 			return await interaction.reply({

@@ -23,7 +23,10 @@ const botInfo: Command = {
 					{ name: 'Bot Tag', value: `${client.user!.tag}` },
 					{ name: 'Bot version', value: `1.0-beta` },
 				)
-				.setFooter({ text: client.user!.tag })
+				.setFooter({
+					text: `Requested by: ${interaction.user.tag}`,
+					iconURL: interaction.user.displayAvatarURL(),
+				})
 				.setTimestamp();
 
 			if (interaction.user.id === process.env.OWNER_ID) {
