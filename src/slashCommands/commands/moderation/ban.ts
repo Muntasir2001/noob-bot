@@ -1,9 +1,9 @@
 import {
 	BaseCommandInteraction,
 	Client,
-	GuildMember,
 	MessageEmbed,
 	User,
+	TextBasedChannel,
 } from 'discord.js';
 
 import logFile from '../../../globalUtilities/logFile';
@@ -72,6 +72,7 @@ const ban: Command = {
 				.then(async () => {
 					const banEmbed = new MessageEmbed()
 						.setColor(botConfig.color.default)
+						.setThumbnail(user.displayAvatarURL())
 						.setTitle(`:no_entry: Banned ${target.user.tag}`)
 						.addFields(
 							{
@@ -80,19 +81,31 @@ const ban: Command = {
 							},
 							{
 								name: 'Banned user',
-								value: `${user}`,
+								value: `${user} `,
 							},
 							{
 								name: 'Reason',
-								value: reason,
+								value: reason.value,
 							},
 						)
 						.setTimestamp()
 						.setFooter({ text: `Member ID: ${target.user.id}` });
 
+					const logChannel: TextBasedChannel | any =
+						interaction.guild?.channels.resolve(
+							process.env.LOG_CHANNEL_ID!,
+						);
+
+					if (logChannel) await logChannel.send({ embeds: [banEmbed] });
+
 					return await interaction.reply({
-						embeds: [banEmbed],
-						ephemeral: false,
+						embeds: [
+							infoMessageEmbed({
+								title: `:hammer: ${user.tag} has been banned successfully`,
+								type: types.SUCCESS,
+							}),
+						],
+						ephemeral: true,
 					});
 				})
 				.catch((err) => {

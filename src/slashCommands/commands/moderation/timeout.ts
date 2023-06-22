@@ -75,6 +75,7 @@ const timeout: Command = {
 
 			const embed = new MessageEmbed()
 				.setColor(botConfig.color.default)
+				.setThumbnail(user.displayAvatarURL())
 				.setTitle(`:alarm_clock: Timed out ${user.tag}`)
 				.addFields(
 					{
