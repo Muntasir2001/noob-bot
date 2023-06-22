@@ -5,6 +5,7 @@ import kick from './commands/moderation/kick';
 import purge from './commands/moderation/purge';
 import timeout from './commands/moderation/timeout';
 import avatar from './commands/avatar';
+import serverInfo from './commands/serverInfo';
 
 const slashCommandsList: Command[] = [
 	botInfo,
@@ -13,6 +14,7 @@ const slashCommandsList: Command[] = [
 	purge,
 	timeout,
 	avatar,
+	serverInfo,
 ];
 
 export default slashCommandsList;
