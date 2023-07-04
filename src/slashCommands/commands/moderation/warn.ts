@@ -3,8 +3,9 @@ import {
 	Client,
 	MessageEmbed,
 	User,
-	TextBasedChannel,
 	GuildMemberRoleManager,
+	MessageActionRow,
+	MessageButton,
 } from 'discord.js';
 
 import logFile from '../../../globalUtilities/logFile';
@@ -105,7 +106,7 @@ const warn: Command = {
 					},
 					{
 						name: 'Reason',
-						value: `${reason}`,
+						value: `${reason.value}`,
 					},
 					{
 						name: 'Warning Channel',
@@ -121,7 +122,7 @@ const warn: Command = {
 				.addFields([
 					{
 						name: 'Reason',
-						value: `${reason}`,
+						value: `${reason.value}`,
 					},
 				])
 				.setTimestamp()
@@ -129,10 +130,17 @@ const warn: Command = {
 					text: `Reach out to mods if you have any question`,
 				});
 
+			const buttons = new MessageActionRow().addComponents(
+				new MessageButton()
+					.setCustomId('closeWarnChannel')
+					.setLabel('Close channel')
+					.setStyle('DANGER'),
+			);
+
 			await warningChannel!.send({
 				content: `<@${user.id}>`,
 				embeds: [warningMessageEmbed],
-				// components: [button],
+				components: [buttons],
 			});
 
 			return await interaction.reply({
