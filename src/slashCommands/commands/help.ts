@@ -9,7 +9,7 @@ import botConfig from '../../botConfig';
 
 const help: Command = {
 	name: 'help',
-	description: 'Information about the bot',
+	description: 'View list of all the commands',
 	type: 'CHAT_INPUT',
 	run: async (client: Client, interaction: BaseCommandInteraction) => {
 		try {
