@@ -59,7 +59,7 @@ const botInfo: Command = {
 			logFile({
 				error: err,
 				folder: 'slashCommands',
-				file: 'avatar',
+				file: 'botInfo',
 			});
 		}
 	},
