@@ -1,10 +1,12 @@
-import fs from 'fs';
-
 import { BaseCommandInteraction, Client, MessageEmbed } from 'discord.js';
 
 import { Command } from '../Command';
 import formatProcessUptime from '../utilities/formatProcessUptime';
 import botConfig from '../../botConfig';
+import logFile from '../../globalUtilities/logFile';
+import infoMessageEmbed, {
+	types,
+} from '../../globalUtilities/infoMessageEmbed';
 
 const botInfo: Command = {
 	name: 'botinfo',
@@ -44,17 +46,21 @@ const botInfo: Command = {
 				embeds: [botInfoEmbed],
 			});
 		} catch (err) {
-			try {
-				fs.appendFile(
-					'logs/crash_logs.txt',
-					`${new Date()} : Something went wrong in slashcommands/botInfo.ts \n Actual error: ${err} \n \n`,
-					(err) => {
-						if (err) throw err;
-					},
-				);
-			} catch (err) {
-				console.log('Error logging failed');
-			}
+			await interaction.reply({
+				embeds: [
+					infoMessageEmbed({
+						title: ':x: Something went wrong',
+						type: types.ERROR,
+					}),
+				],
+				ephemeral: true,
+			});
+
+			logFile({
+				error: err,
+				folder: 'slashCommands',
+				file: 'avatar',
+			});
 		}
 	},
 };

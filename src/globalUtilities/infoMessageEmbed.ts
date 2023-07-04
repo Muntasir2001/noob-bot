@@ -30,10 +30,13 @@ const infoMessageEmbed = (props: infoMessageEmbed) => {
 	switch (type) {
 		case types.ERROR:
 			embed.setColor(botConfig.color.red);
+			break;
 		case types.SUCCESS:
 			embed.setColor(botConfig.color.green);
+			break;
 		default:
 			embed.setColor(botConfig.color.default);
+			break;
 	}
 
 	return embed;
