@@ -37,6 +37,10 @@ const help: Command = {
 						value: `</warn:${commandIds.WARN}>`,
 					},
 					{
+						name: ':broom: Purge',
+						value: `</purge:${commandIds.PURGE}>`,
+					},
+					{
 						name: ':frame_photo: Avatar',
 						value: `</avatar:${commandIds.AVATAR}>`,
 					},
