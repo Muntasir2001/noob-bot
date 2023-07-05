@@ -9,7 +9,7 @@ const {
 	findMessageInGuild,
 	getInfoFromCommandInteraction,
 } = require('../../discord-utils');
-const { filterOutFalsy } = require('../../utils');
+const { filterOutFalsy } = require('../../utils.js.old');
 
 const moveMessage = async (channel, message) => {
 	await channel.sendTyping();
