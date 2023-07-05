@@ -44,7 +44,7 @@ const warn: Command = {
 
 			if (
 				!interaction.memberPermissions!.has('KICK_MEMBERS') &&
-				!roles.some((role) => role.id === roleIds().MOD_ROLE)
+				!roles.some((role) => role.id === roleIds.MOD_ROLE)
 			) {
 				return await interaction.reply({
 					embeds: [
@@ -74,7 +74,7 @@ const warn: Command = {
 						deny: ['VIEW_CHANNEL'],
 					},
 					{
-						id: roleIds().MOD_ROLE,
+						id: roleIds.MOD_ROLE,
 						allow: [
 							'VIEW_CHANNEL',
 							'SEND_MESSAGES',

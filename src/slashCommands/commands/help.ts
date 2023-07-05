@@ -6,6 +6,7 @@ import infoMessageEmbed, {
 	types,
 } from '../../globalUtilities/infoMessageEmbed';
 import botConfig from '../../botConfig';
+import commandIds from '../../commandIds/commandIds';
 
 const help: Command = {
 	name: 'help',
@@ -15,41 +16,49 @@ const help: Command = {
 		try {
 			const embed = new MessageEmbed()
 				.setColor(botConfig.color.default)
+				.setThumbnail(`${client.user?.displayAvatarURL()}`)
 				.setTitle('❓ Help')
+				.setDescription('Here is the list of commands you can use')
 				.addFields([
 					{
-						name: 'Kick',
-						value: `kick`,
+						name: ':boot: Kick',
+						value: `</kick:${commandIds.KICK}>`,
 					},
 					{
-						name: 'Ban',
-						value: `ban`,
+						name: ':hammer: Ban',
+						value: `</ban:${commandIds.BAN}>`,
 					},
 					{
-						name: 'Timeout',
-						value: `timeout`,
+						name: ':clock: Timeout',
+						value: `</timeout:${commandIds.TIMEOUT}>`,
 					},
 					{
-						name: 'Warn',
-						value: `warn`,
+						name: ':stop_sign: Warn',
+						value: `</warn:${commandIds.WARN}>`,
 					},
 					{
-						name: 'Avatar',
-						value: `avatar`,
+						name: ':frame_photo: Avatar',
+						value: `</avatar:${commandIds.AVATAR}>`,
 					},
 					{
-						name: 'Bot Info',
-						value: `botinfo`,
+						name: ':robot: Bot Info',
+						value: `</botinfo:${commandIds.BOT_INFO}>`,
 					},
 					{
-						name: 'Server Info',
-						value: `serverinfo`,
+						name: ':information_source: Server Info',
+						value: `</serverinfo:${commandIds.SERVER_INFO}>`,
 					},
 					{
-						name: 'User Info',
-						value: `userinfo`,
+						name: ':bust_in_silhouette: User Info',
+						value: `</userinfo:${commandIds.USER_INFO}>`,
 					},
-				]);
+				])
+				.setTimestamp()
+				.setFooter({ text: `Requested by: ${interaction.user.tag}` });
+
+			return await interaction.reply({
+				embeds: [embed],
+			});
 		} catch (err) {
 			await interaction.reply({
 				embeds: [
