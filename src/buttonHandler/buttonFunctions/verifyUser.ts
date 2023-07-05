@@ -24,6 +24,8 @@ const verifyUser: Button = {
 				? client.guilds.cache.get(guildId)
 				: client.guilds.cache.get(interaction.guild!.id);
 
+			let verifyChannel: any;
+
 			if (
 				await isChannelCategoryExists({
 					guild: guild!,
@@ -65,37 +67,13 @@ const verifyUser: Button = {
 					},
 				);
 
-				let verifyChannel: any;
-
-				await verifyChannelCreate.then((data: any) => {
-					verifyChannel = data;
-				});
-
-				const buttons = new MessageActionRow().addComponents(
-					new MessageButton()
-						.setCustomId('closeTicket')
-						.setLabel('Close ticket')
-						.setStyle('DANGER'),
-				);
-
-				verifyChannel.send({
-					content: `<@${interaction.user.id}>`,
-					embeds: [
-						infoMessageEmbed({
-							title: 'Please wait until one of the moderators verifies you.',
-						}),
-					],
-					components: [buttons],
-				});
-
-				return await interaction.reply({
-					embeds: [
-						infoMessageEmbed({
-							title: `${verifyChannel} was created, please go there to get verified.`,
-						}),
-					],
-					ephemeral: true,
-				});
+				await verifyChannelCreate
+					.then((data: any) => {
+						verifyChannel = data;
+					})
+					.catch((err: any) => {
+						throw err;
+					});
 			} else {
 				const verifyChannelCreate = guild!.channels.create(
 					`verify-${interaction.user.username}`,
@@ -128,36 +106,40 @@ const verifyUser: Button = {
 
 				let verifyChannel: any;
 
-				await verifyChannelCreate.then((data: any) => {
-					verifyChannel = data;
-				});
-
-				const buttons = new MessageActionRow().addComponents(
-					new MessageButton()
-						.setCustomId('closeTicket')
-						.setLabel('Close ticket')
-						.setStyle('DANGER'),
-				);
-
-				verifyChannel.send({
-					content: `<@${interaction.user.id}>`,
-					embeds: [
-						infoMessageEmbed({
-							title: 'Please wait until one of the moderators verifies you.',
-						}),
-					],
-					components: [buttons],
-				});
-
-				return await interaction.reply({
-					embeds: [
-						infoMessageEmbed({
-							title: `${verifyChannel} was created, please go there to get verified.`,
-						}),
-					],
-					ephemeral: true,
-				});
+				await verifyChannelCreate
+					.then((data: any) => {
+						verifyChannel = data;
+					})
+					.catch((err: any) => {
+						throw err;
+					});
 			}
+
+			const buttons = new MessageActionRow().addComponents(
+				new MessageButton()
+					.setCustomId('closeChannel')
+					.setLabel('Close ticket')
+					.setStyle('DANGER'),
+			);
+
+			verifyChannel.send({
+				content: `<@${interaction.user.id}>`,
+				embeds: [
+					infoMessageEmbed({
+						title: 'Please wait until one of the moderators verifies you.',
+					}),
+				],
+				components: [buttons],
+			});
+
+			return await interaction.reply({
+				embeds: [
+					infoMessageEmbed({
+						title: `${verifyChannel} was created, please go there to get verified.`,
+					}),
+				],
+				ephemeral: true,
+			});
 		} catch (err) {
 			await interaction.reply({
 				embeds: [

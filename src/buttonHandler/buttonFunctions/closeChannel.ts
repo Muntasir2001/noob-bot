@@ -1,10 +1,4 @@
-import {
-	Client,
-	ButtonInteraction,
-	MessageActionRow,
-	MessageButton,
-	GuildMemberRoleManager,
-} from 'discord.js';
+import { Client, ButtonInteraction, GuildMemberRoleManager } from 'discord.js';
 
 import infoMessageEmbed, {
 	types,
@@ -13,8 +7,8 @@ import logFile from '../../globalUtilities/logFile';
 import { Button } from '../Button';
 import roleIds from '../../roleIds/roleIds';
 
-const closeTicket: Button = {
-	customId: 'closeTicket',
+const closeChannel: Button = {
+	customId: 'closeChannel',
 	run: async (client: Client, interaction: ButtonInteraction) => {
 		try {
 			const roles = (interaction.member!.roles as GuildMemberRoleManager)
@@ -56,4 +50,4 @@ const closeTicket: Button = {
 	},
 };
 
-export default closeTicket;
+export default closeChannel;

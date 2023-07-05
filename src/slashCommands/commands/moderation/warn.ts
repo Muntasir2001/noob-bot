@@ -91,10 +91,14 @@ const warn: Command = {
 				],
 			});
 
-			await warnGuild.then((data) => {
-				warningChannel = data;
-				warningChannelId = data.id;
-			});
+			await warnGuild
+				.then((data) => {
+					warningChannel = data;
+					warningChannelId = data.id;
+				})
+				.catch((err: any) => {
+					throw err;
+				});
 
 			const embed = new MessageEmbed()
 				.setColor(botConfig.color.default)
@@ -132,7 +136,7 @@ const warn: Command = {
 
 			const buttons = new MessageActionRow().addComponents(
 				new MessageButton()
-					.setCustomId('closeWarnChannel')
+					.setCustomId('closeChannel')
 					.setLabel('Close channel')
 					.setStyle('DANGER'),
 			);
