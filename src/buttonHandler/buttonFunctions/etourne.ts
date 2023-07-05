@@ -10,8 +10,6 @@ import infoMessageEmbed, {
 } from '../../globalUtilities/infoMessageEmbed';
 import logFile from '../../globalUtilities/logFile';
 import { Button } from '../Button';
-import isChannelCategoryExists from '../../globalUtilities/isChannelCategoryExists';
-import getChannelCategoryId from '../../globalUtilities/getChannelCategoryId';
 import roleIds from '../../roleIds/roleIds';
 
 const etourne: Button = {
