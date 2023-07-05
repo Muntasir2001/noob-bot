@@ -1,5 +1,6 @@
 import { Button } from './Button';
+import verifyUser from './buttonFunctions/verifyUser';
 
-const buttonList: Button[] = [];
+const buttonList: Button[] = [verifyUser];
 
 export default buttonList;
