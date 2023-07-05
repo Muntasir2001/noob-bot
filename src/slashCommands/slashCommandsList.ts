@@ -9,6 +9,7 @@ import serverInfo from './commands/serverInfo';
 import userInfo from './commands/userInfo';
 import warn from './commands/moderation/warn';
 import help from './commands/help';
+import admin from './commands/admin/admin';
 
 const slashCommandsList: Command[] = [
 	botInfo,
@@ -21,6 +22,7 @@ const slashCommandsList: Command[] = [
 	userInfo,
 	warn,
 	help,
+	admin,
 ];
 
 export default slashCommandsList;
