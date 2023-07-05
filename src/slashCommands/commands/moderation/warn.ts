@@ -49,7 +49,7 @@ const warn: Command = {
 				return await interaction.reply({
 					embeds: [
 						infoMessageEmbed({
-							title: ':warning: You are not allowed to use this button!',
+							title: ':warning: You are not allowed to use this command!',
 							type: types.ERROR,
 						}),
 					],
