@@ -65,7 +65,7 @@ const timeout: Command = {
 				return await interaction.reply({
 					embeds: [
 						infoMessageEmbed({
-							title: ':x: User cannot be timeout out!',
+							title: `:x: ${user.tag} cannot be timed out!`,
 							type: types.ERROR,
 						}),
 					],

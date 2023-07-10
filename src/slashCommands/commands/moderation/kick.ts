@@ -59,7 +59,7 @@ const kick: Command = {
 				return await interaction.reply({
 					embeds: [
 						infoMessageEmbed({
-							title: ':x: User not kickable!',
+							title: `:x: ${user.tag} cannot be kicked!`,
 							type: types.ERROR,
 						}),
 					],

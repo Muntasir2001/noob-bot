@@ -59,7 +59,7 @@ const ban: Command = {
 				return await interaction.reply({
 					embeds: [
 						infoMessageEmbed({
-							title: ':x: User not bannable!',
+							title: `:x: ${user.tag} cannot be banned!`,
 							type: types.ERROR,
 						}),
 					],
