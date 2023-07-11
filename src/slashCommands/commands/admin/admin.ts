@@ -38,8 +38,14 @@ const admin: Command = {
 			}> = [
 				{
 					label: 'Welcome Message',
-					description: 'Share the welcome message',
+					description: 'Share the welcome message embed',
 					value: 'welcome message',
+				},
+				{
+					label: 'Info about server and noob_dev54',
+					description:
+						'Share the embed to know more about the server and noob_dev54',
+					value: 'info',
 				},
 			];
 

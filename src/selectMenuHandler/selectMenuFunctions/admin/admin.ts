@@ -6,6 +6,7 @@ import infoMessageEmbed, {
 import logFile from '../../../globalUtilities/logFile';
 import { SelectMenu } from '../../SelectMenu';
 import welcomeMessage from './welcomeMessage';
+import info from './info';
 
 const admin: SelectMenu = {
 	customId: 'admin',
@@ -14,7 +15,9 @@ const admin: SelectMenu = {
 			const option = interaction.values[0];
 
 			if (option === 'welcome message') {
-				await welcomeMessage({ interaction: interaction, client: client });
+				await welcomeMessage({ interaction, client });
+			} else if (option === 'info') {
+				await info({ interaction, client });
 			}
 
 			return await interaction.update({
