@@ -33,7 +33,7 @@ const welcomeMessage = async (props: props) => {
 			.setStyle('SECONDARY'),
 	);
 
-	await interaction.channel!.send({
+	return await interaction.channel!.send({
 		embeds: [embed],
 		components: [buttons],
 	});

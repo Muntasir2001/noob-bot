@@ -4,13 +4,17 @@ const tslib_1 = require("tslib");
 const infoMessageEmbed_1 = tslib_1.__importStar(require("../../../globalUtilities/infoMessageEmbed"));
 const logFile_1 = tslib_1.__importDefault(require("../../../globalUtilities/logFile"));
 const welcomeMessage_1 = tslib_1.__importDefault(require("./welcomeMessage"));
+const info_1 = tslib_1.__importDefault(require("./info"));
 const admin = {
     customId: 'admin',
     run: async (client, interaction) => {
         try {
             const option = interaction.values[0];
             if (option === 'welcome message') {
-                await (0, welcomeMessage_1.default)({ interaction: interaction, client: client });
+                await (0, welcomeMessage_1.default)({ interaction, client });
+            }
+            else if (option === 'info') {
+                await (0, info_1.default)({ interaction, client });
             }
             return await interaction.update({
                 embeds: [

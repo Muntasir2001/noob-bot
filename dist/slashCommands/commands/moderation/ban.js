@@ -47,7 +47,7 @@ const ban = {
                 return await interaction.reply({
                     embeds: [
                         (0, infoMessageEmbed_1.default)({
-                            title: ':x: User not bannable!',
+                            title: `:x: ${user.tag} cannot be banned!`,
                             type: infoMessageEmbed_1.types.ERROR,
                         }),
                     ],

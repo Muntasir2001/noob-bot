@@ -25,8 +25,13 @@ const admin = {
             const options = [
                 {
                     label: 'Welcome Message',
-                    description: 'Share the welcome message',
+                    description: 'Share the welcome message embed',
                     value: 'welcome message',
+                },
+                {
+                    label: 'Info about server and noob_dev54',
+                    description: 'Share the embed to know more about the server and noob_dev54',
+                    value: 'info',
                 },
             ];
             const selectMenu = new discord_js_1.MessageActionRow().addComponents(new discord_js_1.MessageSelectMenu()
