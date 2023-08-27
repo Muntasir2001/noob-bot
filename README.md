@@ -35,6 +35,10 @@ https://shiffman.net/a2z/bot-ec2/
 
 `ssh -i noob-dev-oracle-cloud.key ubuntu@<server-public-ip-address>`
 
+## PM2 instructions
+
+-  To start the bot, run: `pm2 start bin/doppler-run.sh`. **Make sure to setup [PM2](https://pm2.io/) beforehand**.
+
 ## Note
 
 -  **IMPORTANT:** Make sure you are using nodejs v16.14.0 or above (Wasted more than an hour the other day because of this)
