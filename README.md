@@ -37,7 +37,7 @@ https://shiffman.net/a2z/bot-ec2/
 
 ## PM2 instructions
 
--  To start the bot, run: `pm2 start bin/doppler-run.sh`. **Make sure to setup [PM2](https://pm2.io/) beforehand**.
+-  To start the bot, run: `pm2 start bin/run.sh`. **Make sure to setup [PM2](https://pm2.io/) beforehand**.
 
 ## Note
 
