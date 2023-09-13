@@ -11,7 +11,7 @@ const closeChannel = {
             const roles = interaction.member.roles
                 .cache;
             if (!interaction.memberPermissions?.has('MANAGE_CHANNELS') &&
-                roles.some((role) => role.id === roleIds_1.default.MOD_ROLE)) {
+                !roles.some((role) => role.id === roleIds_1.default.MOD_ROLE)) {
                 return interaction.reply({
                     embeds: [
                         (0, infoMessageEmbed_1.default)({

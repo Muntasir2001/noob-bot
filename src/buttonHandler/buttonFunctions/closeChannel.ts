@@ -16,7 +16,7 @@ const closeChannel: Button = {
 
 			if (
 				!interaction.memberPermissions?.has('MANAGE_CHANNELS') &&
-				roles.some((role) => role.id === roleIds.MOD_ROLE)
+				!roles.some((role) => role.id === roleIds.MOD_ROLE)
 			) {
 				return interaction.reply({
 					embeds: [
